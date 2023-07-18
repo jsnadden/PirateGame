@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{e8f5bb3c-32ed-4f28-95f1-dde181cd4912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{36826f9d-813f-49f1-a931-5f0cad71e3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{4710775d-3112-402b-998f-74643390438d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\cannonball.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\collider.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\ship.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\terrain.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\arcade_font.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\map0.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ColliderComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\KeyboardController.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProjectileComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TransformComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UILabelComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetManager.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collision.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureManager.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector2D.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ECS.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collision.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector2D.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\SDL2.dll" />
+    <None Include="src\SDL2_ttf.dll" />
+  </ItemGroup>
+</Project>

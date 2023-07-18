@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PirateGame", "PirateGame.vcxproj", "{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Debug|x64.ActiveCfg = Debug|x64
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Debug|x64.Build.0 = Debug|x64
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Debug|x86.Build.0 = Debug|Win32
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Release|x64.ActiveCfg = Release|x64
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Release|x64.Build.0 = Release|x64
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Release|x86.ActiveCfg = Release|Win32
+		{8C7429B0-982C-404B-8A2B-97A1ECF26EBC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B9D58F8-57D3-48B3-8C52-83DDB27634B4}
+	EndGlobalSection
+EndGlobal
