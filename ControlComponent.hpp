@@ -44,6 +44,7 @@ public:
         if (input->KeyDown(SDL_SCANCODE_W))
         {
             displace += VEC_UP;
+            sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_A))
         {

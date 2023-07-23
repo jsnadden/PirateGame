@@ -38,10 +38,9 @@ Game::Game()
     int offset = (playerSize * playerScale) / 2;
     player.addComponent<TransformComponent>(400 - offset, 320 - offset, playerSize, playerSize, playerScale);
     player.addComponent<SpriteComponent>("assets/ship.png", true, SpriteComponent::loop);
-    Animation idle = Animation(0, 3, 10.0f);
-    Animation sail = Animation(1, 3, 10.0f);
-    player.getComponent<SpriteComponent>().AddAnimation("Idle", &idle);
-    player.getComponent<SpriteComponent>().AddAnimation("Sail", &sail);
+
+    player.getComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
+    player.getComponent<SpriteComponent>().AddAnimation("Sail", 1, 3, 10.0f);
     player.getComponent<SpriteComponent>().Play("Idle");
     player.addComponent<ControlComponent>();
     player.addGroup(playerGroup);

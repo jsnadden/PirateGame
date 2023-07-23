@@ -73,9 +73,9 @@ public:
 		spriteFlip = flip;
 	}
 
-	void AddAnimation(std::string id, Animation* anim)
+	void AddAnimation(std::string id, int r, int f, float s)
 	{
-		animations.emplace(id, anim);
+		animations[id] = new Animation(r, f, s);
 	}
 
 	void init() override
