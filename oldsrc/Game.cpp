@@ -8,7 +8,7 @@
 #include "AssetManager.hpp"
 
 Map* map;
-Manager manager;
+ECSManager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -104,7 +104,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 					player.addComponent <ColliderComponent>("player", 0, 0, playerSize * playerScale);
 					player.addGroup(Game::playerGroup);
 					SDL_Colour white = { 255, 255, 255, 255 };
-					label.addComponent<UILabelComponent>(10, 10, "Yarr!", "arcade", white);
+					label.addComponent<UILabelComponent>(10, 10, "JumpRope Games presents...", "arcade", white);
 
 
 				}
@@ -138,6 +138,7 @@ void Game::update(float dt)
 	SDL_Rect playerCollider = player.getComponent<ColliderComponent>().collider;
 	TransformComponent* playerTransform = &player.getComponent<TransformComponent>();
 
+	// Put this code somewhere else, and automate the calculations
 	camera.x = playerTransform->position.x - (windowWidth - (playerTransform->width * playerTransform->scale)) / 2;
 	camera.y = playerTransform->position.y - (windowHeight - (playerTransform->height * playerTransform->scale)) / 2;
 	if (camera.x < 0) camera.x = 0;

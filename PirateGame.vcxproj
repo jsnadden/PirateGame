@@ -31,36 +31,47 @@
     <Text Include="assets\map0.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Animation.hpp" />
-    <ClInclude Include="src\AssetManager.hpp" />
-    <ClInclude Include="src\ColliderComponent.hpp" />
-    <ClInclude Include="src\Collision.hpp" />
-    <ClInclude Include="src\Components.hpp" />
-    <ClInclude Include="src\ECS.hpp" />
-    <ClInclude Include="src\Game.hpp" />
-    <ClInclude Include="src\GameObject.hpp" />
-    <ClInclude Include="src\KeyboardController.hpp" />
-    <ClInclude Include="src\Map.hpp" />
-    <ClInclude Include="src\ProjectileComponent.hpp" />
-    <ClInclude Include="src\SpriteComponent.hpp" />
-    <ClInclude Include="src\TextureManager.hpp" />
-    <ClInclude Include="src\TileComponent.hpp" />
-    <ClInclude Include="src\TransformComponent.hpp" />
-    <ClInclude Include="src\UILabelComponent.hpp" />
-    <ClInclude Include="src\Vector2D.hpp" />
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="Assets.hpp" />
+    <ClInclude Include="Audio.hpp" />
+    <ClInclude Include="Components.hpp" />
+    <ClInclude Include="ControlComponent.hpp" />
+    <ClInclude Include="ECS.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Graphics.hpp" />
+    <ClInclude Include="Input.hpp" />
+    <ClInclude Include="Map.hpp" />
+    <ClInclude Include="SpriteComponent.hpp" />
+    <ClInclude Include="TileComponent.hpp" />
+    <ClInclude Include="Timer.hpp" />
+    <ClInclude Include="TransformComponent.hpp" />
+    <ClInclude Include="Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AssetManager.cpp" />
-    <ClCompile Include="src\Collision.cpp" />
-    <ClCompile Include="src\ECS.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameObject.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\TextureManager.cpp" />
-    <ClCompile Include="src\Vector2D.cpp" />
+    <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="ECS.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="libFLAC-8.dll" />
+    <None Include="libmodplug-1.dll" />
+    <None Include="libmpg123-0.dll" />
+    <None Include="libogg-0.dll" />
+    <None Include="libopus-0.dll" />
+    <None Include="libopusfile-0.dll" />
+    <None Include="libvorbis-0.dll" />
+    <None Include="libvorbisfile-3.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+    <None Include="SDL2_mixer.dll" />
+    <None Include="SDL2_ttf.dll" />
+    <None Include="SDL_mixer.dll" />
     <None Include="src\SDL2.dll" />
     <None Include="src\SDL2_ttf.dll" />
   </ItemGroup>
@@ -117,8 +128,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\johns_shbfd3b\Documents\C++\SDL2_mixer-2.0.0\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\johns_shbfd3b\Documents\C++\SDL2_mixer-2.0.0\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -158,7 +169,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

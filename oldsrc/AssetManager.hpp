@@ -10,7 +10,7 @@ class AssetManager
 {
 public:
 
-	AssetManager(Manager* man);
+	AssetManager(ECSManager* man);
 	~AssetManager();
 
 	// Game objects
@@ -26,7 +26,7 @@ public:
 
 private:
 
-	Manager* manager;
+	ECSManager* manager;
 	std::map<std::string, SDL_Texture*> textures;
 	std::map<std::string, TTF_Font*> fonts;
 

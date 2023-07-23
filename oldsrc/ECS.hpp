@@ -8,7 +8,7 @@
 
 class Component;
 class Entity;
-class Manager;
+class ECSManager;
 
 using ComponentID = std::size_t;
 using Group = std::size_t;
@@ -50,7 +50,7 @@ class Entity
 {
 private:
 
-	Manager& manager;
+	ECSManager& manager;
 
 	bool active = true;
 
@@ -62,7 +62,7 @@ private:
 
 public:
 
-	Entity(Manager& mManager)  : manager(mManager) {}
+	Entity(ECSManager& mManager)  : manager(mManager) {}
 
 	void update(float dt)
 	{
@@ -118,7 +118,7 @@ public:
 	}
 };
 
-class Manager
+class ECSManager
 {
 private:
 
