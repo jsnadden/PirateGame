@@ -106,7 +106,13 @@ public:
 				}
 			}
 
-			srcRect.x = srcRect.w * static_cast<int>(elapsedTime / timePerFrame);
+			int frame = static_cast<int>(elapsedTime / timePerFrame);
+			if (frame >= totalFrames)
+			{
+				frame = totalFrames - 1;
+			}
+
+			srcRect.x = srcRect.w * frame;
 			srcRect.y = row * srcRect.h;
 		}
 

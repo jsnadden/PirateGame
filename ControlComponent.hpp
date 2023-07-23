@@ -39,7 +39,7 @@ public:
 	void update() override
 	{
         Vector2D displace;
-
+        sprite->Play("Idle");
 
         if (input->KeyDown(SDL_SCANCODE_W))
         {
@@ -49,14 +49,25 @@ public:
         if (input->KeyDown(SDL_SCANCODE_A))
         {
             displace += VEC_LEFT;
+            sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_S))
         {
             displace += VEC_DOWN;
+            sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_D))
         {
             displace += VEC_RIGHT;
+            sprite->Play("Sail");
+        }
+        if (input->KeyPressed(SDL_SCANCODE_A))
+        {
+            sprite->Flip(SDL_FLIP_HORIZONTAL);
+        }
+        if (input->KeyPressed(SDL_SCANCODE_D))
+        {
+            sprite->Flip(SDL_FLIP_NONE);
         }
 
         displace.Normalise();
