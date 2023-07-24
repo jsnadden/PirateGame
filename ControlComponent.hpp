@@ -71,7 +71,7 @@ public:
         }
 
         displace.Normalise();
-        displace *= (timer->DeltaTime() * 100.f);
+        displace *= (timer->DeltaTime() * 150.f);
 
         transform->Translate(displace);
 	}

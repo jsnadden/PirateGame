@@ -87,6 +87,9 @@
     <ClInclude Include="Collision.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">

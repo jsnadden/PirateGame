@@ -43,8 +43,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 
 	mapfile.ignore();
 
-	// Need collider components!
-	/*for (int y = 0; y < sizeY; y++)
+	for (int y = 0; y < sizeY; y++)
 	{
 		for (int x = 0; x < sizeX; x++)
 		{
@@ -59,7 +58,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 
 			mapfile.ignore();
 		}
-	}*/
+	}
 
 	mapfile.close();
 }

@@ -38,7 +38,7 @@ Game::Game()
     camera->SetMap(*map0);
 
     int playerSize = 32;
-    int playerScale = 3;
+    int playerScale = 2;
     int offset = (playerSize * playerScale) / 2;
     player.addComponent<TransformComponent>(400 - offset, 320 - offset, playerSize, playerSize, playerScale);
     player.addComponent<SpriteComponent>("assets/ship.png", true, SpriteComponent::loop);
@@ -46,6 +46,7 @@ Game::Game()
     player.getComponent<SpriteComponent>().AddAnimation("Sail", 1, 3, 10.0f);
     player.getComponent<SpriteComponent>().Play("Idle");
     player.addComponent<ControlComponent>();
+    player.addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
     player.addGroup(playerGroup);
     camera->Follow(player.getComponent<TransformComponent>().Centre());
 
@@ -91,13 +92,25 @@ void Game::EarlyUpdate()
 
 void Game::Update()
 {
+    Vector2D playerLastPosition = *player.getComponent<TransformComponent>().GetPosition();
+
     manager.Update();
 
     camera->Update();
     
     // Collision handling
-    
 
+    SDL_Rect playerLoc = player.getComponent<ColliderComponent>().Location();
+    
+    for (auto& c : colliders)
+    {
+        SDL_Rect cLoc = c->getComponent<ColliderComponent>().Location();
+
+        if (Collision::AABB(playerLoc, cLoc))
+        {
+            player.getComponent<TransformComponent>().SetPosition(playerLastPosition);
+        }
+    }
 
 
     // Cull off-screen tiles
@@ -129,6 +142,11 @@ void Game::Render()
     for (auto& p : players)
     {
         p->draw();
+    }
+
+    for (auto& c : colliders)
+    {
+        c->draw();
     }
 
     graphics->Render();

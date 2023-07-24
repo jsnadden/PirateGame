@@ -35,6 +35,7 @@
     <ClInclude Include="Assets.hpp" />
     <ClInclude Include="Audio.hpp" />
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="ColliderComponent.hpp" />
     <ClInclude Include="Collision.hpp" />
     <ClInclude Include="Components.hpp" />
     <ClInclude Include="ControlComponent.hpp" />

@@ -2,11 +2,15 @@
 #include <string>
 #include "SDL.h"
 #include "Components.hpp"
-#include "TextureManager.hpp"
+#include "Graphics.hpp"
 
 class ColliderComponent : public Component
 {
-public:
+private:
+
+	Graphics* graphics;
+	Camera* camera;
+
 	SDL_Rect collider;
 	std::string tag;
 
@@ -15,51 +19,69 @@ public:
 
 	TransformComponent* transform;
 
-	ColliderComponent(std::string tagIn)
+public:
+
+	ColliderComponent(std::string t)
 	{
-		tag = tagIn;
+		tag = t;
 	}
 
-	ColliderComponent(std::string tagIn, int xPos, int yPos, int size)
+	ColliderComponent(std::string t, int xPos, int yPos, int size)
 	{
-		tag = tagIn;
+		tag = t;
 		
 		collider.x = xPos;
 		collider.y = yPos;
 		collider.w = collider.h = size;
 	}
 
+	~ColliderComponent()
+	{
+		graphics = nullptr;
+		camera = nullptr;
+		colliderTexture = nullptr;
+		transform = nullptr;
+	}
+
 	void init() override
 	{
+		graphics = Graphics::GetInstance();
+		camera = Camera::GetInstance();
+
 		if (!entity->hasComponent<TransformComponent>())
 		{
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
 
-		colliderTexture = TextureManager::loadTexture("assets/collider.png");
+		colliderTexture = graphics->LoadTexture("assets/collider.png");
 		srcRect = { 0, 0, 32, 32 };
 		destRect = { collider.x, collider.y, collider.w, collider.h };
 	}
 
-	void update(float dt) override
+	SDL_Rect Location()
+	{
+		return destRect;
+	}
+
+	void Update() override
 	{
 		if (tag != "terrain")
 		{
-			collider.x = static_cast<int>(transform->position.x);
-			collider.y = static_cast<int>(transform->position.y);
-			collider.w = (transform->width) * (transform->scale);
-			collider.h = (transform->height) * (transform->scale);
+			collider.x = static_cast<int>(transform->GetPosition()->x);
+			collider.y = static_cast<int>(transform->GetPosition()->y);
+			collider.w = (transform->GetWidth()) * (transform->GetScale());
+			collider.h = (transform->GetHeight()) * (transform->GetScale());
 		}
 
-		destRect.x = collider.x - Game::camera.x;
-		destRect.y = collider.y - Game::camera.y;
+		destRect.x = collider.x - camera->OriginX();
+		destRect.y = collider.y - camera->OriginY();
 	}
 
 	void draw() override
 	{
 		// Comment out to hide collision boxes:
-		//TextureManager::Draw(colliderTexture, srcRect, destRect, SDL_FLIP_NONE);
+		//graphics->DrawTexture(colliderTexture, &srcRect, &destRect, SDL_FLIP_NONE);
 	}
 
 };
