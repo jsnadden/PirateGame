@@ -26,6 +26,8 @@ private:
 	SDL_Rect srcRect, destRect;
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
+	bool visible;
+
 	bool animated = false;
 	std::map<std::string, Animation*> animations;
 
@@ -49,6 +51,8 @@ public:
 		camera = Camera::GetInstance();
 
 		setTexture(path);
+
+		visible = true;
 
 		animated = isAnimated;
 		animationComplete = !isAnimated;
@@ -84,6 +88,16 @@ public:
 	void Flip(SDL_RendererFlip flip)
 	{
 		spriteFlip = flip;
+	}
+
+	bool Visible()
+	{
+		return visible;
+	}
+
+	void SetVisibility(bool vis)
+	{
+		visible = vis;
 	}
 
 	void AddAnimation(std::string id, int r, int f, float s)
@@ -138,7 +152,10 @@ public:
 
 	void draw() override
 	{
-		graphics->DrawTexture(texture, &srcRect, &destRect, transform->GetRotation(), spriteFlip);
+		if (visible)
+		{
+			graphics->DrawTexture(texture, &srcRect, &destRect, transform->GetRotation(), spriteFlip);
+		}
 	}
 
 	void Play(std::string animName)

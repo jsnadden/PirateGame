@@ -9,6 +9,7 @@
 #include "Components.hpp"
 #include "Vector2D.hpp"
 #include "Camera.hpp"
+#include "Collision.hpp"
 
 class Game
 {
@@ -42,6 +43,8 @@ private:
 	Input* input;
 	Audio* audio;
 	Camera* camera;
+
+	SDL_Rect viewRect;
 
 	Timer* timer;
 

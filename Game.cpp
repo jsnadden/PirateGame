@@ -28,8 +28,10 @@ Game::Game()
     input = Input::GetInstance();
     audio = Audio::GetInstance();
     timer = Timer::GetInstance();
+
     camera = Camera::GetInstance();
     camera->SetDims(Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT);
+    viewRect = SDL_Rect{ 0, 0, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT };
 
     map0 = new Map("assets/terrain.png", 32, 2);
     map0->LoadMap("assets/map0.txt", 16, 16);
@@ -93,13 +95,23 @@ void Game::Update()
 
     camera->Update();
     
-    //Collision handling?
+    // Collision handling
+    
 
 
+
+    // Cull off-screen tiles
+    for (auto& t : tiles)
+    {
+        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(viewRect, t->getComponent<TileComponent>().Location()));
+    }
+    //TODO do this for NPCs etc.
 }
 
 void Game::LateUpdate()
 {
+    manager.LateUpdate();
+    
     input->UpdatePrevious();
 }
 
@@ -159,5 +171,6 @@ void Game::Run()
         }
 
         timer->Update();
+        
     }
 }

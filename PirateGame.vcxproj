@@ -35,6 +35,7 @@
     <ClInclude Include="Assets.hpp" />
     <ClInclude Include="Audio.hpp" />
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Collision.hpp" />
     <ClInclude Include="Components.hpp" />
     <ClInclude Include="ControlComponent.hpp" />
     <ClInclude Include="ECS.hpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />

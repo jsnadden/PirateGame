@@ -18,7 +18,7 @@ private:
 	SDL_Rect srcRect, destRect;
 	Vector2D worldPosition;
 
-	bool active;
+	bool visible;
 
 public:
 
@@ -38,7 +38,7 @@ public:
 		assets = Assets::GetInstance();
 		camera = Camera::GetInstance();
 
-		active = true;
+		visible = true;
 
 		texture = assets->GetTexture(path);
 
@@ -52,31 +52,30 @@ public:
 		destRect.w = destRect.h = static_cast<int>(size*scale);
 	}
 
-	bool Active()
+	bool Visible()
 	{
-		return active;
+		return visible;
 	}
 
-	void Activate()
+	void SetVisibility(bool vis)
 	{
-		active = true;
+		visible = vis;
 	}
 
-	void Deactivate()
+	SDL_Rect Location()
 	{
-		active = false;
+		return destRect;
 	}
 
 	void Update() override
 	{
-		// TODO: toggle active if it enters/leaves view
 		destRect.x = worldPosition.x - camera->OriginX();
 		destRect.y = worldPosition.y - camera->OriginY();
 	}
 
 	void draw() override
 	{
-		if (active)
+		if (visible)
 		{
 			graphics->DrawTexture(texture, &srcRect, &destRect, 0.0f, SDL_FLIP_NONE);
 		}

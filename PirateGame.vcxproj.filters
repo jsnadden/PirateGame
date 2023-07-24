@@ -84,6 +84,9 @@
     <ClInclude Include="Camera.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.hpp">
+      <Filter>Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Structs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
