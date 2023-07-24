@@ -3,49 +3,53 @@
 #include <SDL_ttf.h>
 #include <string>
 #include "ECS.hpp"
-#include "AssetManager.hpp"
+#include "Graphics.hpp"
+#include "Assets.hpp"
 #include "Game.hpp"
 
 
 class UILabelComponent : public Component
 {
+private:
+
+	Graphics* graphics;
+	Assets* assets;
+
+	SDL_Rect location;
+	std::string textString;
+	std::string font;
+	SDL_Color textColour;
+	SDL_Texture* texture;
+	int textSize;
+
 public:
 
-	UILabelComponent(int xpos, int ypos, std::string textIn, std::string fontIn, SDL_Color& colourIn)
+	UILabelComponent(int xpos, int ypos, std::string text, std::string fontPath, int size, SDL_Color& colour)
 	{
-		position.x = xpos;
-		position.y = ypos;
-		text = textIn;
-		font = fontIn;
-		colour = colourIn;
+		graphics = Graphics::GetInstance();
+		assets = Assets::GetInstance();
 
-		SetLabelText(textIn, fontIn);
+		location.x = xpos;
+		location.y = ypos;
+		textString = text;
+		font = fontPath;
+		textSize = size;
+		textColour = colour;
+
+		texture = assets->GetText(textString, font, textSize, textColour);
+		SDL_QueryTexture(texture, NULL, NULL, &location.w, &location.h);
 	}
 
 	~UILabelComponent()
-	{}
-
-	void SetLabelText(std::string textIn, std::string fontIn)
 	{
-		SDL_Surface* tempSurface = TTF_RenderText_Blended(Game::assets->GetFont(fontIn), textIn.c_str(), colour);
-		texture = SDL_CreateTextureFromSurface(Game::renderer, tempSurface);
-		SDL_FreeSurface(tempSurface);
-
-		SDL_QueryTexture(texture, nullptr, nullptr, &position.w, &position.h);
+		graphics = nullptr;
+		assets = nullptr;
+		texture = nullptr;
 	}
 
 	void draw() override
 	{
-		SDL_RenderCopy(Game::renderer, texture, nullptr, &position);
+		graphics->DrawTexture(texture, nullptr, &location);
 	}
-
-
-private:
-
-	SDL_Rect position;
-	std::string text;
-	std::string font;
-	SDL_Color colour;
-	SDL_Texture* texture;
 
 };

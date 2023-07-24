@@ -5,3 +5,4 @@
 #include "SpriteComponent.hpp"
 #include "ControlComponent.hpp"
 #include "ColliderComponent.hpp"
+#include "UILabelComponent.hpp"

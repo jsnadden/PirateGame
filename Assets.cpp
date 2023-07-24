@@ -80,11 +80,11 @@ SDL_Texture* Assets::GetTexture(std::string path)
 	return textures[path];
 }
 
-SDL_Texture* Assets::GetText(std::string text, std::string path, int size, SDL_Color colour)
+SDL_Texture* Assets::GetText(std::string text, std::string fontPath, int size, SDL_Color colour)
 {
-	TTF_Font* font = GetFont(path, size);
+	TTF_Font* font = GetFont(fontPath, size);
 
-	std::string key = text + path + std::to_string(size) + (char)colour.r + (char)colour.b + (char)colour.g;
+	std::string key = text + fontPath + std::to_string(size) + (char)colour.r + (char)colour.b + (char)colour.g;
 
 	if (texts[key] == nullptr)
 	{

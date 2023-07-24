@@ -48,6 +48,7 @@
     <ClInclude Include="TileComponent.hpp" />
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="TransformComponent.hpp" />
+    <ClInclude Include="UILabelComponent.hpp" />
     <ClInclude Include="Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>

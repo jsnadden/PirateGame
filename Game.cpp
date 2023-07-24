@@ -47,6 +47,8 @@ Game::Game()
     player.getComponent<SpriteComponent>().Play("Idle");
     player.addComponent<ControlComponent>();
     player.addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
+    SDL_Color black = { 0x00, 0x00, 0x00, 0xff };
+    player.addComponent<UILabelComponent>(50, 50, "JumpRope Games presents...", "assets/arcade_font.ttf", 18, black);
     player.addGroup(playerGroup);
     camera->Follow(player.getComponent<TransformComponent>().Centre());
 
