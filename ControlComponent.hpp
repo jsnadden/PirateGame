@@ -36,7 +36,7 @@ public:
 		sprite = &entity->getComponent<SpriteComponent>();
 	}
 
-	void update() override
+	void Update() override
 	{
         Vector2D displace;
         sprite->Play("Idle");

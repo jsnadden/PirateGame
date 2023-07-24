@@ -58,7 +58,7 @@ public:
 		timer = Timer::GetInstance();
 	}
 
-	void update() override
+	void Update() override
 	{
 		position.x += velocity.x * timer->DeltaTime();
 		position.y += velocity.y * timer->DeltaTime();

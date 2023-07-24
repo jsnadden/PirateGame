@@ -8,6 +8,7 @@
 #include "ECS.hpp"
 #include "Components.hpp"
 #include "Vector2D.hpp"
+#include "Camera.hpp"
 
 class Game
 {
@@ -40,6 +41,7 @@ private:
 	Assets* assets;
 	Input* input;
 	Audio* audio;
+	Camera* camera;
 
 	Timer* timer;
 

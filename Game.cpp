@@ -27,8 +27,8 @@ Game::Game()
     assets = Assets::GetInstance();
     input = Input::GetInstance();
     audio = Audio::GetInstance();
-
     timer = Timer::GetInstance();
+    camera = Camera::GetInstance();
 
     map0 = new Map("assets/terrain.png", 32, 2);
     map0->LoadMap("assets/map0.txt", 16, 16);
@@ -84,7 +84,7 @@ void Game::EarlyUpdate()
 void Game::Update()
 {
     manager.refresh();
-    manager.update();
+    manager.Update();
     
 }
 

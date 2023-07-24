@@ -82,7 +82,7 @@
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="Camera.hpp">
-      <Filter>Structs</Filter>
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +111,9 @@
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>

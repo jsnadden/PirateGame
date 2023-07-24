@@ -87,7 +87,7 @@ public:
 		srcRect.h = transform->GetHeight();
 	}
 
-	void update() override
+	void Update() override
 	{
 		if (!animationComplete)
 		{

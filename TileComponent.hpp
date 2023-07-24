@@ -63,7 +63,7 @@ public:
 		active = false;
 	}
 
-	void update() override
+	void Update() override
 	{
 		// TODO: subtract camera position, and toggle active if it enters/leaves view
 		destRect.x = worldPosition.x;

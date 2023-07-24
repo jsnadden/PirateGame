@@ -40,7 +40,9 @@ public:
 	Entity* entity;
 
 	virtual void init() {}
-	virtual void update() {}
+	virtual void EarlyUpdate() {}
+	virtual void Update() {}
+	virtual void LateUpdate() {}
 	virtual void draw() {}
 
 	virtual ~Component() {}
@@ -64,9 +66,19 @@ public:
 
 	Entity(ECSManager& mManager)  : manager(mManager) {}
 
-	void update()
+	void EarlyUpdate()
 	{
-		for (auto& c : components) c->update();
+		for (auto& c : components) c->EarlyUpdate();
+	}
+
+	void Update()
+	{
+		for (auto& c : components) c->Update();
+	}
+
+	void LateUpdate()
+	{
+		for (auto& c : components) c->LateUpdate();
 	}
 
 	void draw()
@@ -127,9 +139,19 @@ private:
 
 public:
 
-	void update()
+	void EarlyUpdate()
 	{
-		for (auto& e : entities) e->update();
+		for (auto& e : entities) e->EarlyUpdate();
+	}
+
+	void Update()
+	{
+		for (auto& e : entities) e->Update();
+	}
+
+	void LateUpdate()
+	{
+		for (auto& e : entities) e->LateUpdate();
 	}
 
 	void draw()
