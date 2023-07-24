@@ -1,12 +1,24 @@
 #pragma once
 #include <SDL.h>
-#include "ECS.hpp"
-#include "Components.hpp"
 #include "Vector2D.hpp"
 #include "Map.hpp"
 
 class Camera
 {
+public:
+
+	static Camera* GetInstance();
+	static void Release();
+
+	int OriginX();
+	int OriginY();
+
+	void Follow(Vector2D* pos);
+	void SetMap(Map& m);
+	void SetDims(int w, int h);
+
+	void Update();
+
 private:
 
 	Camera();
@@ -14,21 +26,10 @@ private:
 
 	static Camera* instance;
 
-	Entity* parent = nullptr;
 	Map* map = nullptr;
-	int centerX = 0;
-	int centerY = 0;
+	Vector2D* centre;
 	SDL_Rect view;
-	int levelW;
-	int levelH;
+	int mapWidth;
+	int mapHeight;
 
-public:
-
-	static Camera* GetInstance();
-	static void Release();
-
-	void AddParent(Entity& p);
-	void AddMap(Map& m);
-
-	void Update();
 };

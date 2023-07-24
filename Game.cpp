@@ -29,9 +29,11 @@ Game::Game()
     audio = Audio::GetInstance();
     timer = Timer::GetInstance();
     camera = Camera::GetInstance();
+    camera->SetDims(Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT);
 
     map0 = new Map("assets/terrain.png", 32, 2);
     map0->LoadMap("assets/map0.txt", 16, 16);
+    camera->SetMap(*map0);
 
     int playerSize = 32;
     int playerScale = 3;
@@ -43,6 +45,7 @@ Game::Game()
     player.getComponent<SpriteComponent>().Play("Idle");
     player.addComponent<ControlComponent>();
     player.addGroup(playerGroup);
+    camera->Follow(player.getComponent<TransformComponent>().Centre());
 
 }
 Game::~Game()
@@ -79,21 +82,25 @@ void Game::Release()
 void Game::EarlyUpdate()
 {
     input->Update();
+
+    manager.refresh();
+    manager.EarlyUpdate();
 }
 
 void Game::Update()
 {
-    manager.refresh();
     manager.Update();
+
+    camera->Update();
     
+    //Collision handling?
+
+
 }
 
 void Game::LateUpdate()
 {
     input->UpdatePrevious();
-
-    // COLLISION HANDLING GOES HERE
-
 }
 
 void Game::Render()

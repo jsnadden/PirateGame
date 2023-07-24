@@ -10,7 +10,6 @@ Camera::Camera()
 
 Camera::~Camera()
 {
-	parent = nullptr;
 	map = nullptr;
 }
 
@@ -30,37 +29,51 @@ void Camera::Release()
 	instance = nullptr;
 }
 
-//TODO: add set/get methods for the position and rectangle stuff
-
-void Camera::AddParent(Entity& p)
+int Camera::OriginX()
 {
-	parent = &p;
-
-	if (!parent->hasComponent<TransformComponent>())
-	{
-		parent->addComponent<TransformComponent>();
-	}
+	return view.x;
 }
 
-void Camera::AddMap(Map& m)
+int Camera::OriginY()
+{
+	return view.y;
+}
+
+void Camera::Follow(Vector2D* pos)
+{
+	centre = pos;
+}
+
+void Camera::SetMap(Map& m)
 {
 	map = &m;
+	mapWidth = m.mapWidth;
+	mapHeight = m.mapHeight;
+}
+
+void Camera::SetDims(int w, int h)
+{
+	view.w = w;
+	view.h = h;
 }
 
 void Camera::Update()
 {
-	if (parent != nullptr)
+	int centreX = 0;
+	int centreY = 0;
+
+	if (centre != nullptr)
 	{
-		Vector2D pos = parent->getComponent<TransformComponent>().GetPosition();
-		centerX = pos.x;
-		centerX = pos.y;
+		centreX = static_cast<int>(centre->x);
+		centreY = static_cast<int>(centre->y);
 	}
 
-	view.x = centerX - (view.w / 2);
-	view.y = centerY - (view.h / 2);
+	view.x = centreX - (view.w / 2);
+	view.y = centreY - (view.h / 2);
 
 	if (view.x < 0) view.x = 0;
 	if (view.y < 0) view.y = 0;
-	if (view.x + view.w > levelW) view.x = levelW - view.w;
-	if (view.y + view.h > levelH) view.y = levelH - view.h;
+	if (view.x + view.w > mapWidth) view.x = mapWidth - view.w;
+	if (view.y + view.h > mapHeight) view.y = mapHeight - view.h;
+
 }

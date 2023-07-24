@@ -6,6 +6,7 @@
 #include "Assets.hpp"
 #include "Timer.hpp"
 #include "Animation.hpp"
+#include "Camera.hpp"
 
 class SpriteComponent : public Component
 {
@@ -18,6 +19,7 @@ private:
 	Graphics* graphics;
 	Assets* assets;
 	Timer* timer;
+	Camera* camera;
 
 	TransformComponent* transform;
 	SDL_Texture* texture;
@@ -44,6 +46,7 @@ public:
 		graphics = Graphics::GetInstance();
 		assets = Assets::GetInstance();
 		timer = Timer::GetInstance();
+		camera = Camera::GetInstance();
 
 		setTexture(path);
 
@@ -56,10 +59,20 @@ public:
 	~SpriteComponent()
 	{
 		graphics = nullptr;
+		assets = nullptr;
 		timer = nullptr;
+		camera = nullptr;
+
 		transform = nullptr;
 		texture = nullptr;
 
+		for (auto& a : animations)
+		{
+			if (a.second != nullptr)
+			{
+				delete a.second;
+			}
+		}
 		animations.clear();
 	}
 
@@ -115,10 +128,9 @@ public:
 			srcRect.x = srcRect.w * frame;
 			srcRect.y = row * srcRect.h;
 		}
-
-		// TODO subtract camera coordinates below
-		destRect.x = static_cast<int>(transform->GetPosition().x);
-		destRect.y = static_cast<int>(transform->GetPosition().y);
+		
+		destRect.x = static_cast<int>(transform->GetPosition()->x) - camera->OriginX();
+		destRect.y = static_cast<int>(transform->GetPosition()->y) - camera->OriginY();
 
 		destRect.w = static_cast<int>(transform->GetWidth() * transform->GetScale());
 		destRect.h = static_cast<int>(transform->GetHeight() * transform->GetScale());

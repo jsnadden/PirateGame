@@ -10,6 +10,7 @@ private:
 	Timer* timer;
 
 	Vector2D position;
+	Vector2D centre;
 	Vector2D velocity;
 	float rotation;
 	float scale;
@@ -42,6 +43,8 @@ public:
 	{
 		position.x = x;
 		position.y = y;
+		centre.x = x + static_cast<float>(w) / 2;
+		centre.y = y + static_cast<float>(h) / 2;
 		width = w;
 		height = h;
 		scale = s;
@@ -62,6 +65,9 @@ public:
 	{
 		position.x += velocity.x * timer->DeltaTime();
 		position.y += velocity.y * timer->DeltaTime();
+
+		centre.x = position.x + scale * static_cast<float>(width) / 2;
+		centre.y = position.y + scale * static_cast<float>(height) / 2;
 	}
 
 	void SetPosition(Vector2D pos)
@@ -74,11 +80,15 @@ public:
 		position += disp;
 	}
 
-	Vector2D GetPosition()
+	Vector2D* GetPosition()
 	{
-		return position;
+		return &position;
 	}
 
+	Vector2D* Centre()
+	{
+		return &centre;
+	}
 
 	void SetRotation(float rot)
 	{

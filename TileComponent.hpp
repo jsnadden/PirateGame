@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "Assets.hpp"
 #include "Graphics.hpp"
+#include "Camera.hpp"
 
 class TileComponent : public Component
 {
@@ -10,6 +11,7 @@ private:
 
 	Graphics* graphics;
 	Assets* assets;
+	Camera* camera;
 
 	SDL_Texture* texture;
 
@@ -27,12 +29,14 @@ public:
 		texture = nullptr;
 		graphics = nullptr;
 		assets = nullptr;
+		camera = nullptr;
 	}
 
 	TileComponent(std::string path, int x, int y, int size, Vector2D position, float scale)
 	{
 		graphics = Graphics::GetInstance();
 		assets = Assets::GetInstance();
+		camera = Camera::GetInstance();
 
 		active = true;
 
@@ -65,9 +69,9 @@ public:
 
 	void Update() override
 	{
-		// TODO: subtract camera position, and toggle active if it enters/leaves view
-		destRect.x = worldPosition.x;
-		destRect.y = worldPosition.y;
+		// TODO: toggle active if it enters/leaves view
+		destRect.x = worldPosition.x - camera->OriginX();
+		destRect.y = worldPosition.y - camera->OriginY();
 	}
 
 	void draw() override

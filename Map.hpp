@@ -11,6 +11,9 @@ public:
 
 	void LoadMap(std::string path, int sizeX, int sizeY);
 	void AddTile(int srcX, int srcY, int xPos, int yPos);
+
+	int mapWidth;
+	int mapHeight;
 	
 private:
 

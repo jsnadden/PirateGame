@@ -19,6 +19,9 @@ Map::~Map()
 
 void Map::LoadMap(std::string path, int sizeX, int sizeY)
 {
+	mapWidth = scaledSize * sizeX;
+	mapHeight = scaledSize * sizeY;
+
 	char c;
 	std::fstream mapfile;
 	mapfile.open(path);
