@@ -12,6 +12,8 @@ public:
 
 	int OriginX();
 	int OriginY();
+	int Width();
+	int Height();
 
 	void Follow(Vector2D* pos);
 	void SetMap(Map& m);

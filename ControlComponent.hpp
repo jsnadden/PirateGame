@@ -38,27 +38,27 @@ public:
 
 	void Update() override
 	{
-        Vector2D displace;
+        Vector2D vel;
         sprite->Play("Idle");
 
         if (input->KeyDown(SDL_SCANCODE_W))
         {
-            displace += VEC_UP;
+            vel += VEC_UP;
             sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_A))
         {
-            displace += VEC_LEFT;
+            vel += VEC_LEFT;
             sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_S))
         {
-            displace += VEC_DOWN;
+            vel += VEC_DOWN;
             sprite->Play("Sail");
         }
         if (input->KeyDown(SDL_SCANCODE_D))
         {
-            displace += VEC_RIGHT;
+            vel += VEC_RIGHT;
             sprite->Play("Sail");
         }
         if (input->KeyPressed(SDL_SCANCODE_A))
@@ -70,10 +70,11 @@ public:
             sprite->Flip(SDL_FLIP_NONE);
         }
 
-        displace.Normalise();
-        displace *= (timer->DeltaTime() * 150.f);
+        vel.Normalise();
 
-        transform->Translate(displace);
+        // TODO this speed should be set by other systems!!
+        vel *= 150.f;
+        transform->SetVelocity(vel);
 	}
 
 };

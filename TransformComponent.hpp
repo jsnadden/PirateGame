@@ -90,6 +90,17 @@ public:
 		return &centre;
 	}
 
+	Vector2D* GetVelocity()
+	{
+		return &velocity;
+	}
+
+	void SetVelocity(Vector2D vel)
+	{
+		velocity.x = vel.x;
+		velocity.y = vel.y;
+	}
+
 	void SetRotation(float rot)
 	{
 		rotation = rot;

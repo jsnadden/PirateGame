@@ -6,3 +6,4 @@
 #include "ControlComponent.hpp"
 #include "ColliderComponent.hpp"
 #include "UILabelComponent.hpp"
+#include "ProjectileComponent.hpp"

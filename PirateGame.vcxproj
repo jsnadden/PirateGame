@@ -44,6 +44,7 @@
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="ProjectileComponent.hpp" />
     <ClInclude Include="SpriteComponent.hpp" />
     <ClInclude Include="TileComponent.hpp" />
     <ClInclude Include="Timer.hpp" />

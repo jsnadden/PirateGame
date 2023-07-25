@@ -39,6 +39,16 @@ int Camera::OriginY()
 	return view.y;
 }
 
+int Camera::Width()
+{
+	return view.w;
+}
+
+int Camera::Height()
+{
+	return view.h;
+}
+
 void Camera::Follow(Vector2D* pos)
 {
 	centre = pos;

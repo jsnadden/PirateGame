@@ -93,6 +93,9 @@
     <ClInclude Include="UILabelComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
