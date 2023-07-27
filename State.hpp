@@ -1,28 +1,33 @@
 #pragma once
-#include "Graphics.hpp"
-#include "Assets.hpp"
-#include "Input.hpp"
-#include "Timer.hpp"
-#include "Audio.hpp"
-#include "Map.hpp"
+#include <vector>
+#include <stack>
+#include <map>
 #include "ECS.hpp"
-#include "Components.hpp"
-#include "Vector2D.hpp"
-#include "Camera.hpp"
-#include "Collision.hpp"
+#include "Graphics.hpp"
+#include "Timer.hpp"
 
 class State
 {
-private:
+protected:
 
-	// Add a bunch of manager instances
+	bool exit;
+
+	Graphics* graphics;
+	Timer* timer;
+
+	ECSManager ecs;
 
 public:
 
 	State();
 	virtual ~State();
 
+	const bool& HasExited();
+	virtual void Exit() = 0;
+
+	virtual void EarlyUpdate() = 0;
 	virtual void Update() = 0;
+	virtual void LateUpdate() = 0;
 	virtual void Render() = 0;
 
 };

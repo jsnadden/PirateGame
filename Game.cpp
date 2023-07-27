@@ -33,6 +33,10 @@ Game::Game()
     camera->SetDims(Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT);
     viewRect = SDL_Rect{ 0, 0, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT };
 
+    InitStates();
+
+    /////////////////////////////////////////////////////////////////////
+    //              MOVE THIS BLOCK INTO A STATE CLASS
     map0 = new Map("assets/terrain.png", 32, 2);
     map0->LoadMap("assets/map0.txt", 16, 16);
     camera->SetMap(*map0);
@@ -51,6 +55,8 @@ Game::Game()
     player.addComponent<UILabelComponent>(50, 50, "JumpRope Games presents...", "assets/arcade_font.ttf", 18, black);
     player.addGroup(playerGroup);
     camera->Follow(player.getComponent<TransformComponent>().Centre());
+    //
+    /////////////////////////////////////////////////////////////////////
 
 }
 Game::~Game()
@@ -66,6 +72,22 @@ Game::~Game()
 
     Timer::Release();
     timer = nullptr;
+
+    Input::Release();
+    input = nullptr;
+
+    Camera::Release();
+    camera = nullptr;
+
+    while (!stateStack.empty())
+    {
+        stateStack.top()->Exit();
+        delete stateStack.top();
+        stateStack.pop();
+    }
+        
+
+
 }
 
 Game* Game::GetInstance()
@@ -84,16 +106,33 @@ void Game::Release()
     instance = nullptr;
 }
 
+void Game::InitStates()
+{
+    stateStack.push(new GameState());
+}
+
 void Game::EarlyUpdate()
 {
     input->Update();
 
+    if (!stateStack.empty())
+    {
+        stateStack.top()->EarlyUpdate();
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //                STATE CLASS EARLYUPDATE
     manager.refresh();
     manager.EarlyUpdate();
+    //
+    /////////////////////////////////////////////////////////////////////
 }
 
 void Game::Update()
 {
+
+    /////////////////////////////////////////////////////////////////////
+    //                   STATE CLASS UPDATE
     Vector2D playerLastPosition = *player.getComponent<TransformComponent>().GetPosition();
 
     manager.Update();
@@ -116,19 +155,46 @@ void Game::Update()
             player.getComponent<TransformComponent>().SetPosition(playerLastPosition);
         }
     }
-
-
     // Cull off-screen tiles
     for (auto& t : tiles)
     {
         t->getComponent<TileComponent>().SetVisibility(Collision::AABB(viewRect, t->getComponent<TileComponent>().Location()));
     }
-    //TODO do this for NPCs etc.
+
+    //
+    /////////////////////////////////////////////////////////////////////
+
+
+    // Check if current state needs to be ended, quit if no states left.
+    if (!stateStack.empty())
+    {
+        stateStack.top()->Update();
+
+        if (stateStack.top()->HasExited())
+        {
+            delete stateStack.top();
+            stateStack.pop();
+        }
+    }
+    else
+    {
+        quit = true;
+    }
+
 }
 
 void Game::LateUpdate()
 {
+    if (!stateStack.empty())
+    {
+        stateStack.top()->LateUpdate();
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //                    STATE CLASS LATEUPDATE
     manager.LateUpdate();
+    //
+    /////////////////////////////////////////////////////////////////////
     
     input->UpdatePrevious();
 }
@@ -137,8 +203,8 @@ void Game::Render()
 {
     graphics->ClearRenderer();
 
-    // DRAW CALLS GO HERE
-
+    //////////////////////////////////////////////////////////////////////////
+    //              STATE CLASS RENDER METHOD
     for (auto& t : tiles)
     {
         t->draw();
@@ -152,6 +218,13 @@ void Game::Render()
     for (auto& c : colliders)
     {
         c->draw();
+    }
+    //
+    //////////////////////////////////////////////////////////////////////////
+    
+    if (!stateStack.empty())
+    {
+        stateStack.top()->Render();
     }
 
     graphics->Render();

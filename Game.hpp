@@ -1,5 +1,16 @@
 #pragma once
-#include "State.hpp"
+#include "Graphics.hpp"
+#include "Assets.hpp"
+#include "Input.hpp"
+#include "Timer.hpp"
+#include "Audio.hpp"
+#include "Map.hpp"
+#include "ECS.hpp"
+#include "Components.hpp"
+#include "Vector2D.hpp"
+#include "Camera.hpp"
+#include "Collision.hpp"
+#include "GameState.hpp"
 
 class Game
 {
@@ -31,14 +42,17 @@ private:
 	Graphics* graphics;
 	Assets* assets;
 	Input* input;
+	Timer* timer;
 	Audio* audio;
 	Camera* camera;
 
+	std::stack<State*> stateStack;
+
 	SDL_Rect viewRect;
 
-	Timer* timer;
-
 	SDL_Event event;
+	
+	void InitStates();
 
 	void EarlyUpdate();
 	void Update();

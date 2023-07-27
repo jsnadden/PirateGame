@@ -4,6 +4,8 @@
 #include "ECS.hpp"
 #include "Components.hpp"
 
+
+// TODO would it make sense to instead pass a pointer to the current manager in the Map() constructor?
 extern ECSManager manager;
 
 Map::Map(std::string path, int ts, int ms)
@@ -53,6 +55,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 			{
 				auto& tileCollider(manager.addEntity());
 				tileCollider.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
+				// TODO make this reference a group specific to the current state stateStack.top()
 				tileCollider.addGroup(Game::colliderGroup);
 			}
 
