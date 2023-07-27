@@ -17,11 +17,11 @@
     <Filter Include="DLLs">
       <UniqueIdentifier>{a4591799-2b4d-4be0-9f99-5faad60bed34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Structs">
-      <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc.">
+      <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2D.hpp">
-      <Filter>Structs</Filter>
+      <Filter>Misc.</Filter>
     </ClInclude>
     <ClInclude Include="Assets.hpp">
       <Filter>Managers</Filter>
@@ -72,14 +72,11 @@
     <ClInclude Include="TileComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Map.hpp">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="Animation.hpp">
-      <Filter>Structs</Filter>
+      <Filter>Misc.</Filter>
     </ClInclude>
     <ClInclude Include="ControlComponent.hpp">
       <Filter>ECS</Filter>
@@ -88,7 +85,7 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Collision.hpp">
-      <Filter>Structs</Filter>
+      <Filter>Misc.</Filter>
     </ClInclude>
     <ClInclude Include="ColliderComponent.hpp">
       <Filter>ECS</Filter>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="GameState.hpp">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.hpp">
+      <Filter>Misc.</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,20 +131,20 @@
     <ClCompile Include="ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
-      <Filter>Structs</Filter>
+      <Filter>Misc.</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Misc.</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
