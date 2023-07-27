@@ -36,7 +36,7 @@ public:
 		sprite = &entity->getComponent<SpriteComponent>();
 	}
 
-	void Update() override
+	void EarlyUpdate() override
 	{
         Vector2D vel;
         sprite->Play("Idle");

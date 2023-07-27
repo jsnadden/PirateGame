@@ -46,6 +46,7 @@
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="ProjectileComponent.hpp" />
     <ClInclude Include="SpriteComponent.hpp" />
+    <ClInclude Include="State.hpp" />
     <ClInclude Include="TileComponent.hpp" />
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="TransformComponent.hpp" />
@@ -63,6 +64,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>

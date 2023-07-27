@@ -106,10 +106,13 @@ void Game::Update()
     
     for (auto& c : colliders)
     {
+        // Should do a coarse collision search, using tree methods or whatever
+
         SDL_Rect cLoc = c->getComponent<ColliderComponent>().Location();
 
         if (Collision::AABB(playerLoc, cLoc))
         {
+            // Should compute the collision "face" and only "push" in the normal direction.
             player.getComponent<TransformComponent>().SetPosition(playerLastPosition);
         }
     }

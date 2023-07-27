@@ -20,6 +20,9 @@
     <Filter Include="Structs">
       <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\cannonball.png">
@@ -96,6 +99,9 @@
     <ClInclude Include="ProjectileComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
@@ -130,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
