@@ -2,11 +2,8 @@
 #include <map>
 #include "SDL.h"
 #include "Components.hpp"
-#include "Graphics.hpp"
-#include "Assets.hpp"
-#include "Timer.hpp"
+#include "Managers.hpp"
 #include "Animation.hpp"
-#include "Camera.hpp"
 
 class SpriteComponent : public Component
 {

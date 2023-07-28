@@ -1,7 +1,4 @@
 #include "TestLevel.hpp"
-#include "Map.hpp"
-#include "ECS.hpp"
-#include "Components.hpp"
 
 ECSManager manager;
 
@@ -23,8 +20,7 @@ TestLevel::TestLevel()
     graphics->WindowTitle("Test Level");
     
     map0 = new Map("assets/terrain.png", 32, 2, &manager);
-    map0->LoadMap("assets/map0.txt", 16, 16);
-    camera->SetMap(*map0);
+    map0->LoadMap("assets/map0.txt", 16, 16, colliderGroup, mapGroup);
 
     int playerSize = 32;
     int playerScale = 2;
@@ -56,11 +52,18 @@ void TestLevel::Exit()
 	// Clean things up!!
 	graphics = nullptr;
 	timer = nullptr;
+    audio = nullptr;
+    input = nullptr;
     camera = nullptr;
 }
 
 void TestLevel::EarlyUpdate()
 {
+    if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
+    {
+        Exit();
+    }
+
     manager.refresh();
     manager.EarlyUpdate();
 }

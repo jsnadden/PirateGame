@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "Graphics.hpp"
 
 int main(int argc, char* argv[])
 {

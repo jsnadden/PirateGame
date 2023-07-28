@@ -31,6 +31,13 @@ void States::Release()
 	instance = nullptr;
 }
 
+//void States::EndCurrentState()
+//{
+//	stateStack.top()->Exit();
+//	delete stateStack.top();
+//	stateStack.pop();
+//}
+
 bool States::EarlyUpdate()
 {
 	if (!stateStack.empty())

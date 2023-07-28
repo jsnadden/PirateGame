@@ -1,6 +1,7 @@
 #pragma once
+#include "Map.hpp"
+#include "Components.hpp"
 #include "State.hpp"
-#include "Camera.hpp"
 #include "Collision.hpp"
 
 class TestLevel :

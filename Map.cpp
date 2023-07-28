@@ -1,12 +1,4 @@
 #include "Map.hpp"
-#include "Game.hpp"
-#include <fstream>
-#include "Components.hpp"
-
-
-
-// TODO would it make sense to instead pass a pointer to the current manager in the Map() constructor?
-//extern ECSManager manager;
 
 Map::Map(std::string path, int ts, int ms, ECSManager* man)
 {
@@ -15,16 +7,19 @@ Map::Map(std::string path, int ts, int ms, ECSManager* man)
 	mapScale = ms;
 	scaledSize = ts * ms;
 
+	camera = Camera::GetInstance();
+
 	manager = man;
 }
 
 Map::~Map()
 {}
 
-void Map::LoadMap(std::string path, int sizeX, int sizeY)
+void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Group tileGrp)
 {
 	mapWidth = scaledSize * sizeX;
 	mapHeight = scaledSize * sizeY;
+	camera->SetMapSize(mapWidth, mapHeight);
 
 	char c;
 	std::fstream mapfile;
@@ -40,7 +35,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 			srcY = atoi(&c) * tileSize;
 			mapfile.get(c);
 			srcX = atoi(&c) * tileSize;
-			AddTile(srcX, srcY, x * scaledSize, y * scaledSize);
+			AddTile(srcX, srcY, x * scaledSize, y * scaledSize, tileGrp);
 			mapfile.ignore();
 		}
 	}
@@ -58,7 +53,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 				auto& tileCollider(manager->addEntity());
 				tileCollider.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
 				// TODO make this reference a group specific to the current state stateStack.top()
-				tileCollider.addGroup(TestLevel::colliderGroup);
+				tileCollider.addGroup(colliderGrp);
 			}
 
 			mapfile.ignore();
@@ -68,9 +63,9 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 	mapfile.close();
 }
 
-void Map::AddTile(int srcX, int srcY, int xPos, int yPos)
+void Map::AddTile(int srcX, int srcY, int xPos, int yPos, Group tileGrp)
 {
 	auto& tile(manager->addEntity());
 	tile.addComponent<TileComponent>(texturePath, srcX, srcY, tileSize, Vector2D(xPos, yPos), mapScale);
-	tile.addGroup(TestLevel::mapGroup);
+	tile.addGroup(tileGrp);
 }

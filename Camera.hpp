@@ -1,7 +1,6 @@
 #pragma once
 #include <SDL.h>
 #include "Vector2D.hpp"
-#include "Map.hpp"
 
 class Camera
 {
@@ -16,7 +15,7 @@ public:
 	int Height();
 
 	void Follow(Vector2D* pos);
-	void SetMap(Map& m);
+	void SetMapSize(int w, int h);
 	void SetDims(int w, int h);
 
 	void Update();
@@ -28,7 +27,7 @@ private:
 
 	static Camera* instance;
 
-	Map* map = nullptr;
+	//Map* map = nullptr;
 	Vector2D* centre;
 	SDL_Rect view;
 	int mapWidth;

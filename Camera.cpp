@@ -10,7 +10,7 @@ Camera::Camera()
 
 Camera::~Camera()
 {
-	map = nullptr;
+	
 }
 
 Camera* Camera::GetInstance()
@@ -54,11 +54,10 @@ void Camera::Follow(Vector2D* pos)
 	centre = pos;
 }
 
-void Camera::SetMap(Map& m)
+void Camera::SetMapSize(int w, int h)
 {
-	map = &m;
-	mapWidth = m.mapWidth;
-	mapHeight = m.mapHeight;
+	mapWidth = w;
+	mapHeight = h;
 }
 
 void Camera::SetDims(int w, int h)

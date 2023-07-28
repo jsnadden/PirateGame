@@ -2,7 +2,7 @@
 #include <string>
 #include "SDL.h"
 #include "Components.hpp"
-#include "Graphics.hpp"
+#include "Managers.hpp"
 
 class ColliderComponent : public Component
 {

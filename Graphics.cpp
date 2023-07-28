@@ -39,10 +39,10 @@ void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 	backgroundColour.a = a;
 }
 
-void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect rect)
+void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
 {
 	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
-	SDL_RenderFillRect(renderer, &rect);
+	SDL_RenderFillRect(renderer, rect);
 }
 
 SDL_Rect Graphics::ViewRect()

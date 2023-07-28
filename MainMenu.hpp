@@ -1,9 +1,10 @@
 #pragma once
-#include <vector>
+#include <map>
 #include "State.hpp"
 #include "States.hpp"
 #include "TestLevel.hpp"
-#include "UIElement.hpp"
+#include "Button.hpp"
+#include "Vector2D.hpp"
 
 class MainMenu :
     public State
@@ -12,9 +13,7 @@ private:
 
     States* states;
 
-    std::vector<UIElement*> elements;
-
-    float counter = 5.0f;
+    std::map<std::string, UIElement*> elements;
 
 public:
     MainMenu();

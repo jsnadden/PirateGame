@@ -1,11 +1,13 @@
 #pragma once
-#include "Graphics.hpp"
+#include "Managers.hpp"
 
 class UIElement
 {
 protected:
 
 	Graphics* graphics;
+	Assets* assets;
+	Input* input;
 
 public:
 

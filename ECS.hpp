@@ -66,6 +66,15 @@ public:
 
 	Entity(ECSManager& mManager)  : manager(mManager) {}
 
+	~Entity()
+	{
+		for (auto& c : components)
+		{
+			Component* cPoint = c.release();
+			delete cPoint;
+		}
+	}
+
 	void EarlyUpdate()
 	{
 		for (auto& c : components) c->EarlyUpdate();
@@ -199,4 +208,5 @@ public:
 
 		return *e;
 	}
+
 };

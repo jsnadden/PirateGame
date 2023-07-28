@@ -123,6 +123,12 @@
     <ClInclude Include="UIElement.hpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Managers.hpp">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
@@ -171,6 +177,9 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>

@@ -126,12 +126,6 @@ void Game::Run()
             }
         }
 
-        // TODO remove this in favour of a menu
-        if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
-        {
-            quit = true;
-        }
-
         // CRUDE FRAME RATE LIMITER
         timer->Update();
         if (timer->DeltaTime() < FRAME_SECS)

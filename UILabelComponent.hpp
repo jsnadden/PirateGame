@@ -2,9 +2,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
-#include "ECS.hpp"
-#include "Graphics.hpp"
-#include "Assets.hpp"
+#include "Managers.hpp"
 
 
 class UILabelComponent : public Component
@@ -17,7 +15,7 @@ private:
 	SDL_Rect location;
 	std::string textString;
 	std::string font;
-	SDL_Color textColour;
+	SDL_Color fontColour;
 	SDL_Texture* texture;
 	int textSize;
 
@@ -33,9 +31,9 @@ public:
 		textString = text;
 		font = fontPath;
 		textSize = size;
-		textColour = colour;
+		fontColour = colour;
 
-		texture = assets->GetText(textString, font, textSize, textColour);
+		texture = assets->GetText(textString, font, textSize, fontColour);
 		SDL_QueryTexture(texture, NULL, NULL, &location.w, &location.h);
 	}
 

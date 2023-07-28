@@ -1,7 +1,7 @@
 #pragma once
 #include "Components.hpp"
 #include "Vector2D.hpp"
-#include "Timer.hpp"
+#include "Managers.hpp"
 
 class TransformComponent : public Component
 {

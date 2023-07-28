@@ -7,8 +7,7 @@ MainMenu::MainMenu()
 
 	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 	
-
-	counter = 2.0f;
+	elements["test button"] = new Button(Vector2D(400.0f, 300.0f), "Test button");
 }
 
 MainMenu::~MainMenu()
@@ -24,22 +23,29 @@ void MainMenu::Exit()
 	states = nullptr;
 	graphics = nullptr;
 	timer = nullptr;
+	input = nullptr;
+	audio = nullptr;
 }
 
 void MainMenu::EarlyUpdate()
 {
-
+	if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
+	{
+		Exit();
+	}
 }
 
 void MainMenu::Update()
 {
-	counter -= timer->DeltaTime();
+	for (auto& e : elements)
+	{
+		e.second->Update();
+	}
 
-	if (counter <= 0)
+	if (((Button*)elements["test button"])->TestActivated())
 	{
 		states->StartState<TestLevel>();
 	}
-
 }
 
 void MainMenu::LateUpdate()
@@ -49,7 +55,8 @@ void MainMenu::LateUpdate()
 
 void MainMenu::Render()
 {
-	SDL_Rect myrect{ 100,100,200,200 };
-	SDL_Color mycolour{ 0x90, 0xa9, 0xff, 0xff };
-	graphics->DrawRectangle(mycolour, myrect);
+	for (auto& e : elements)
+	{
+		e.second->Draw();
+	}
 }

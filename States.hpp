@@ -23,6 +23,8 @@ public:
 		stateStack.push(new T());
 	}
 
+	void EndCurrentState();
+
 	bool EarlyUpdate();
 	bool Update();
 	bool LateUpdate();

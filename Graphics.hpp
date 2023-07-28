@@ -25,7 +25,7 @@ public:
 	void WindowTitle(const char* newTitle);
 	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-	void DrawRectangle(SDL_Color colour, SDL_Rect rect);
+	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
 
 	SDL_Rect ViewRect();
 

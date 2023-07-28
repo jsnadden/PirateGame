@@ -1,9 +1,7 @@
 #pragma once
-#include "ECS.hpp"
 #include "Components.hpp"
 #include "Vector2D.hpp"
-#include "Timer.hpp"
-#include "Camera.hpp"
+#include "Managers.hpp"
 
 
 class ProjectileComponent : public Component

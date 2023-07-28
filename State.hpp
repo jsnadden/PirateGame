@@ -3,8 +3,7 @@
 #include <stack>
 #include <map>
 #include "ECS.hpp"
-#include "Graphics.hpp"
-#include "Timer.hpp"
+#include "Managers.hpp"
 
 class State
 {
@@ -14,8 +13,8 @@ protected:
 
 	Graphics* graphics;
 	Timer* timer;
-
-	ECSManager ecs;
+	Audio* audio;
+	Input* input;
 
 public:
 

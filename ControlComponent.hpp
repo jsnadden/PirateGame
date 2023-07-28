@@ -1,7 +1,6 @@
 #pragma once
 #include "Components.hpp"
-#include "Input.hpp"
-#include "Timer.hpp"
+#include "Managers.hpp"
 #include "Vector2D.hpp"
 
 class ControlComponent : public Component
