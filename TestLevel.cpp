@@ -1,24 +1,26 @@
-#include "GameState.hpp"
+#include "TestLevel.hpp"
 #include "Map.hpp"
 #include "ECS.hpp"
 #include "Components.hpp"
 
 ECSManager manager;
 
-auto& tiles(manager.getGroup(GameState::mapGroup));
-auto& players(manager.getGroup(GameState::playerGroup));
-auto& enemies(manager.getGroup(GameState::enemyGroup));
-auto& colliders(manager.getGroup(GameState::colliderGroup));
-auto& projectiles(manager.getGroup(GameState::projectileGroup));
+auto& tiles(manager.getGroup(TestLevel::mapGroup));
+auto& players(manager.getGroup(TestLevel::playerGroup));
+auto& enemies(manager.getGroup(TestLevel::enemyGroup));
+auto& colliders(manager.getGroup(TestLevel::colliderGroup));
+auto& projectiles(manager.getGroup(TestLevel::projectileGroup));
 
 Map* map0;
 
 auto& player(manager.addEntity());
 
-GameState::GameState()
+TestLevel::TestLevel()
 	: State()
 {
     camera = Camera::GetInstance();
+
+    graphics->WindowTitle("Test Level");
     
     map0 = new Map("assets/terrain.png", 32, 2, &manager);
     map0->LoadMap("assets/map0.txt", 16, 16);
@@ -35,18 +37,19 @@ GameState::GameState()
     player.addComponent<ControlComponent>();
     player.addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
     SDL_Color black = { 0x00, 0x00, 0x00, 0xff };
-    player.addComponent<UILabelComponent>(50, 50, "JumpRope Games presents...", "assets/arcade_font.ttf", 18, black);
+    player.addComponent<UILabelComponent>(350, 600, "TEST LEVEL", "assets/arcade_font.ttf", 18, black);
+    player.getComponent<UILabelComponent>().CentreH();
     player.addGroup(playerGroup);
     camera->Follow(player.getComponent<TransformComponent>().Centre());
     
 }
 
-GameState::~GameState()
+TestLevel::~TestLevel()
 {
 	Exit();
 }
 
-void GameState::Exit()
+void TestLevel::Exit()
 {
 	exit = true;
 
@@ -56,13 +59,13 @@ void GameState::Exit()
     camera = nullptr;
 }
 
-void GameState::EarlyUpdate()
+void TestLevel::EarlyUpdate()
 {
     manager.refresh();
     manager.EarlyUpdate();
 }
 
-void GameState::Update()
+void TestLevel::Update()
 {
     
     Vector2D playerLastPosition = *player.getComponent<TransformComponent>().GetPosition();
@@ -90,17 +93,17 @@ void GameState::Update()
     // Cull off-screen tiles
     for (auto& t : tiles)
     {
-        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(Game::viewRect, t->getComponent<TileComponent>().Location()));
+        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(Graphics::viewRect, t->getComponent<TileComponent>().Location()));
     }
 
 }
 
-void GameState::LateUpdate()
+void TestLevel::LateUpdate()
 {
     manager.LateUpdate();
 }
 
-void GameState::Render()
+void TestLevel::Render()
 {
     for (auto& t : tiles)
     {

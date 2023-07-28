@@ -58,7 +58,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY)
 				auto& tileCollider(manager->addEntity());
 				tileCollider.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
 				// TODO make this reference a group specific to the current state stateStack.top()
-				tileCollider.addGroup(GameState::colliderGroup);
+				tileCollider.addGroup(TestLevel::colliderGroup);
 			}
 
 			mapfile.ignore();
@@ -72,5 +72,5 @@ void Map::AddTile(int srcX, int srcY, int xPos, int yPos)
 {
 	auto& tile(manager->addEntity());
 	tile.addComponent<TileComponent>(texturePath, srcX, srcY, tileSize, Vector2D(xPos, yPos), mapScale);
-	tile.addGroup(GameState::mapGroup);
+	tile.addGroup(TestLevel::mapGroup);
 }

@@ -10,7 +10,8 @@
 #include "Vector2D.hpp"
 #include "Camera.hpp"
 #include "Collision.hpp"
-#include "GameState.hpp"
+#include "States.hpp"
+#include "MainMenu.hpp"
 
 class Game
 {
@@ -20,8 +21,6 @@ public:
 	static void Release();
 
 	void Run();
-
-	static SDL_Rect viewRect;
 
 private:
 
@@ -38,12 +37,11 @@ private:
 	Timer* timer;
 	Audio* audio;
 	Camera* camera;
-
-	std::stack<State*> stateStack;
+	States* states;
 
 	SDL_Event event;
 	
-	void InitStates();
+	void InitialState();
 
 	void EarlyUpdate();
 	void Update();

@@ -20,7 +20,13 @@
     <Filter Include="States">
       <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc.">
+    <Filter Include="Utility">
+      <UniqueIdentifier>{3a2102ac-e9d3-40e4-ad1c-73201ad57ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Structs">
+      <UniqueIdentifier>{df57ce12-6f58-4abf-997e-39e0d1c4252b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Non-Entity Elements">
       <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -39,9 +45,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector2D.hpp">
-      <Filter>Misc.</Filter>
-    </ClInclude>
     <ClInclude Include="Assets.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -75,17 +78,11 @@
     <ClInclude Include="SpriteComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.hpp">
-      <Filter>Misc.</Filter>
-    </ClInclude>
     <ClInclude Include="ControlComponent.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="Camera.hpp">
       <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.hpp">
-      <Filter>Misc.</Filter>
     </ClInclude>
     <ClInclude Include="ColliderComponent.hpp">
       <Filter>ECS</Filter>
@@ -99,11 +96,29 @@
     <ClInclude Include="State.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.hpp">
+    <ClInclude Include="TestLevel.hpp">
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
-      <Filter>Misc.</Filter>
+      <Filter>Non-Entity Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.hpp">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.hpp">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.hpp">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>Non-Entity Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="States.hpp">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,17 +149,26 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Misc.</Filter>
-    </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
+    <ClCompile Include="TestLevel.cpp">
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Misc.</Filter>
+      <Filter>Non-Entity Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Non-Entity Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="States.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

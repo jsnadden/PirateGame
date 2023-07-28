@@ -1,7 +1,6 @@
 #include "Game.hpp"
 
 Game* Game::instance = nullptr;
-SDL_Rect Game::viewRect = SDL_Rect{ 0, 0, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT };
 
 Game::Game()
 {
@@ -17,11 +16,12 @@ Game::Game()
     input = Input::GetInstance();
     audio = Audio::GetInstance();
     timer = Timer::GetInstance();
+    states = States::GetInstance();
 
     camera = Camera::GetInstance();
     camera->SetDims(Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT);
 
-    InitStates();
+    InitialState();
 
 }
 Game::~Game()
@@ -43,14 +43,10 @@ Game::~Game()
 
     Camera::Release();
     camera = nullptr;
-
-    while (!stateStack.empty())
-    {
-        stateStack.top()->Exit();
-        delete stateStack.top();
-        stateStack.pop();
-    }
         
+    States::Release();
+    states = nullptr;
+
 }
 
 Game* Game::GetInstance()
@@ -69,19 +65,17 @@ void Game::Release()
     instance = nullptr;
 }
 
-void Game::InitStates()
+void Game::InitialState()
 {
-    stateStack.push(new GameState());
+    // Eventually this should start a loading screen type thing
+    states->StartState<MainMenu>();
 }
 
 void Game::EarlyUpdate()
 {
     input->Update();
 
-    if (!stateStack.empty())
-    {
-        stateStack.top()->EarlyUpdate();
-    }
+    quit = states->EarlyUpdate();
 
     
 }
@@ -89,30 +83,13 @@ void Game::EarlyUpdate()
 void Game::Update()
 {
     
-    if (!stateStack.empty())
-    {
-        stateStack.top()->Update();
-
-        // Check if current state needs to be ended, quit if no states left.
-        if (stateStack.top()->HasExited())
-        {
-            delete stateStack.top();
-            stateStack.pop();
-        }
-    }
-    else
-    {
-        quit = true;
-    }
+    quit = states->Update();
 
 }
 
 void Game::LateUpdate()
 {
-    if (!stateStack.empty())
-    {
-        stateStack.top()->LateUpdate();
-    }
+    quit = states->LateUpdate();
     
     input->UpdatePrevious();
 }
@@ -121,10 +98,7 @@ void Game::Render()
 {
     graphics->ClearRenderer();
     
-    if (!stateStack.empty())
-    {
-        stateStack.top()->Render();
-    }
+    quit = states->Render();
 
     graphics->Render();
 }
@@ -136,9 +110,17 @@ void Game::Run()
     {
         timer->Reset();
 
+        EarlyUpdate();
+
+        Update();
+        
+        LateUpdate();
+
+        Render();
+
         while (SDL_PollEvent(&event) != 0)
         {
-            if ( event.type == SDL_QUIT)
+            if (event.type == SDL_QUIT)
             {
                 quit = true;
             }
@@ -149,14 +131,6 @@ void Game::Run()
         {
             quit = true;
         }
-
-        EarlyUpdate();
-
-        Update();
-        
-        LateUpdate();
-
-        Render();
 
         // CRUDE FRAME RATE LIMITER
         timer->Update();

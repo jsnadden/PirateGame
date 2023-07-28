@@ -5,7 +5,6 @@
 #include "ECS.hpp"
 #include "Graphics.hpp"
 #include "Assets.hpp"
-#include "Game.hpp"
 
 
 class UILabelComponent : public Component
@@ -45,6 +44,20 @@ public:
 		graphics = nullptr;
 		assets = nullptr;
 		texture = nullptr;
+	}
+
+	void CentreV()
+	{
+		int height;
+		SDL_QueryTexture(texture, NULL, NULL, NULL, &height);
+		location.y = (Graphics::SCREEN_HEIGHT - height) / 2;
+	}
+
+	void CentreH()
+	{
+		int width;
+		SDL_QueryTexture(texture, NULL, NULL, &width, NULL);
+		location.x = (Graphics::SCREEN_WIDTH - width) / 2;
 	}
 
 	void draw() override

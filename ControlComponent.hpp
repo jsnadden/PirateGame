@@ -61,13 +61,14 @@ public:
             vel += VEC_RIGHT;
             sprite->Play("Sail");
         }
-        if (input->KeyPressed(SDL_SCANCODE_A))
-        {
-            sprite->Flip(SDL_FLIP_HORIZONTAL);
-        }
-        if (input->KeyPressed(SDL_SCANCODE_D))
+        
+        if (vel.x > 0)
         {
             sprite->Flip(SDL_FLIP_NONE);
+        }
+        if (vel.x < 0)
+        {
+            sprite->Flip(SDL_FLIP_HORIZONTAL);
         }
 
         vel.Normalise();

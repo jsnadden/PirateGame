@@ -3,6 +3,8 @@
 Graphics* Graphics::instance = nullptr;
 bool Graphics::initialised = false;
 
+SDL_Rect Graphics::viewRect = SDL_Rect{0, 0, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT};
+
 Graphics* Graphics::GetInstance()
 {
 	if (instance == nullptr)
@@ -24,6 +26,16 @@ void Graphics::Release()
 bool Graphics::HasInitialised()
 {
 	return initialised;
+}
+
+void Graphics::WindowTitle(const char* newTitle)
+{
+	SDL_SetWindowTitle(window, newTitle);
+}
+
+void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
 Graphics::Graphics()

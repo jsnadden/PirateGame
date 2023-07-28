@@ -1,8 +1,9 @@
 #pragma once
 #include "State.hpp"
 #include "Camera.hpp"
+#include "Collision.hpp"
 
-class GameState :
+class TestLevel :
     public State
 {
 private:
@@ -11,8 +12,8 @@ private:
 
 public:
 
-    GameState();
-    ~GameState();
+    TestLevel();
+    ~TestLevel();
 
     void Exit();
 
@@ -20,7 +21,6 @@ public:
     void Update();
     void LateUpdate();
     void Render();
-
 
     enum groupLabels : std::size_t
     {

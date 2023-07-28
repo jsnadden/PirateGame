@@ -34,6 +34,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Assets.hpp" />
     <ClInclude Include="Audio.hpp" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="ColliderComponent.hpp" />
     <ClInclude Include="Collision.hpp" />
@@ -41,7 +42,9 @@
     <ClInclude Include="ControlComponent.hpp" />
     <ClInclude Include="ECS.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="MainMenu.hpp" />
+    <ClInclude Include="States.hpp" />
+    <ClInclude Include="TestLevel.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="Map.hpp" />
@@ -57,11 +60,14 @@
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="States.cpp" />
+    <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
