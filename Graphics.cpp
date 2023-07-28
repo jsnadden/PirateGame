@@ -3,8 +3,6 @@
 Graphics* Graphics::instance = nullptr;
 bool Graphics::initialised = false;
 
-SDL_Rect Graphics::viewRect = SDL_Rect{0, 0, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT};
-
 Graphics* Graphics::GetInstance()
 {
 	if (instance == nullptr)
@@ -35,13 +33,35 @@ void Graphics::WindowTitle(const char* newTitle)
 
 void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+	backgroundColour.r = r;
+	backgroundColour.g = g;
+	backgroundColour.b = b;
+	backgroundColour.a = a;
+}
+
+void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect rect)
+{
+	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
+	SDL_RenderFillRect(renderer, &rect);
+}
+
+SDL_Rect Graphics::ViewRect()
+{
+	SDL_Rect viewRect;
+	viewRect.x = viewRect.y = 0;
+	SDL_GetWindowSize(window, &viewRect.w, &viewRect.h);
+	return viewRect;
 }
 
 Graphics::Graphics()
 {
 	renderer = nullptr;
 	initialised = Init();
+
+	backgroundColour.r = 0;
+	backgroundColour.g = 0;
+	backgroundColour.b = 0;
+	backgroundColour.a = 0;
 }
 
 Graphics::~Graphics()
@@ -143,6 +163,7 @@ SDL_Texture* Graphics::LoadText(TTF_Font* font, std::string text, SDL_Color colo
 
 void Graphics::ClearRenderer()
 {
+	SDL_SetRenderDrawColor(renderer, backgroundColour.r, backgroundColour.g, backgroundColour.b, backgroundColour.a);
 	SDL_RenderClear(renderer);
 }
 

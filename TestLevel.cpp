@@ -93,7 +93,7 @@ void TestLevel::Update()
     // Cull off-screen tiles
     for (auto& t : tiles)
     {
-        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(Graphics::viewRect, t->getComponent<TileComponent>().Location()));
+        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(graphics->ViewRect(), t->getComponent<TileComponent>().Location()));
     }
 
 }

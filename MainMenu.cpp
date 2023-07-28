@@ -6,6 +6,7 @@ MainMenu::MainMenu()
 	states = States::GetInstance();
 
 	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
+	
 
 	counter = 2.0f;
 }
@@ -48,5 +49,7 @@ void MainMenu::LateUpdate()
 
 void MainMenu::Render()
 {
-
+	SDL_Rect myrect{ 100,100,200,200 };
+	SDL_Color mycolour{ 0x90, 0xa9, 0xff, 0xff };
+	graphics->DrawRectangle(mycolour, myrect);
 }

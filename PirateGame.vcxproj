@@ -34,7 +34,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Assets.hpp" />
     <ClInclude Include="Audio.hpp" />
-    <ClInclude Include="Button.hpp" />
+    <ClInclude Include="UIElement.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="ColliderComponent.hpp" />
     <ClInclude Include="Collision.hpp" />
@@ -60,7 +60,7 @@
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ECS.cpp" />

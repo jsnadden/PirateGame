@@ -26,8 +26,11 @@
     <Filter Include="Structs">
       <UniqueIdentifier>{df57ce12-6f58-4abf-997e-39e0d1c4252b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Non-Entity Elements">
+    <Filter Include="Non-ECS Elements">
       <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Non-ECS Elements\UI Elements">
+      <UniqueIdentifier>{4c553c88-9317-4cb9-9bff-990df1a091bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +103,7 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
-      <Filter>Non-Entity Elements</Filter>
+      <Filter>Non-ECS Elements</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.hpp">
       <Filter>States</Filter>
@@ -114,11 +117,11 @@
     <ClInclude Include="Animation.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Button.hpp">
-      <Filter>Non-Entity Elements</Filter>
-    </ClInclude>
     <ClInclude Include="States.hpp">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.hpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +159,7 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Non-Entity Elements</Filter>
+      <Filter>Non-ECS Elements</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>States</Filter>
@@ -164,11 +167,11 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Non-Entity Elements</Filter>
-    </ClCompile>
     <ClCompile Include="States.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

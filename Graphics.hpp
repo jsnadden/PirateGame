@@ -13,7 +13,6 @@ public:
 	// TODO: construct a way to set the window resolution in-game, using an .ini
 	static const int SCREEN_WIDTH = 800;
 	static const int SCREEN_HEIGHT = 640;
-	static SDL_Rect viewRect;
 
 	static Graphics* GetInstance();
 	static void Release();
@@ -26,6 +25,10 @@ public:
 	void WindowTitle(const char* newTitle);
 	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
+	void DrawRectangle(SDL_Color colour, SDL_Rect rect);
+
+	SDL_Rect ViewRect();
+
 	void ClearRenderer();
 	void Render();
 
@@ -33,6 +36,8 @@ private:
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+
+	SDL_Color backgroundColour;
 
 	static Graphics* instance;
 	static bool initialised;
