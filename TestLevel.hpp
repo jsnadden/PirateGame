@@ -11,17 +11,31 @@ private:
 
     Camera* camera;
 
+    ECSManager manager;
+
+    Entity* player;
+
+    Map* map0;
+
+
 public:
 
     TestLevel();
     ~TestLevel();
 
-    void Exit();
+    void Exit() override;
 
-    void EarlyUpdate();
-    void Update();
-    void LateUpdate();
-    void Render();
+    void Init() override;
+    void EarlyUpdate() override;
+    void Update() override;
+    void LateUpdate() override;
+    void Render() override;
+
+    std::vector<Entity*>* tiles;
+    std::vector<Entity*>* players;
+    std::vector<Entity*>* enemies;
+    std::vector<Entity*>* colliders;
+    std::vector<Entity*>* projectiles;
 
     enum groupLabels : std::size_t
     {

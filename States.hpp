@@ -22,8 +22,8 @@ public:
 	{
 		stateStack.push(new T());
 	}
-
 	void EndCurrentState();
+	void CheckEndState();
 
 	bool EarlyUpdate();
 	bool Update();

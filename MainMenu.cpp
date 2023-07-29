@@ -4,10 +4,16 @@ MainMenu::MainMenu()
 	: State()
 {
 	states = States::GetInstance();
-
-	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 	
 	elements["test button"] = new Button(Vector2D(400.0f, 300.0f), "Test button");
+
+	Init();
+}
+
+void MainMenu::Init()
+{
+	graphics->WindowTitle("Main menu");
+	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 }
 
 MainMenu::~MainMenu()

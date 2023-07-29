@@ -8,6 +8,7 @@ State::State()
 	timer = Timer::GetInstance();
 	audio = Audio::GetInstance();
 	input = Input::GetInstance();
+
 }
 
 State::~State()

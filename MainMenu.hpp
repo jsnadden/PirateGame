@@ -19,12 +19,13 @@ public:
     MainMenu();
     ~MainMenu();
 
-    void Exit();
+    void Exit() override;
 
-    void EarlyUpdate();
-    void Update();
-    void LateUpdate();
-    void Render();
+    void Init() override;
+    void EarlyUpdate() override;
+    void Update() override;
+    void LateUpdate() override;
+    void Render() override;
 
 };
 

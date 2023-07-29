@@ -9,9 +9,7 @@ States::~States()
 {
 	while (!stateStack.empty())
 	{
-		stateStack.top()->Exit();
-		delete stateStack.top();
-		stateStack.pop();
+		EndCurrentState();
 	}
 }
 
@@ -31,12 +29,20 @@ void States::Release()
 	instance = nullptr;
 }
 
-//void States::EndCurrentState()
-//{
-//	stateStack.top()->Exit();
-//	delete stateStack.top();
-//	stateStack.pop();
-//}
+void States::EndCurrentState()
+{
+	delete stateStack.top();
+	stateStack.pop();
+}
+
+void States::CheckEndState()
+{
+	if (stateStack.top()->HasExited())
+	{
+		EndCurrentState();
+		if (!stateStack.empty()) { stateStack.top()->Init(); }
+	}
+}
 
 bool States::EarlyUpdate()
 {
@@ -44,12 +50,7 @@ bool States::EarlyUpdate()
 	{
 		stateStack.top()->EarlyUpdate();
 
-		// Check if current state needs to be ended
-		if (stateStack.top()->HasExited())
-		{
-			delete stateStack.top();
-			stateStack.pop();
-		}
+		CheckEndState();
 
 		return false;
 	}
@@ -65,12 +66,7 @@ bool States::Update()
 	{
 		stateStack.top()->Update();
 
-		// Check if current state needs to be ended
-		if (stateStack.top()->HasExited())
-		{
-			delete stateStack.top();
-			stateStack.pop();
-		}
+		CheckEndState();
 
 		return false;
 	}
@@ -86,12 +82,7 @@ bool States::LateUpdate()
 	{
 		stateStack.top()->LateUpdate();
 
-		// Check if current state needs to be ended
-		if (stateStack.top()->HasExited())
-		{
-			delete stateStack.top();
-			stateStack.pop();
-		}
+		CheckEndState();
 
 		return false;
 	}
@@ -107,12 +98,7 @@ bool States::Render()
 	{
 		stateStack.top()->Render();
 
-		// Check if current state needs to be ended
-		if (stateStack.top()->HasExited())
-		{
-			delete stateStack.top();
-			stateStack.pop();
-		}
+		CheckEndState();
 
 		return false;
 	}

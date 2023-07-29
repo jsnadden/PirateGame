@@ -81,7 +81,7 @@ public:
 	void draw() override
 	{
 		// Comment out to hide collision boxes:
-		//graphics->DrawTexture(colliderTexture, &srcRect, &destRect, SDL_FLIP_NONE);
+		// graphics->DrawTexture(colliderTexture, &srcRect, &destRect, SDL_FLIP_NONE);
 	}
 
 };
