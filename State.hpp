@@ -2,7 +2,6 @@
 #include <vector>
 #include <stack>
 #include <map>
-#include "ECS.hpp"
 #include "Managers.hpp"
 
 class State

@@ -129,6 +129,7 @@
     <ClInclude Include="Button.hpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevel2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
@@ -182,6 +183,7 @@
     <ClCompile Include="Button.cpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\SDL2_ttf.dll">
