@@ -129,6 +129,7 @@
     <ClInclude Include="Button.hpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">

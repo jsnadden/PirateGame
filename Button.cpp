@@ -33,12 +33,10 @@ Button::~Button()
 
 void Button::Update()
 {
-    SDL_Rect cursorLocation;
-    cursorLocation.x = input->MousePosition().x;
-    cursorLocation.y = input->MousePosition().y;
-    cursorLocation.w = cursorLocation.h = 1;
+    int cursorX = input->MousePosition().x;
+    int cursorY = input->MousePosition().y;
 
-    if (Collision::AABB(buttonRect, cursorLocation))
+    if (Collision::PointRect(cursorX, cursorY, buttonRect))
     {
         hover = true;
 

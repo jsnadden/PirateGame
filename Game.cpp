@@ -75,7 +75,7 @@ void Game::EarlyUpdate()
 {
     input->Update();
 
-    quit = states->EarlyUpdate();
+    states->EarlyUpdate();
 
     
 }
@@ -83,13 +83,13 @@ void Game::EarlyUpdate()
 void Game::Update()
 {
     
-    quit = states->Update();
+    states->Update();
 
 }
 
 void Game::LateUpdate()
 {
-    quit = states->LateUpdate();
+    states->LateUpdate();
     
     input->UpdatePrevious();
 }

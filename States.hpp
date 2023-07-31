@@ -25,9 +25,9 @@ public:
 	void EndCurrentState();
 	void CheckEndState();
 
-	bool EarlyUpdate();
-	bool Update();
-	bool LateUpdate();
+	void EarlyUpdate();
+	void Update();
+	void LateUpdate();
 	bool Render();
 
 };

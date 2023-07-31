@@ -25,6 +25,7 @@ TestLevel::TestLevel()
     player->getComponent<SpriteComponent>().Play("Idle");
     player->addComponent<ControlComponent>();
     player->addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
+    player->getComponent<ColliderComponent>().SetRelative(0.0f, 0.5f, 1.0f, 0.5f);
     SDL_Color black = { 0x00, 0x00, 0x00, 0xff };
     player->addComponent<UILabelComponent>(350, 600, "TEST LEVEL", "assets/arcade_font.ttf", 18, black);
     player->getComponent<UILabelComponent>().CentreH();
@@ -68,55 +69,40 @@ void TestLevel::EarlyUpdate()
         exit = true;
     }
 
-    if (input->KeyPressed(SDL_SCANCODE_5))
-    {
-        for (auto& t : *tiles)
-        {
-            t->destroy();
-            t->delGroup(mapGroup);
-        }
-    }
-
-    if (input->KeyPressed(SDL_SCANCODE_6))
-    {
-        for (auto& t : *colliders)
-        {
-            t->destroy();
-            t->delGroup(colliderGroup);
-        }
-    }
-
     manager.refresh();
     manager.EarlyUpdate();
 }
 
 void TestLevel::Update()
 {
-    Vector2D playerLastPosition = *player->getComponent<TransformComponent>().GetPosition();
-
-    manager.refresh();
-    manager.Update();
-
-    camera->Update();
-
     // Collision handling
-    SDL_Rect playerLoc = player->getComponent<ColliderComponent>().Location();
 
-    
     for (auto& c : *colliders)
     {
         // Should do a coarse collision search, using tree methods or whatever
 
-        SDL_Rect cLoc = c->getComponent<ColliderComponent>().Location();
+        Vector2D contactPt;
+        Vector2D contactNormal;
+        float s;
 
-        if (Collision::AABB(playerLoc, cLoc))
+        if (Collision::SweptAABB(player->getComponent<ColliderComponent>(),
+            c->getComponent<ColliderComponent>(), timer->DeltaTime(),
+            contactPt, contactNormal, s))
         {
-            // Should compute the collision "face" and only "push" in the normal direction.
-            player->getComponent<TransformComponent>().SetPosition(playerLastPosition);
+            Vector2D vel = *player->getComponent<TransformComponent>().GetVelocity();
+            vel += contactNormal * Vector2D(std::abs(vel.x), std::abs(vel.y)) * (1-s);
+            player->getComponent<TransformComponent>().SetVelocity(vel);
+            c->getComponent<ColliderComponent>().Show();
         }
+        
     }
 
     
+    player->getComponent<ColliderComponent>().Show();
+
+    manager.Update();
+    camera->Update();
+
     // Cull off-screen tiles
     for (auto& t : *tiles)
     {
@@ -128,7 +114,6 @@ void TestLevel::Update()
 
 void TestLevel::LateUpdate()
 {
-    manager.refresh();
     manager.LateUpdate();
 }
 
@@ -139,8 +124,15 @@ void TestLevel::Render()
         t->draw();
     }
 
+    for (auto& c : *colliders)
+    {
+        c->draw();
+    }
+
     for (auto& p : *players)
     {
         p->draw();
     }
+
+    
 }

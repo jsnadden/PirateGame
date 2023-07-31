@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -118,6 +119,8 @@ public:
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... mArgs)
 	{
+		assert(!this->hasComponent<T>());
+
 		T* c(new T(std::forward<TArgs>(mArgs)...));
 		c->entity = this;
 

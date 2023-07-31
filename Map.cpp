@@ -52,6 +52,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Gro
 			{
 				auto& tileCollider(manager->addEntity());
 				tileCollider.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
+				//tileCollider.getComponent<ColliderComponent>().SetRelative(0.25f, 0.25f, 0.5f, 0.5f);
 				// TODO make this reference a group specific to the current state stateStack.top()
 				tileCollider.addGroup(colliderGrp);
 			}

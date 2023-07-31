@@ -44,51 +44,33 @@ void States::CheckEndState()
 	}
 }
 
-bool States::EarlyUpdate()
+void States::EarlyUpdate()
 {
 	if (!stateStack.empty())
 	{
 		stateStack.top()->EarlyUpdate();
 
 		CheckEndState();
-
-		return false;
-	}
-	else
-	{
-		return true;
 	}
 }
 
-bool States::Update()
+void States::Update()
 {
 	if (!stateStack.empty())
 	{
 		stateStack.top()->Update();
 
 		CheckEndState();
-
-		return false;
-	}
-	else
-	{
-		return true;
 	}
 }
 
-bool States::LateUpdate()
+void States::LateUpdate()
 {
 	if (!stateStack.empty())
 	{
 		stateStack.top()->LateUpdate();
 
 		CheckEndState();
-
-		return false;
-	}
-	else
-	{
-		return true;
 	}
 }
 
