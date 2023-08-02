@@ -35,6 +35,7 @@
     <ClInclude Include="Assets.hpp" />
     <ClInclude Include="Audio.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="DynRect.hpp" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Managers.hpp" />
     <ClInclude Include="UIElement.hpp" />

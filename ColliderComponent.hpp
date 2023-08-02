@@ -11,11 +11,11 @@ private:
 	Graphics* graphics;
 	Camera* camera;
 
-	SDL_Rect collider;
+	DynRect collider;
 	std::string tag;
 
 	SDL_Texture* colliderTexture;
-	SDL_Rect srcRect, destRect;
+	SDL_Rect srcRect;
 
 	TransformComponent* transform;
 
@@ -28,15 +28,10 @@ private:
 
 public:
 
-	ColliderComponent(std::string t)
+	ColliderComponent(std::string t, float xPos, float yPos, float size)
 	{
 		tag = t;
-	}
 
-	ColliderComponent(std::string t, int xPos, int yPos, int size)
-	{
-		tag = t;
-		
 		collider.x = xPos;
 		collider.y = yPos;
 		collider.w = collider.h = size;
@@ -63,7 +58,6 @@ public:
 
 		colliderTexture = graphics->LoadTexture("assets/collider.png");
 		srcRect = { 0, 0, 32, 32 };
-		destRect = { collider.x, collider.y, collider.w, collider.h };
 	}
 
 	void SetRelative(float x, float y, float w, float h)
@@ -74,14 +68,14 @@ public:
 		relH = h;
 	}
 
-	SDL_Rect Location()
+	DynRect Rectangle()
 	{
-		return destRect;
+		return collider;
 	}
 
-	Vector2D Centre()
+	void SetRectangle(DynRect R)
 	{
-		return Vector2D(destRect.x + destRect.w / 2, destRect.y + destRect.h / 2);
+		collider = R;
 	}
 
 	TransformComponent* Transform()
@@ -94,26 +88,32 @@ public:
 		visible = true;
 	}
 
+	void SyncToTransform()
+	{
+		collider.x = transform->GetPosition()->x + (relX * transform->GetWidth() * transform->GetScale());
+		collider.y = transform->GetPosition()->y + (relY * transform->GetHeight() * transform->GetScale());
+		collider.w = relW * transform->GetWidth() * transform->GetScale();
+		collider.h = relH * transform->GetHeight() * transform->GetScale();
+		collider.vx = transform->GetVelocity()->x;
+		collider.vy = transform->GetVelocity()->y;
+	}
+
 	void Update() override
 	{
 		if (tag != "terrain")
 		{
-			collider.x = static_cast<int>(transform->GetPosition()->x);
-			collider.y = static_cast<int>(transform->GetPosition()->y);
-			collider.w = (transform->GetWidth()) * (transform->GetScale());
-			collider.h = (transform->GetHeight()) * (transform->GetScale());
+			SyncToTransform();
 		}
-
-		destRect.x = collider.x + (relX * collider.w) - camera->OriginX();
-		destRect.y = collider.y + (relY * collider.w) - camera->OriginY();
-		destRect.w = relW * collider.w;
-		destRect.h = relH * collider.h;
 	}
 
 	void draw() override
 	{
 		if (visible)
 		{
+			SDL_Rect destRect = collider.SDLCast();
+			destRect.x -= camera->OriginX();
+			destRect.y -= camera->OriginY();
+
 			graphics->DrawTexture(colliderTexture, &srcRect, &destRect, SDL_FLIP_NONE);
 			visible = false;
 		}

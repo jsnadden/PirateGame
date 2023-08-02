@@ -76,29 +76,13 @@ void TestLevel::EarlyUpdate()
 void TestLevel::Update()
 {
     // Collision handling
-
+    player->getComponent<ColliderComponent>().SyncToTransform();
+    // TODO correctly order colliders (see https://www.youtube.com/watch?v=8JJ-4JgR7Dg&t=9s)
     for (auto& c : *colliders)
     {
-        // Should do a coarse collision search, using tree methods or whatever
-
-        Vector2D contactPt;
-        Vector2D contactNormal;
-        float s;
-
-        if (Collision::SweptAABB(player->getComponent<ColliderComponent>(),
-            c->getComponent<ColliderComponent>(), timer->DeltaTime(),
-            contactPt, contactNormal, s))
-        {
-            Vector2D vel = *player->getComponent<TransformComponent>().GetVelocity();
-            vel += contactNormal * Vector2D(std::abs(vel.x), std::abs(vel.y)) * (1-s);
-            player->getComponent<TransformComponent>().SetVelocity(vel);
-            c->getComponent<ColliderComponent>().Show();
-        }
-        
+        // TODO broad phase collision detection before this finer algorithm:
+        Collision::ResolveSweptAABB(player, c, timer->DeltaTime());
     }
-
-    
-    player->getComponent<ColliderComponent>().Show();
 
     manager.Update();
     camera->Update();

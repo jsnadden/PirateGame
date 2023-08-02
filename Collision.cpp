@@ -15,65 +15,92 @@ bool Collision::AABB(const SDL_Rect rectA, const SDL_Rect rectB)
 		
 }
 
-bool Collision::RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection, const SDL_Rect& target,
+bool Collision::RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection, const DynRect& target,
 Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime)
 {
-	float Nx = (target.x - rayOrigin.x) / rayDirection.x;
-	float Ny = (target.y - rayOrigin.y) / rayDirection.y;
-	float Fx = (target.x + target.w - rayOrigin.x) / rayDirection.x;
-	float Fy = (target.y + target.h - rayOrigin.y) / rayDirection.y;
+	
+	contactNormal = { 0, 0 };
+	contactPoint = { 0, 0 };
 
-	if (std::isnan(Nx) || std::isnan(Ny) || std::isnan(Fx) || std::isnan(Fy)) return false;
+	// Cache division
+	Vector2D invdir = {1.0f / rayDirection.x, 1.0f / rayDirection.y };
 
-	if (Nx > Fx) std::swap(Nx, Fx);
-	if (Ny > Fy) std::swap(Ny, Fy);
+	// Calculate intersections with rectangle bounding axes
+	Vector2D t_near = (target.GetPosition() - rayOrigin) * invdir;
+	Vector2D t_far = (target.GetPosition() + target.GetSize() - rayOrigin) * invdir;
 
-	if (Nx > Fy || Ny > Fx) return false;
+	if (std::isnan(t_far.y) || std::isnan(t_far.x)) return false;
+	if (std::isnan(t_near.y) || std::isnan(t_near.x)) return false;
 
-	contactTime = std::max(Nx, Ny);
+	// Sort distances
+	if (t_near.x > t_far.x) std::swap(t_near.x, t_far.x);
+	if (t_near.y > t_far.y) std::swap(t_near.y, t_far.y);
 
-	float leavingTime = std::min(Fx, Fy);
+	// Early rejection		
+	if (t_near.x > t_far.y || t_near.y > t_far.x) return false;
 
-	if (leavingTime < 0.0f || contactTime > 1.0f) return false;
+	// Closest 'time' will be the first contact
+	contactTime = std::max(t_near.x, t_near.y);
 
-	contactPoint = rayOrigin + (contactTime * rayDirection);
+	// Furthest 'time' is contact on opposite side of target
+	float t_hit_far = std::min(t_far.x, t_far.y);
 
-	// TODO: decide what to do on edge case Nx = Ny i.e. ray enters through a corner
-	if (Nx > Ny)
-	{
-		if (rayDirection.x < 0)
+	// Reject if ray direction is pointing away from object
+	if (t_hit_far < 0)
+		return false;
+
+	// Contact point of collision from parametric line equation
+	contactPoint = rayOrigin + contactTime * rayDirection;
+
+	if (t_near.x > t_near.y)
+		if (invdir.x < 0)
 			contactNormal = VEC_RIGHT;
 		else
 			contactNormal = VEC_LEFT;
-	}
-	else if (Nx < Ny)
-	{
-		if (rayDirection.y < 0)
+	else if (t_near.x < t_near.y)
+		if (invdir.y < 0)
 			contactNormal = VEC_DOWN;
 		else
 			contactNormal = VEC_UP;
-	}
 
+	// Note if t_near == t_far, collision is principly in a diagonal
+	// By returning a CN={0,0} even though its
+	// considered a hit, the resolver wont change anything.
 	return true;
 }
 
-bool Collision::SweptAABB(ColliderComponent& colliderA, ColliderComponent& colliderB, float dt,
+bool Collision::SweptAABB(const DynRect& colliderA, const DynRect& colliderB, float dt,
 	Vector2D& contactPos, Vector2D& contactNormal, float& contactTime)
 {
-	Vector2D vel = *colliderA.Transform()->GetVelocity();
+	
+	// Check if dynamic rectangle is actually moving - we assume rectangles are NOT in collision to start
+	if (colliderA.vx == 0.0f && colliderA.vy == 0.0f)
+		return false;
 
-	if (vel.IsZero()) return false;
+	// Expand target rectangle by source dimensions
+	DynRect expandedB = colliderB + colliderA;
 
-	SDL_Rect expandedB;
-	expandedB.x = colliderB.Location().x - colliderA.Location().w / 2;
-	expandedB.y = colliderB.Location().y - colliderA.Location().h / 2;
-	expandedB.w = colliderB.Location().w + colliderA.Location().w;
-	expandedB.h = colliderB.Location().h + colliderA.Location().h;
+	if (RayRect(colliderA.Centre(), colliderA.GetVelocity() * dt, expandedB, contactPos, contactNormal, contactTime))
+		return (contactTime >= 0.0f && contactTime < 1.0f);
+	else
+		return false;
 
+}
 
-	if (RayRect(colliderA.Centre(), vel * dt, expandedB, contactPos, contactNormal, contactTime))
+bool Collision::ResolveSweptAABB(Entity* colliderA, Entity* colliderB, const float dt)
+{
+	Vector2D contactPoint, contactNormal;
+	float s = 0.0f;
+
+	if (Collision::SweptAABB(colliderA->getComponent<ColliderComponent>().Rectangle(), colliderB->getComponent<ColliderComponent>().Rectangle(), dt,
+		contactPoint, contactNormal, s))
 	{
-		if (contactTime <= 1.0f) return true;
+		Vector2D projectedVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal.Orth()) * contactNormal.Orth();
+		colliderA->getComponent<TransformComponent>().SetVelocity(projectedVel);
+		colliderA->getComponent<ColliderComponent>().SyncToTransform();
+		colliderB->getComponent<ColliderComponent>().Show();
+
+		return true;
 	}
 
 	return false;

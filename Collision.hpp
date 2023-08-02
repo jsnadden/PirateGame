@@ -22,10 +22,12 @@ struct Collision
 
 	// Check collision for a ray and an axis-aligned rectangle, passback collision data
 	static bool RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection,
-		const SDL_Rect& target, Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime);
+		const DynRect& target, Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime);
 
 	// Check collision for two axis-aligned rectangular ColliderComponents, passback collision data
-	static bool SweptAABB(ColliderComponent& colliderA, ColliderComponent& colliderB, float dt,
+	static bool SweptAABB(const DynRect& colliderA, const DynRect& colliderB, float dt,
 		Vector2D& contactPos, Vector2D& contactNormal, float& contactTime);
+
+	static bool ResolveSweptAABB(Entity* colliderA, Entity* colliderB, const float dt);
 
 };

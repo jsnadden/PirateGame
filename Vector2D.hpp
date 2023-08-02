@@ -125,6 +125,11 @@ struct Vector2D
 		return Vector2D(x / n, y / n);
 	}
 
+	Vector2D Orth() const
+	{
+		return Vector2D(-this->y, this->x);
+	}
+
 	static Vector2D RotateVector(Vector2D& v, float theta)
 	{
 		return Vector2D(static_cast<float>(v.x * cos(theta) - v.y * sin(theta)), static_cast<float>(v.x * sin(theta) + v.y * cos(theta)));
@@ -164,3 +169,4 @@ const Vector2D VEC_RIGHT = Vector2D(1.0f, 0.0f);
 const Vector2D VEC_UP = Vector2D(0.0f, -1.0f);
 const Vector2D VEC_LEFT = Vector2D(-1.0f, 0.0f);
 const Vector2D VEC_DOWN = Vector2D(0.0f, 1.0f);
+const Vector2D VEC_ZERO = Vector2D(0.0f, 0.0f);

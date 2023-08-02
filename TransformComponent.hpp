@@ -2,6 +2,7 @@
 #include "Components.hpp"
 #include "Vector2D.hpp"
 #include "Managers.hpp"
+#include "DynRect.hpp"
 
 class TransformComponent : public Component
 {
@@ -24,20 +25,6 @@ public:
 		position.x = 0.0f;
 		position.y = 0.0f;
 	}
-
-	//TransformComponent(float xIn, float yIn)
-	//{
-	//	position.x = xIn;
-	//	position.y = yIn;
-	//}
-
-	//TransformComponent(int scaleIn)
-	//{
-	//	// Place the object in the screen center
-	//	position.x = 400 - (width * scaleIn / 2);
-	//	position.y = 320 - (height * scaleIn / 2);
-	//	scale = scaleIn;
-	//}
 
 	TransformComponent(float x, float y, int w, int h, float s = 1.0f)
 	{
@@ -88,6 +75,13 @@ public:
 	Vector2D* Centre()
 	{
 		return &centre;
+	}
+
+	DynRect Location()
+	{
+		return DynRect(position.x, position.y,
+			scale * static_cast<float>(width), scale * static_cast<float>(height),
+			velocity.x, velocity.y);
 	}
 
 	Vector2D* GetVelocity()

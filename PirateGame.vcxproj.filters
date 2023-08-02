@@ -130,6 +130,9 @@
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClInclude>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="DynRect.hpp">
+      <Filter>Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">

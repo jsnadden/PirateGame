@@ -139,18 +139,15 @@ public:
 			srcRect.x = srcRect.w * frame;
 			srcRect.y = row * srcRect.h;
 		}
-		
-		destRect.x = static_cast<int>(transform->GetPosition()->x) - camera->OriginX();
-		destRect.y = static_cast<int>(transform->GetPosition()->y) - camera->OriginY();
-
-		destRect.w = static_cast<int>(transform->GetWidth() * transform->GetScale());
-		destRect.h = static_cast<int>(transform->GetHeight() * transform->GetScale());
 	}
 
 	void draw() override
 	{
 		if (visible)
 		{
+			destRect = transform->Location().SDLCast();
+			destRect.x -= camera->OriginX();
+			destRect.y -= camera->OriginY();
 			graphics->DrawTexture(texture, &srcRect, &destRect, transform->GetRotation(), spriteFlip);
 		}
 	}
