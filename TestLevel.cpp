@@ -77,11 +77,31 @@ void TestLevel::Update()
 {
     // Collision handling
     player->getComponent<ColliderComponent>().SyncToTransform();
-    // TODO correctly order colliders (see https://www.youtube.com/watch?v=8JJ-4JgR7Dg&t=9s)
-    for (auto& c : *colliders)
+    
+    // Sort collisions in order of distance
+    Vector2D cp, cn;
+    float s = 0, min_t = INFINITY;
+    std::vector<std::pair<int, float>> z;
+
+    // Work out collision point, add it to vector along with rect ID
+    for (size_t i = 1; i < colliders->size(); i++)
     {
-        // TODO broad phase collision detection before this finer algorithm:
-        Collision::ResolveSweptAABB(player, c, timer->DeltaTime());
+        if (Collision::SweptAABB(player->getComponent<ColliderComponent>().Rectangle(), (*colliders)[i]->getComponent<ColliderComponent>().Rectangle(), timer->DeltaTime(), cp, cn, s))
+        {
+            z.push_back({ i, s });
+        }
+    }
+
+    // Do the sort
+    std::sort(z.begin(), z.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b)
+        {
+            return a.second < b.second;
+        });
+
+
+    for (auto& c : z)
+    {
+        Collision::ResolveSweptAABB(player, (*colliders)[c.first], timer->DeltaTime());
     }
 
     manager.Update();

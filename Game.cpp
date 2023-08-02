@@ -134,6 +134,6 @@ void Game::Run()
         }
 
         timer->Update();
-        
+        //std::cout << timer->DeltaTime() << std::endl;
     }
 }

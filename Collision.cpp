@@ -95,8 +95,11 @@ bool Collision::ResolveSweptAABB(Entity* colliderA, Entity* colliderB, const flo
 	if (Collision::SweptAABB(colliderA->getComponent<ColliderComponent>().Rectangle(), colliderB->getComponent<ColliderComponent>().Rectangle(), dt,
 		contactPoint, contactNormal, s))
 	{
-		Vector2D projectedVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal.Orth()) * contactNormal.Orth();
-		colliderA->getComponent<TransformComponent>().SetVelocity(projectedVel);
+		// scale normal component of colliderA's velocity so that it will touch, but not penetrate colliderB
+		float nVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal);
+		float tVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal.Orth());
+		Vector2D correctedVelocity = s * nVel * contactNormal + tVel * contactNormal.Orth();
+		colliderA->getComponent<TransformComponent>().SetVelocity(correctedVelocity);
 		colliderA->getComponent<ColliderComponent>().SyncToTransform();
 		colliderB->getComponent<ColliderComponent>().Show();
 
