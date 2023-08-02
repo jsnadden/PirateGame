@@ -3,12 +3,11 @@
 #include "State.hpp"
 #include "States.hpp"
 #include "TestLevel.hpp"
-#include "SettingsMenu.hpp"
 #include "Button.hpp"
 #include "UIText.hpp"
 #include "Vector2D.hpp"
 
-class MainMenu :
+class SettingsMenu :
     public State
 {
 private:
@@ -18,8 +17,8 @@ private:
     std::map<std::string, UIElement*> elements;
 
 public:
-    MainMenu();
-    ~MainMenu();
+    SettingsMenu();
+    ~SettingsMenu();
 
     void Exit() override;
 

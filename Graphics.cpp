@@ -3,56 +3,6 @@
 Graphics* Graphics::instance = nullptr;
 bool Graphics::initialised = false;
 
-Graphics* Graphics::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new Graphics();
-	}
-
-	return instance;
-}
-
-void Graphics::Release()
-{
-	delete instance;
-	instance = nullptr;
-
-	initialised = false;
-}
-
-bool Graphics::HasInitialised()
-{
-	return initialised;
-}
-
-void Graphics::WindowTitle(const char* newTitle)
-{
-	SDL_SetWindowTitle(window, newTitle);
-}
-
-void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
-{
-	backgroundColour.r = r;
-	backgroundColour.g = g;
-	backgroundColour.b = b;
-	backgroundColour.a = a;
-}
-
-void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
-{
-	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
-	SDL_RenderFillRect(renderer, rect);
-}
-
-SDL_Rect Graphics::ViewRect()
-{
-	SDL_Rect viewRect;
-	viewRect.x = viewRect.y = 0;
-	SDL_GetWindowSize(window, &viewRect.w, &viewRect.h);
-	return viewRect;
-}
-
 Graphics::Graphics()
 {
 	renderer = nullptr;
@@ -75,6 +25,24 @@ Graphics::~Graphics()
 	IMG_Quit();
 	SDL_Quit();
 	TTF_Quit();
+}
+
+Graphics* Graphics::GetInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new Graphics();
+	}
+
+	return instance;
+}
+
+void Graphics::Release()
+{
+	delete instance;
+	instance = nullptr;
+
+	initialised = false;
 }
 
 bool Graphics::Init()
@@ -118,6 +86,11 @@ bool Graphics::Init()
 	}
 
 	return true;
+}
+
+bool Graphics::HasInitialised()
+{
+	return initialised;
 }
 
 SDL_Texture* Graphics::LoadTexture(std::string path)
@@ -175,4 +148,31 @@ void Graphics::Render()
 void Graphics::DrawTexture(SDL_Texture* tex, SDL_Rect* sRect, SDL_Rect* dRect, float rot, SDL_RendererFlip flip)
 {
 	SDL_RenderCopyEx(renderer, tex, sRect, dRect, rot, NULL, flip);
+}
+
+void Graphics::WindowTitle(const char* newTitle)
+{
+	SDL_SetWindowTitle(window, newTitle);
+}
+
+void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+	backgroundColour.r = r;
+	backgroundColour.g = g;
+	backgroundColour.b = b;
+	backgroundColour.a = a;
+}
+
+void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
+{
+	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
+	SDL_RenderFillRect(renderer, rect);
+}
+
+SDL_Rect Graphics::ViewRect()
+{
+	SDL_Rect viewRect;
+	viewRect.x = viewRect.y = 0;
+	SDL_GetWindowSize(window, &viewRect.w, &viewRect.h);
+	return viewRect;
 }

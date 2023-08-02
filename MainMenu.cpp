@@ -5,7 +5,11 @@ MainMenu::MainMenu()
 {
 	states = States::GetInstance();
 	
-	elements["test button"] = new Button(Vector2D(400.0f, 300.0f), "Test button");
+	elements["title"] = new UIText(Vector2D(400, 200), "PIRATE GAME", 36);
+
+	elements["start"] = new Button(Vector2D(400, 350), "NEW GAME");
+	elements["settings"] = new Button(Vector2D(400, 400), "SETTINGS");
+	elements["quit"] = new Button(Vector2D(400.0f, 450.0f), "QUIT GAME");
 
 	Init();
 }
@@ -48,9 +52,19 @@ void MainMenu::Update()
 		e.second->Update();
 	}
 
-	if (((Button*)elements["test button"])->TestActivated())
+	if (((Button*)elements["start"])->TestActivated())
 	{
 		states->StartState<TestLevel>();
+	}
+
+	if (((Button*)elements["settings"])->TestActivated())
+	{
+		states->StartState<SettingsMenu>();
+	}
+
+	if (((Button*)elements["quit"])->TestActivated())
+	{
+		Exit();
 	}
 }
 

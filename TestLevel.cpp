@@ -75,31 +75,30 @@ void TestLevel::EarlyUpdate()
 
 void TestLevel::Update()
 {
-    // Collision handling
+
     player->getComponent<ColliderComponent>().SyncToTransform();
     
-    // Sort collisions in order of distance
     Vector2D cp, cn;
     float s = 0, min_t = INFINITY;
-    std::vector<std::pair<int, float>> z;
+    std::vector<std::pair<int, float>> nearbyColliders;
 
-    // Work out collision point, add it to vector along with rect ID
-    for (size_t i = 1; i < colliders->size(); i++)
+    // Find potential collisions, make a list of pairs (time til collision, collider id)
+    for (size_t i = 0; i < colliders->size(); i++)
     {
         if (Collision::SweptAABB(player->getComponent<ColliderComponent>().Rectangle(), (*colliders)[i]->getComponent<ColliderComponent>().Rectangle(), timer->DeltaTime(), cp, cn, s))
         {
-            z.push_back({ i, s });
+            nearbyColliders.push_back({ i, s });
         }
     }
 
-    // Do the sort
-    std::sort(z.begin(), z.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b)
+    // Sort by ascending collision time
+    std::sort(nearbyColliders.begin(), nearbyColliders.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b)
         {
             return a.second < b.second;
         });
 
-
-    for (auto& c : z)
+    // Handle collisions
+    for (auto& c : nearbyColliders)
     {
         Collision::ResolveSweptAABB(player, (*colliders)[c.first], timer->DeltaTime());
     }

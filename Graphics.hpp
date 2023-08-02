@@ -16,6 +16,7 @@ public:
 
 	static Graphics* GetInstance();
 	static void Release();
+
 	static bool HasInitialised();
 
 	SDL_Texture* LoadTexture(std::string path);
@@ -24,6 +25,7 @@ public:
 
 	void WindowTitle(const char* newTitle);
 	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+	void SetVideoMode();
 
 	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
 

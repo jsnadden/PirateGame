@@ -133,6 +133,12 @@
     <ClInclude Include="DynRect.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
+    <ClInclude Include="SettingsMenu.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.hpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp">
@@ -184,6 +190,12 @@
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
+      <Filter>Non-ECS Elements\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsMenu.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
       <Filter>Non-ECS Elements\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>

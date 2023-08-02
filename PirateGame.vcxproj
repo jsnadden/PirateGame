@@ -38,6 +38,7 @@
     <ClInclude Include="DynRect.hpp" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Managers.hpp" />
+    <ClInclude Include="SettingsMenu.hpp" />
     <ClInclude Include="UIElement.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="ColliderComponent.hpp" />
@@ -59,12 +60,14 @@
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="TransformComponent.hpp" />
     <ClInclude Include="UILabelComponent.hpp" />
+    <ClInclude Include="UIText.hpp" />
     <ClInclude Include="Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -79,6 +82,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libFLAC-8.dll" />
