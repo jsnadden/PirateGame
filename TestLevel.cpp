@@ -27,11 +27,13 @@ TestLevel::TestLevel()
     player->addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
     player->getComponent<ColliderComponent>().SetRelative(0.0f, 0.5f, 1.0f, 0.5f);
     SDL_Color black = { 0x00, 0x00, 0x00, 0xff };
-    player->addComponent<UILabelComponent>(350, 600, "TEST LEVEL", "assets/arcade_font.ttf", 18, black);
-    player->getComponent<UILabelComponent>().CentreH();
     player->addGroup(playerGroup);
-
     camera->Follow(player->getComponent<TransformComponent>().Centre());
+
+    elements["paused"] = new UIText(Vector2D(400.0f, 200.0f), "PAUSED", 36);
+    elements["quit"] = new Button(Vector2D(400.0f, 350.0f), "QUIT TO MAIN MENU");
+    ((Button*)elements["quit"])->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
+    ((Button*)elements["quit"])->SetTextColours(black, LIGHT_GREY, black);
     
     Init();
 }
@@ -45,15 +47,9 @@ void TestLevel::Init()
 TestLevel::~TestLevel()
 {
 	Exit();
-}
 
-void TestLevel::Exit()
-{
-	exit = true;
-
-	// Clean things up!!
-	graphics = nullptr;
-	timer = nullptr;
+    graphics = nullptr;
+    timer = nullptr;
     audio = nullptr;
     input = nullptr;
     camera = nullptr;
@@ -62,62 +58,97 @@ void TestLevel::Exit()
     map0 = nullptr;
 }
 
+void TestLevel::Exit()
+{
+	exit = true;
+}
+
 void TestLevel::EarlyUpdate()
 {
     if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
     {
-        exit = true;
+        this->TogglePause();
     }
 
-    manager.refresh();
-    manager.EarlyUpdate();
+    if (!this->IsPaused())
+    {
+        elements["paused"]->SetVisibility(false);
+        elements["quit"]->SetVisibility(false);
+
+        manager.refresh();
+        manager.EarlyUpdate();
+    }
+    else
+    {
+        elements["paused"]->SetVisibility(true);
+        elements["quit"]->SetVisibility(true);
+    }
+
+    
 }
 
 void TestLevel::Update()
 {
+    for (auto& e : elements)
+	{
+		if (e.second->IsVisible()) e.second->Update();
+	}
 
-    player->getComponent<ColliderComponent>().SyncToTransform();
-    
-    Vector2D cp, cn;
-    float s = 0, min_t = INFINITY;
-    std::vector<std::pair<int, float>> nearbyColliders;
-
-    // Find potential collisions, make a list of pairs (time til collision, collider id)
-    for (size_t i = 0; i < colliders->size(); i++)
+    if (((Button*)elements["quit"])->IsActivated())
     {
-        if (Collision::SweptAABB(player->getComponent<ColliderComponent>().Rectangle(), (*colliders)[i]->getComponent<ColliderComponent>().Rectangle(), timer->DeltaTime(), cp, cn, s))
+        Exit();
+    }
+
+    if (!this->IsPaused())
+    {
+        player->getComponent<ColliderComponent>().SyncToTransform();
+
+        Vector2D cp, cn;
+        float s = 0, min_t = INFINITY;
+        std::vector<std::pair<int, float>> nearbyColliders;
+
+        // Find potential collisions, make a list of pairs (time til collision, collider id)
+        for (size_t i = 0; i < colliders->size(); i++)
         {
-            nearbyColliders.push_back({ i, s });
+            if (Collision::SweptAABB(player->getComponent<ColliderComponent>().Rectangle(), (*colliders)[i]->getComponent<ColliderComponent>().Rectangle(), timer->DeltaTime(), cp, cn, s))
+            {
+                nearbyColliders.push_back({ i, s });
+            }
+        }
+
+        // Sort by ascending collision time
+        std::sort(nearbyColliders.begin(), nearbyColliders.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b)
+            {
+                return a.second < b.second;
+            });
+
+        // Handle collisions
+        for (auto& c : nearbyColliders)
+        {
+            Collision::ResolveSweptAABB(player, (*colliders)[c.first], timer->DeltaTime());
+        }
+
+        manager.Update();
+        camera->Update();
+
+        // Cull off-screen tiles
+        for (auto& t : *tiles)
+        {
+            t->getComponent<TileComponent>().SetVisibility(Collision::AABB(*graphics->ViewRect(), t->getComponent<TileComponent>().Location()));
         }
     }
-
-    // Sort by ascending collision time
-    std::sort(nearbyColliders.begin(), nearbyColliders.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b)
-        {
-            return a.second < b.second;
-        });
-
-    // Handle collisions
-    for (auto& c : nearbyColliders)
-    {
-        Collision::ResolveSweptAABB(player, (*colliders)[c.first], timer->DeltaTime());
-    }
-
-    manager.Update();
-    camera->Update();
-
-    // Cull off-screen tiles
-    for (auto& t : *tiles)
-    {
-        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(graphics->ViewRect(), t->getComponent<TileComponent>().Location()));
-    }
+    
     
 
 }
 
 void TestLevel::LateUpdate()
 {
-    manager.LateUpdate();
+    if (!this->IsPaused())
+    {
+        manager.LateUpdate();
+    }
+    
 }
 
 void TestLevel::Render()
@@ -137,5 +168,14 @@ void TestLevel::Render()
         p->draw();
     }
 
+    if (this->IsPaused())
+    {
+        graphics->FillWindow(PAUSE_TINT);
+    }
+
+    for (auto& e : elements)
+    {
+        if (e.second->IsVisible()) e.second->Draw();
+    }
     
 }

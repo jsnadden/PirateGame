@@ -23,7 +23,7 @@ public:
 		stateStack.push(new T());
 	}
 	void EndCurrentState();
-	void CheckEndState();
+	void ExitPoll();
 
 	void EarlyUpdate();
 	void Update();

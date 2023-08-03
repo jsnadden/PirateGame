@@ -35,7 +35,7 @@ void States::EndCurrentState()
 	stateStack.pop();
 }
 
-void States::CheckEndState()
+void States::ExitPoll()
 {
 	if (stateStack.top()->HasExited())
 	{
@@ -50,7 +50,7 @@ void States::EarlyUpdate()
 	{
 		stateStack.top()->EarlyUpdate();
 
-		CheckEndState();
+		ExitPoll();
 	}
 }
 
@@ -60,7 +60,7 @@ void States::Update()
 	{
 		stateStack.top()->Update();
 
-		CheckEndState();
+		ExitPoll();
 	}
 }
 
@@ -70,7 +70,7 @@ void States::LateUpdate()
 	{
 		stateStack.top()->LateUpdate();
 
-		CheckEndState();
+		ExitPoll();
 	}
 }
 
@@ -80,7 +80,7 @@ bool States::Render()
 	{
 		stateStack.top()->Render();
 
-		CheckEndState();
+		ExitPoll();
 
 		return false;
 	}

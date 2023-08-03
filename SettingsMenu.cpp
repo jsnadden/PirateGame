@@ -8,6 +8,7 @@ SettingsMenu::SettingsMenu()
 	elements["title"] = new UIText(Vector2D(400, 200), "SETTINGS", 36);
 
 	elements["setting1"] = new Button(Vector2D(400, 300), "SETTING 1");
+	elements["arrow"] = new Button(Vector2D(600,300), 32, 32, 1, "assets/arrowbutton.png");
 	elements["setting2"] = new Button(Vector2D(400, 350), "SETTING 2");
 	elements["setting3"] = new Button(Vector2D(400, 400), "SETTING 3");
 	elements["setting4"] = new Button(Vector2D(400, 450), "SETTING 4");
@@ -24,13 +25,7 @@ void SettingsMenu::Init()
 SettingsMenu::~SettingsMenu()
 {
 	Exit();
-}
 
-void SettingsMenu::Exit()
-{
-	exit = true;
-
-	// Clean things up!!
 	states = nullptr;
 	graphics = nullptr;
 	timer = nullptr;
@@ -38,12 +33,14 @@ void SettingsMenu::Exit()
 	audio = nullptr;
 }
 
+void SettingsMenu::Exit()
+{
+	exit = true;
+}
+
 void SettingsMenu::EarlyUpdate()
 {
-	if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
-	{
-		Exit();
-	}
+	
 }
 
 void SettingsMenu::Update()
@@ -53,15 +50,14 @@ void SettingsMenu::Update()
 		e.second->Update();
 	}
 
-	/*if (((Button*)elements["start"])->TestActivated())
-	{
-		
-	}*/
 }
 
 void SettingsMenu::LateUpdate()
 {
-
+	if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
+	{
+		Exit();
+	}
 }
 
 void SettingsMenu::Render()

@@ -4,8 +4,6 @@
 #include "States.hpp"
 #include "TestLevel.hpp"
 #include "SettingsMenu.hpp"
-#include "Button.hpp"
-#include "UIText.hpp"
 #include "Vector2D.hpp"
 
 class MainMenu :
@@ -14,8 +12,6 @@ class MainMenu :
 private:
 
     States* states;
-
-    std::map<std::string, UIElement*> elements;
 
 public:
     MainMenu();

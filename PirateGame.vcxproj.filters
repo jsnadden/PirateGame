@@ -17,34 +17,49 @@
     <Filter Include="DLLs">
       <UniqueIdentifier>{a4591799-2b4d-4be0-9f99-5faad60bed34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States">
-      <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utility">
       <UniqueIdentifier>{3a2102ac-e9d3-40e4-ad1c-73201ad57ef6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Structs">
       <UniqueIdentifier>{df57ce12-6f58-4abf-997e-39e0d1c4252b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Non-ECS Elements">
+    <Filter Include="TileMaps">
       <UniqueIdentifier>{ee4fbaae-a389-4a95-b7ed-d2d6124c757c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Non-ECS Elements\UI Elements">
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{f5b213df-7c5b-4abc-89ec-7c445b8ac507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Sprites">
+      <UniqueIdentifier>{21d56466-ba3b-4a8d-b2c0-f28722d73abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Components">
+      <UniqueIdentifier>{7d34107d-8c2c-4afc-a4bc-5aabe7af3efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State System">
+      <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abstract Class Patterns">
+      <UniqueIdentifier>{20a1f9b9-20e1-4267-aa43-8f051373bb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
       <UniqueIdentifier>{4c553c88-9317-4cb9-9bff-990df1a091bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\UIElements">
+      <UniqueIdentifier>{5817c7d7-01df-4336-ba14-89c03cf0e921}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\cannonball.png">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Sprites</Filter>
     </Image>
     <Image Include="assets\collider.png">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Sprites</Filter>
     </Image>
     <Image Include="assets\ship.png">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Sprites</Filter>
     </Image>
     <Image Include="assets\terrain.png">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Sprites</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -72,41 +87,20 @@
     <ClInclude Include="Components.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="TransformComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="TileComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ControlComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="UILabelComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="State.hpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClInclude>
     <ClInclude Include="TestLevel.hpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
-      <Filter>Non-ECS Elements</Filter>
+      <Filter>TileMaps</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.hpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClInclude>
     <ClInclude Include="Collision.hpp">
       <Filter>Utility</Filter>
@@ -121,23 +115,55 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="UIElement.hpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="Managers.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Button.hpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Header.h" />
     <ClInclude Include="DynRect.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="SettingsMenu.hpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.hpp">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Uncopyable.hpp">
+      <Filter>Abstract Class Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>GUI\UIElements</Filter>
     </ClInclude>
     <ClInclude Include="UIText.hpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TileComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UILabelComponent.hpp">
+      <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.hpp">
+      <Filter>Abstract Class Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Picker.hpp">
+      <Filter>GUI\UIElements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,16 +195,16 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Non-ECS Elements</Filter>
+      <Filter>TileMaps</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Utility</Filter>
@@ -187,16 +213,22 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="SettingsMenu.cpp">
-      <Filter>States</Filter>
+      <Filter>State System</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>GUI\UIElements</Filter>
     </ClCompile>
     <ClCompile Include="UIText.cpp">
-      <Filter>Non-ECS Elements\UI Elements</Filter>
+      <Filter>GUI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="Picker.cpp">
+      <Filter>GUI\UIElements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,13 +279,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\arcade_font.ttf">
-      <Filter>Assets</Filter>
-    </Font>
+    <Text Include="assets\map0.txt">
+      <Filter>TileMaps</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="assets\map0.txt">
-      <Filter>Assets</Filter>
-    </Text>
+    <Font Include="assets\arcade_font.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

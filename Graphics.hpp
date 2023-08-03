@@ -25,11 +25,11 @@ public:
 
 	void WindowTitle(const char* newTitle);
 	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-	void SetVideoMode();
 
 	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
+	void FillWindow(SDL_Color colour);
 
-	SDL_Rect ViewRect();
+	SDL_Rect* ViewRect();
 
 	void ClearRenderer();
 	void Render();
@@ -40,6 +40,8 @@ private:
 	SDL_Renderer* renderer;
 
 	SDL_Color backgroundColour;
+
+	SDL_Rect windowRect;
 
 	static Graphics* instance;
 	static bool initialised;

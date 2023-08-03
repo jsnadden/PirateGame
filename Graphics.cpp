@@ -70,6 +70,7 @@ bool Graphics::Init()
 		return false;
 	}
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
 	// Start image library, error check
 	int imgflags = IMG_INIT_PNG;
@@ -169,10 +170,14 @@ void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
 	SDL_RenderFillRect(renderer, rect);
 }
 
-SDL_Rect Graphics::ViewRect()
+void Graphics::FillWindow(SDL_Color colour)
 {
-	SDL_Rect viewRect;
-	viewRect.x = viewRect.y = 0;
-	SDL_GetWindowSize(window, &viewRect.w, &viewRect.h);
-	return viewRect;
+	DrawRectangle(colour, ViewRect());
+}
+
+SDL_Rect* Graphics::ViewRect()
+{
+	windowRect.x = windowRect.y = 0;
+	SDL_GetWindowSize(window, &windowRect.w, &windowRect.h);
+	return &windowRect;
 }

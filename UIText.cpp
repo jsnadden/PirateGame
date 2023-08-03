@@ -28,4 +28,8 @@ void UIText::Draw()
     graphics->DrawTexture(textTexture, NULL, &textRect);
 }
 
+void UIText::Update()
+{
+}
+
 

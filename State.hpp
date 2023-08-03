@@ -3,17 +3,23 @@
 #include <stack>
 #include <map>
 #include "Managers.hpp"
+#include "Button.hpp"
+#include "UIText.hpp"
 
 class State
 {
 protected:
 
 	bool exit;
+	bool paused;
 
 	Graphics* graphics;
 	Timer* timer;
 	Audio* audio;
 	Input* input;
+
+	std::map<std::string, UIElement*> elements;
+
 
 public:
 
@@ -22,6 +28,9 @@ public:
 
 	const bool& HasExited();
 	virtual void Exit() = 0;
+
+	bool IsPaused();
+	void TogglePause();
 
 	virtual void Init() = 0;
 	virtual void EarlyUpdate() = 0;

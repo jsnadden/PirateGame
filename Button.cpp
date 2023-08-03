@@ -1,25 +1,31 @@
 #include "Button.hpp"
 
-Button::Button(Vector2D c, std::string t)
+Button::Button(Vector2D position, std::string t)
 	: UIElement()
 {
-	
+    centre = position; 
+    
     down = hover = false;
 
+    hasText = true;
     text = t;
 
-    textTexture = assets->GetText(text, fontPath, fontSize, fontColour);
+    InitText();
+}
 
-    centre = c;
-    SDL_QueryTexture(textTexture, NULL, NULL, &textRect.w, &textRect.h);
-    textRect.x = c.x - (textRect.w / 2);
-    textRect.y = c.y - (textRect.h / 2);
+Button::Button(Vector2D position, int width, int height, int scale, std::string imgPath)
+{
+    centre = position; 
+    
+    down = hover = false;
 
-    int offset = 10;
-    buttonRect.w = textRect.w + offset;
-    buttonRect.h = textRect.h + offset;
-    buttonRect.x = c.x - (buttonRect.w / 2);
-    buttonRect.y = c.y - (buttonRect.h / 2);
+    hasImage = true;
+    SetImage(imgPath, width, height);
+
+    buttonRect.x = centre.x - (width * scale) / 2;
+    buttonRect.y = centre.y - (height * scale) / 2;
+    buttonRect.w = width * scale;
+    buttonRect.h = height * scale;
 }
 
 Button::~Button()
@@ -28,7 +34,11 @@ Button::~Button()
     assets = nullptr;
     input = nullptr;
 
-    textTexture = nullptr;
+    imageTexture = nullptr;
+
+    defaultTextTexture = nullptr;
+    hoverTextTexture = nullptr;
+    downTextTexture = nullptr;
 }
 
 void Button::Update()
@@ -63,23 +73,135 @@ void Button::Update()
 
 void Button::Draw()
 {
-    SDL_Color currentColour = defaultColour;
-    if (hover)
+    SDL_Color currentColour;
+    SDL_Texture* currentText;
+
+    if (hasImage)
     {
-        currentColour = hoverColour;
+        srcRect.y = 0;
+        if (hover)
+        {
+            srcRect.y = srcRect.h;
+        }
+        if (down)
+        {
+            srcRect.y = 2 * srcRect.h;
+        }
+        graphics->DrawTexture(imageTexture, &srcRect, &buttonRect, 0.0f, imageFlip);
     }
-    if (down)
+    else
     {
-        currentColour = downColour;
+        currentColour = defaultButtonColour;
+        if (hover)
+        {
+            currentColour = hoverButtonColour;
+        }
+        if (down)
+        {
+            currentColour = downButtonColour;
+        }
+        graphics->DrawRectangle(currentColour, &buttonRect);
     }
 
-    graphics->DrawRectangle(currentColour, &buttonRect);
-    graphics->DrawTexture(textTexture, NULL, &textRect);
+    if (hasText)
+    {
+        currentText = defaultTextTexture;
+        if (hover)
+        {
+            currentText = hoverTextTexture;
+        }
+        if (down)
+        {
+            currentText = downTextTexture;
+        }
+        graphics->DrawTexture(currentText, NULL, &textRect);
+        currentText = nullptr;
+    }
+          
 }
 
-bool Button::TestActivated()
+bool Button::IsDown()
+{
+    return down;
+}
+
+bool Button::IsActivated()
 {
     bool act = activated;
     activated = false;
     return act;
+}
+
+void Button::CentreOn(Vector2D position)
+{
+    centre = position;
+    if (hasText)
+    {
+        InitText();
+    }
+    else
+    {
+        buttonRect.x = centre.x - (buttonRect.w / 2);
+        buttonRect.y = centre.y - (buttonRect.h / 2);
+    }
+}
+
+void Button::SetButtonColours(SDL_Color defaultColour, SDL_Color hoverColour, SDL_Color downColour)
+{
+    defaultButtonColour = defaultColour;
+    hoverButtonColour = hoverColour;
+    downButtonColour = downColour;
+}
+
+void Button::InitText()
+{
+    defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
+    hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
+    downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+
+    SDL_QueryTexture(defaultTextTexture, NULL, NULL, &textRect.w, &textRect.h);
+    textRect.x = centre.x - (textRect.w / 2);
+    textRect.y = centre.y - (textRect.h / 2);
+
+    buttonRect.w = textRect.w + offset;
+    buttonRect.h = textRect.h + offset;
+    buttonRect.x = centre.x - (buttonRect.w / 2);
+    buttonRect.y = centre.y - (buttonRect.h / 2);
+}
+
+void Button::SetText(std::string t)
+{
+    hasText = true;
+    text = t;
+    InitText();
+}
+
+void Button::SetFont(std::string path)
+{
+    fontPath = path;
+    InitText();
+}
+
+void Button::SetFontSize(int size)
+{
+    fontSize = size;
+    InitText();
+}
+
+void Button::SetTextColours(SDL_Color defaultColour, SDL_Color hoverColour, SDL_Color downColour)
+{
+    defaultTextColour = defaultColour;
+    hoverTextColour = hoverColour;
+    downTextColour = downColour;
+    
+    defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
+    hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
+    downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+}
+
+void Button::SetImage(std::string path, int width, int height, SDL_RendererFlip flip)
+{
+    srcRect = { 0, 0, width, height };
+    imageTexture = assets->GetTexture(path);
+    imageFlip = flip;
 }

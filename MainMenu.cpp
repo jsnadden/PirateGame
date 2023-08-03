@@ -23,18 +23,17 @@ void MainMenu::Init()
 MainMenu::~MainMenu()
 {
 	Exit();
-}
 
-void MainMenu::Exit()
-{
-	exit = true;
-
-	// Clean things up!!
 	states = nullptr;
 	graphics = nullptr;
 	timer = nullptr;
 	input = nullptr;
 	audio = nullptr;
+}
+
+void MainMenu::Exit()
+{
+	exit = true;
 }
 
 void MainMenu::EarlyUpdate()
@@ -49,20 +48,20 @@ void MainMenu::Update()
 {
 	for (auto& e : elements)
 	{
-		e.second->Update();
+		if (e.second->IsVisible()) e.second->Update();
 	}
 
-	if (((Button*)elements["start"])->TestActivated())
+	if (((Button*)elements["start"])->IsActivated())
 	{
 		states->StartState<TestLevel>();
 	}
 
-	if (((Button*)elements["settings"])->TestActivated())
+	if (((Button*)elements["settings"])->IsActivated())
 	{
 		states->StartState<SettingsMenu>();
 	}
 
-	if (((Button*)elements["quit"])->TestActivated())
+	if (((Button*)elements["quit"])->IsActivated())
 	{
 		Exit();
 	}
@@ -77,6 +76,6 @@ void MainMenu::Render()
 {
 	for (auto& e : elements)
 	{
-		e.second->Draw();
+		if (e.second->IsVisible()) e.second->Draw();
 	}
 }

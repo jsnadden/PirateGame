@@ -36,9 +36,11 @@
     <ClInclude Include="Audio.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="DynRect.hpp" />
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Managers.hpp" />
+    <ClInclude Include="Picker.hpp" />
     <ClInclude Include="SettingsMenu.hpp" />
+    <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="UIElement.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="ColliderComponent.hpp" />
@@ -61,12 +63,15 @@
     <ClInclude Include="TransformComponent.hpp" />
     <ClInclude Include="UILabelComponent.hpp" />
     <ClInclude Include="UIText.hpp" />
+    <ClInclude Include="Uncopyable.hpp" />
     <ClInclude Include="Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Picker.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Camera.cpp" />

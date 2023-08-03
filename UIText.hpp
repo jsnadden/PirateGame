@@ -20,7 +20,7 @@ public:
     UIText(Vector2D centre, std::string text, int size = 18);
     ~UIText();
 
-    void Update() {}
+    void Update();
     void Draw();
 
 };

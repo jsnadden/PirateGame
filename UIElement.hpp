@@ -9,6 +9,8 @@ protected:
 	Assets* assets;
 	Input* input;
 
+	bool visible;
+
 public:
 
 	UIElement();
@@ -16,5 +18,8 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+
+	bool IsVisible();
+	void SetVisibility(bool vis);
 };
 

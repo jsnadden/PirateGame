@@ -3,8 +3,6 @@
 #include "State.hpp"
 #include "States.hpp"
 #include "TestLevel.hpp"
-#include "Button.hpp"
-#include "UIText.hpp"
 #include "Vector2D.hpp"
 
 class SettingsMenu :
@@ -13,8 +11,6 @@ class SettingsMenu :
 private:
 
     States* states;
-
-    std::map<std::string, UIElement*> elements;
 
 public:
     SettingsMenu();
