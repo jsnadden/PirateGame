@@ -13,11 +13,11 @@ private:
     std::string text;
     std::string fontPath = "assets/arcade_font.ttf";
     int fontSize;
-    SDL_Color fontColour{ 0xff, 0xff, 0xff, 0xff };
+    SDL_Color fontColour;
 
 public:
 
-    UIText(Vector2D centre, std::string text, int size = 18);
+    UIText(Vector2D centre, std::string text, int size = 18, SDL_Color colour = {0xff, 0xff, 0xff, 0xff});
     ~UIText();
 
     void Update();

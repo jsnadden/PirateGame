@@ -26,14 +26,13 @@ TestLevel::TestLevel()
     player->addComponent<ControlComponent>();
     player->addComponent<ColliderComponent>("player", 400 - offset, 320 - offset, playerSize * playerScale);
     player->getComponent<ColliderComponent>().SetRelative(0.0f, 0.5f, 1.0f, 0.5f);
-    SDL_Color black = { 0x00, 0x00, 0x00, 0xff };
     player->addGroup(playerGroup);
     camera->Follow(player->getComponent<TransformComponent>().Centre());
 
     elements["paused"] = new UIText(Vector2D(400.0f, 200.0f), "PAUSED", 36);
     elements["quit"] = new Button(Vector2D(400.0f, 350.0f), "QUIT TO MAIN MENU");
     ((Button*)elements["quit"])->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
-    ((Button*)elements["quit"])->SetTextColours(black, LIGHT_GREY, black);
+    ((Button*)elements["quit"])->SetTextColours(WHITE, LIGHT_GREY, BLACK);
     
     Init();
 }
@@ -56,6 +55,12 @@ TestLevel::~TestLevel()
 
     delete map0;
     map0 = nullptr;
+
+    for (auto& e : elements)
+    {
+        delete e.second;
+    }
+    elements.clear();
 }
 
 void TestLevel::Exit()

@@ -7,11 +7,18 @@ SettingsMenu::SettingsMenu()
 	
 	elements["title"] = new UIText(Vector2D(400, 200), "SETTINGS", 36);
 
-	elements["setting1"] = new Button(Vector2D(400, 300), "SETTING 1");
-	elements["arrow"] = new Button(Vector2D(600,300), 32, 32, 1, "assets/arrowbutton.png");
-	elements["setting2"] = new Button(Vector2D(400, 350), "SETTING 2");
-	elements["setting3"] = new Button(Vector2D(400, 400), "SETTING 3");
-	elements["setting4"] = new Button(Vector2D(400, 450), "SETTING 4");
+	elements["pickertest1"] = new Picker(Vector2D(400, 320), "A setting");
+	((Picker*)elements["pickertest1"])->AddOption("option 1");
+	((Picker*)elements["pickertest1"])->AddOption("option 2");
+	((Picker*)elements["pickertest1"])->AddOption("option 3");
+
+	elements["pickertest2"] = new Picker(Vector2D(400, 420), "Another setting");
+	((Picker*)elements["pickertest2"])->AddOption("other option 1");
+	((Picker*)elements["pickertest2"])->AddOption("other option 2");
+	((Picker*)elements["pickertest2"])->AddOption("other option 3");
+
+
+
 
 	Init();
 }
@@ -31,6 +38,12 @@ SettingsMenu::~SettingsMenu()
 	timer = nullptr;
 	input = nullptr;
 	audio = nullptr;
+
+	for (auto& e : elements)
+	{
+		delete e.second;
+	}
+	elements.clear();
 }
 
 void SettingsMenu::Exit()

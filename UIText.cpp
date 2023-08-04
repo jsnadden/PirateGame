@@ -1,10 +1,11 @@
 #include "UIText.hpp"
 
-UIText::UIText(Vector2D c, std::string t, int size)
+UIText::UIText(Vector2D c, std::string t, int size, SDL_Color colour)
     : UIElement()
 {
     text = t;
     fontSize = size;
+    fontColour = colour;
 
     textTexture = assets->GetText(text, fontPath, fontSize, fontColour);
 

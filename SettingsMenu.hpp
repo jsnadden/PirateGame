@@ -4,6 +4,7 @@
 #include "States.hpp"
 #include "TestLevel.hpp"
 #include "Vector2D.hpp"
+#include "Picker.hpp"
 
 class SettingsMenu :
     public State

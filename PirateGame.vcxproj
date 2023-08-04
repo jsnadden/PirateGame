@@ -38,6 +38,7 @@
     <ClInclude Include="DynRect.hpp" />
     <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Managers.hpp" />
+    <ClInclude Include="TextPanel.hpp" />
     <ClInclude Include="Picker.hpp" />
     <ClInclude Include="SettingsMenu.hpp" />
     <ClInclude Include="Singleton.hpp" />
@@ -73,6 +74,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Picker.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
+    <ClCompile Include="TextPanel.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />

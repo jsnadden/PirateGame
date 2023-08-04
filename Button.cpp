@@ -13,14 +13,14 @@ Button::Button(Vector2D position, std::string t)
     InitText();
 }
 
-Button::Button(Vector2D position, int width, int height, int scale, std::string imgPath)
+Button::Button(Vector2D position, int width, int height, int scale, std::string imgPath, SDL_RendererFlip flip)
 {
     centre = position; 
     
     down = hover = false;
 
     hasImage = true;
-    SetImage(imgPath, width, height);
+    SetImage(imgPath, width, height, flip);
 
     buttonRect.x = centre.x - (width * scale) / 2;
     buttonRect.y = centre.y - (height * scale) / 2;

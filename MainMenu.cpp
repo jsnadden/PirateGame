@@ -29,6 +29,12 @@ MainMenu::~MainMenu()
 	timer = nullptr;
 	input = nullptr;
 	audio = nullptr;
+
+	for (auto& e : elements)
+	{
+		delete e.second;
+	}
+	elements.clear();
 }
 
 void MainMenu::Exit()

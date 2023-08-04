@@ -16,8 +16,8 @@ private:
     bool activated = false;
 
     SDL_Color defaultButtonColour{0x00, 0x00, 0x00, 0xff};
-    SDL_Color hoverButtonColour{ 0x30, 0x30, 0x30, 0xff };
-    SDL_Color downButtonColour{ 0x60, 0x60, 0x60, 0xff };
+    SDL_Color hoverButtonColour{ 0x60, 0x60, 0x60, 0xff };
+    SDL_Color downButtonColour{ 0x30, 0x30, 0x30, 0xff };
 
     bool hasText = false;
 
@@ -47,7 +47,7 @@ public:
     Button(Vector2D position, std::string text);
 
     // Constructor for button with image
-    Button(Vector2D position, int width, int height, int scale, std::string imgPath);
+    Button(Vector2D position, int width, int height, int scale, std::string imgPath, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     ~Button();
 
