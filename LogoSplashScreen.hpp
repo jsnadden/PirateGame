@@ -1,20 +1,28 @@
 #pragma once
-#include <map>
 #include "State.hpp"
 #include "States.hpp"
-#include "Vector2D.hpp"
-#include "Picker.hpp"
+#include "MainMenu.hpp"
+#include "UISprite.hpp"
 
-class SettingsMenu :
+class LogoSplashScreen :
     public State
 {
 private:
 
     States* states;
 
+    float elapsedTime;
+    const float totalTime = 4.0f;
+
+    const Uint8 red = 0x00;
+    const Uint8 green = 0x00;
+    const Uint8 blue = 0x00;
+    Uint8 alpha;
+
 public:
-    SettingsMenu();
-    ~SettingsMenu();
+
+    LogoSplashScreen();
+    ~LogoSplashScreen();
 
     void Exit() override;
 

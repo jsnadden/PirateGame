@@ -44,6 +44,14 @@ void States::ExitPoll()
 	}
 }
 
+bool States::KillSwitch()
+{
+	if (stateStack.empty()) return true;
+	else return stateStack.top()->HasEndedGame();
+}
+
+
+
 void States::EarlyUpdate()
 {
 	if (!stateStack.empty())
@@ -74,18 +82,12 @@ void States::LateUpdate()
 	}
 }
 
-bool States::Render()
+void States::Render()
 {
 	if (!stateStack.empty())
 	{
 		stateStack.top()->Render();
 
 		ExitPoll();
-
-		return false;
-	}
-	else
-	{
-		return true;
 	}
 }

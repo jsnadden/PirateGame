@@ -11,6 +11,7 @@ class State
 protected:
 
 	bool exit;
+	bool endGame;
 	bool paused;
 
 	Graphics* graphics;
@@ -28,6 +29,8 @@ public:
 
 	const bool& HasExited();
 	virtual void Exit() = 0;
+
+	const bool& HasEndedGame();
 
 	bool IsPaused();
 	void TogglePause();

@@ -12,6 +12,8 @@ Game::Game()
         quit = true;
     }
 
+    graphics->WindowTitle("Untitled Pirate Game");
+
     assets = Assets::GetInstance();
     input = Input::GetInstance();
     audio = Audio::GetInstance();
@@ -67,8 +69,8 @@ void Game::Release()
 
 void Game::InitialState()
 {
-    // Eventually this should start a loading screen type thing
-    states->StartState<MainMenu>();
+    // For testing/debugging purposes, the following lets me start in any state I'd like
+    states->StartState<LogoSplashScreen>();
 }
 
 void Game::EarlyUpdate()
@@ -98,9 +100,11 @@ void Game::Render()
 {
     graphics->ClearRenderer();
     
-    quit = states->Render();
+    states->Render();
 
     graphics->Render();
+
+    quit = states->KillSwitch();
 }
 
 

@@ -7,6 +7,8 @@ SettingsMenu::SettingsMenu()
 	
 	elements["title"] = new UIText(Vector2D(400, 200), "SETTINGS", 36);
 
+	elements["backbutton"] = new Button(Vector2D(80, 50), "BACK");
+
 	elements["pickertest1"] = new Picker(Vector2D(400, 320), "A setting");
 	((Picker*)elements["pickertest1"])->AddOption("option 1");
 	((Picker*)elements["pickertest1"])->AddOption("option 2");
@@ -25,7 +27,7 @@ SettingsMenu::SettingsMenu()
 
 void SettingsMenu::Init()
 {
-	graphics->WindowTitle("Settings menu");
+	//graphics->WindowTitle("Settings menu");
 	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 }
 
@@ -63,6 +65,10 @@ void SettingsMenu::Update()
 		e.second->Update();
 	}
 
+	if (((Button*)elements["backbutton"])->IsActivated())
+	{
+		Exit();
+	}
 }
 
 void SettingsMenu::LateUpdate()

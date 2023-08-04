@@ -11,7 +11,7 @@ private:
 
     SDL_Texture* textTexture;
     std::string text;
-    std::string fontPath = "assets/arcade_font.ttf";
+    std::string fontPath = "assets/fonts/arcade.ttf";
     int fontSize;
     SDL_Color fontColour;
 

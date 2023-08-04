@@ -35,9 +35,6 @@
     <Filter Include="ECS\Components">
       <UniqueIdentifier>{7d34107d-8c2c-4afc-a4bc-5aabe7af3efa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State System">
-      <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Abstract Class Patterns">
       <UniqueIdentifier>{20a1f9b9-20e1-4267-aa43-8f051373bb27}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,9 @@
     </Filter>
     <Filter Include="GUI\UIElements">
       <UniqueIdentifier>{5817c7d7-01df-4336-ba14-89c03cf0e921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,16 +91,16 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="State.hpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="TestLevel.hpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
       <Filter>TileMaps</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.hpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Collision.hpp">
       <Filter>Utility</Filter>
@@ -114,9 +114,6 @@
     <ClInclude Include="States.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="UIElement.hpp">
-      <Filter>GUI</Filter>
-    </ClInclude>
     <ClInclude Include="Managers.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -124,19 +121,13 @@
       <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="SettingsMenu.hpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="GUI.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Uncopyable.hpp">
       <Filter>Abstract Class Patterns</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.hpp">
-      <Filter>GUI\UIElements</Filter>
-    </ClInclude>
-    <ClInclude Include="UIText.hpp">
-      <Filter>GUI\UIElements</Filter>
     </ClInclude>
     <ClInclude Include="ColliderComponent.hpp">
       <Filter>ECS\Components</Filter>
@@ -162,10 +153,28 @@
     <ClInclude Include="Singleton.hpp">
       <Filter>Abstract Class Patterns</Filter>
     </ClInclude>
+    <ClInclude Include="LogoSplashScreen.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="ListOfStates.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
     <ClInclude Include="Picker.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
     <ClInclude Include="TextPanel.hpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.hpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.hpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="UISprite.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
   </ItemGroup>
@@ -198,16 +207,16 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>TileMaps</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Utility</Filter>
@@ -215,25 +224,31 @@
     <ClCompile Include="States.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsMenu.cpp">
-      <Filter>State System</Filter>
+      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="GUI.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>GUI\UIElements</Filter>
+    <ClCompile Include="LogoSplashScreen.cpp">
+      <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="UIText.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
     <ClCompile Include="Picker.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
     <ClCompile Include="TextPanel.cpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="UISprite.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
   </ItemGroup>

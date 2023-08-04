@@ -37,6 +37,8 @@
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="DynRect.hpp" />
     <ClInclude Include="GUI.hpp" />
+    <ClInclude Include="ListOfStates.hpp" />
+    <ClInclude Include="LogoSplashScreen.hpp" />
     <ClInclude Include="Managers.hpp" />
     <ClInclude Include="TextPanel.hpp" />
     <ClInclude Include="Picker.hpp" />
@@ -63,6 +65,7 @@
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="TransformComponent.hpp" />
     <ClInclude Include="UILabelComponent.hpp" />
+    <ClInclude Include="UISprite.hpp" />
     <ClInclude Include="UIText.hpp" />
     <ClInclude Include="Uncopyable.hpp" />
     <ClInclude Include="Vector2D.hpp" />
@@ -72,6 +75,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="LogoSplashScreen.cpp" />
     <ClCompile Include="Picker.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
     <ClCompile Include="TextPanel.cpp" />
@@ -89,6 +93,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="UISprite.cpp" />
     <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>

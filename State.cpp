@@ -3,6 +3,7 @@
 State::State()
 {
 	exit = false;
+	endGame = false;
 	paused = false;
 
 	graphics = Graphics::GetInstance();
@@ -20,6 +21,11 @@ State::~State()
 const bool& State::HasExited()
 {
 	return exit;
+}
+
+const bool& State::HasEndedGame()
+{
+	return endGame;
 }
 
 bool State::IsPaused()

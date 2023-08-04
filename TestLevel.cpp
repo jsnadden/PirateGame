@@ -30,16 +30,21 @@ TestLevel::TestLevel()
     camera->Follow(player->getComponent<TransformComponent>().Centre());
 
     elements["paused"] = new UIText(Vector2D(400.0f, 200.0f), "PAUSED", 36);
+
     elements["quit"] = new Button(Vector2D(400.0f, 350.0f), "QUIT TO MAIN MENU");
     ((Button*)elements["quit"])->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
     ((Button*)elements["quit"])->SetTextColours(WHITE, LIGHT_GREY, BLACK);
+
+    elements["endgame"] = new Button(Vector2D(400.0f, 400.0f), "QUIT TO DESKTOP");
+    ((Button*)elements["endgame"])->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
+    ((Button*)elements["endgame"])->SetTextColours(WHITE, LIGHT_GREY, BLACK);
     
     Init();
 }
 
 void TestLevel::Init()
 {
-    graphics->WindowTitle("Test Level");
+    //graphics->WindowTitle("Test Level");
     graphics->SetBackgroundColour(0xf0, 0xf0, 0xff, 0xff);
 }
 
@@ -79,6 +84,7 @@ void TestLevel::EarlyUpdate()
     {
         elements["paused"]->SetVisibility(false);
         elements["quit"]->SetVisibility(false);
+        elements["endgame"]->SetVisibility(false);
 
         manager.refresh();
         manager.EarlyUpdate();
@@ -87,6 +93,7 @@ void TestLevel::EarlyUpdate()
     {
         elements["paused"]->SetVisibility(true);
         elements["quit"]->SetVisibility(true);
+        elements["endgame"]->SetVisibility(true);
     }
 
     
@@ -102,6 +109,11 @@ void TestLevel::Update()
     if (((Button*)elements["quit"])->IsActivated())
     {
         Exit();
+    }
+
+    if (((Button*)elements["endgame"])->IsActivated())
+    {
+        endGame = true;
     }
 
     if (!this->IsPaused())

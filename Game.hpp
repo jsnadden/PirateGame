@@ -1,5 +1,5 @@
 #pragma once
-#include "MainMenu.hpp"
+#include "ListOfStates.hpp"
 
 class Game
 {

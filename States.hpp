@@ -24,11 +24,12 @@ public:
 	}
 	void EndCurrentState();
 	void ExitPoll();
+	bool KillSwitch();
 
 	void EarlyUpdate();
 	void Update();
 	void LateUpdate();
-	bool Render();
+	void Render();
 
 };
 

@@ -16,7 +16,7 @@ MainMenu::MainMenu()
 
 void MainMenu::Init()
 {
-	graphics->WindowTitle("Main menu");
+	//graphics->WindowTitle("Main menu");
 	graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 }
 
@@ -46,6 +46,11 @@ void MainMenu::EarlyUpdate()
 {
 	if (input->KeyPressed(SDL_SCANCODE_ESCAPE))
 	{
+		endGame = true;
+	}
+
+	if (input->KeyPressed(SDL_SCANCODE_SPACE))
+	{
 		Exit();
 	}
 }
@@ -69,7 +74,7 @@ void MainMenu::Update()
 
 	if (((Button*)elements["quit"])->IsActivated())
 	{
-		Exit();
+		endGame = true;
 	}
 }
 

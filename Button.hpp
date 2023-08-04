@@ -17,19 +17,19 @@ private:
 
     SDL_Color defaultButtonColour{0x00, 0x00, 0x00, 0xff};
     SDL_Color hoverButtonColour{ 0x60, 0x60, 0x60, 0xff };
-    SDL_Color downButtonColour{ 0x30, 0x30, 0x30, 0xff };
+    SDL_Color downButtonColour{ 0x60, 0x60, 0x60, 0xff };
 
     bool hasText = false;
 
     SDL_Rect textRect;
 
     std::string text = " ";
-    std::string fontPath = "assets/arcade_font.ttf";
+    std::string fontPath = "assets/fonts/arcade.ttf";
     int fontSize = 18;
 
     SDL_Color defaultTextColour{ 0xff, 0xff, 0xff, 0xff };
     SDL_Color hoverTextColour{ 0xff, 0xff, 0xff, 0xff };
-    SDL_Color downTextColour{ 0xff, 0xff, 0xff, 0xff };
+    SDL_Color downTextColour{ 0x00, 0x00, 0x00, 0xff };
     
     SDL_Texture* defaultTextTexture = nullptr;
     SDL_Texture* hoverTextTexture = nullptr;
