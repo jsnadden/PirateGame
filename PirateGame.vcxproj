@@ -21,11 +21,22 @@
   <ItemGroup>
     <Image Include="assets\cannonball.png" />
     <Image Include="assets\collider.png" />
+    <Image Include="assets\GUI\10longpanel.png" />
+    <Image Include="assets\GUI\12longpanel.png" />
+    <Image Include="assets\GUI\6longpanel.png" />
+    <Image Include="assets\GUI\downarrowbutton.png" />
+    <Image Include="assets\GUI\sidearrowbutton.png" />
+    <Image Include="assets\GUI\uparrowbutton.png" />
     <Image Include="assets\ship.png" />
     <Image Include="assets\terrain.png" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\arcade_font.ttf" />
+    <Font Include="assets\fonts\arcade.ttf" />
+    <Font Include="assets\fonts\Leander.ttf" />
+    <Font Include="assets\fonts\pixel_gothic.ttf" />
+    <Font Include="assets\fonts\pixel_pirate.ttf" />
+    <Font Include="assets\fonts\UglyQua-Italic.ttf" />
+    <Font Include="assets\fonts\UglyQua.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\map0.txt" />

@@ -47,6 +47,9 @@
     <Filter Include="States">
       <UniqueIdentifier>{278cfc49-446a-4cd1-b273-7388bfc3727a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\GUI">
+      <UniqueIdentifier>{73bff196-d654-467c-9eac-1a93f1e2c411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\cannonball.png">
@@ -60,6 +63,24 @@
     </Image>
     <Image Include="assets\terrain.png">
       <Filter>Assets\Sprites</Filter>
+    </Image>
+    <Image Include="assets\GUI\6longpanel.png">
+      <Filter>Assets\GUI</Filter>
+    </Image>
+    <Image Include="assets\GUI\10longpanel.png">
+      <Filter>Assets\GUI</Filter>
+    </Image>
+    <Image Include="assets\GUI\12longpanel.png">
+      <Filter>Assets\GUI</Filter>
+    </Image>
+    <Image Include="assets\GUI\downarrowbutton.png">
+      <Filter>Assets\GUI</Filter>
+    </Image>
+    <Image Include="assets\GUI\sidearrowbutton.png">
+      <Filter>Assets\GUI</Filter>
+    </Image>
+    <Image Include="assets\GUI\uparrowbutton.png">
+      <Filter>Assets\GUI</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +326,22 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\arcade_font.ttf">
+    <Font Include="assets\fonts\arcade.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="assets\fonts\Leander.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="assets\fonts\pixel_gothic.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="assets\fonts\pixel_pirate.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="assets\fonts\UglyQua.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="assets\fonts\UglyQua-Italic.ttf">
       <Filter>Assets\Fonts</Filter>
     </Font>
   </ItemGroup>

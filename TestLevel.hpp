@@ -2,7 +2,9 @@
 #include "Map.hpp"
 #include "Components.hpp"
 #include "State.hpp"
+#include "States.hpp"
 #include "Collision.hpp"
+#include "ListOfStates.hpp"
 
 class TestLevel :
     public State
@@ -10,6 +12,7 @@ class TestLevel :
 private:
 
     Camera* camera;
+    States* states;
 
     ECSManager manager;
 
@@ -23,6 +26,8 @@ private:
     SDL_Color WHITE = { 0xff, 0xff, 0xff, 0xff };
     SDL_Color TRANSPARENT = { 0x00, 0x00, 0x00, 0x00 };
 
+    std::map<std::string, UIElement*> pausemenu;
+
 public:
 
     TestLevel();
@@ -35,6 +40,11 @@ public:
     void Update() override;
     void LateUpdate() override;
     void Render() override;
+
+    void InitMap();
+    void InitPlayer();
+    void InitPauseMenu();
+    void HandleCollision();
 
     std::vector<Entity*>* tiles;
     std::vector<Entity*>* players;

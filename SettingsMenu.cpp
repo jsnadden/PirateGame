@@ -9,15 +9,14 @@ SettingsMenu::SettingsMenu()
 
 	elements["backbutton"] = new Button(Vector2D(80, 50), "BACK");
 
-	elements["pickertest1"] = new Picker(Vector2D(400, 320), "A setting");
-	((Picker*)elements["pickertest1"])->AddOption("option 1");
-	((Picker*)elements["pickertest1"])->AddOption("option 2");
-	((Picker*)elements["pickertest1"])->AddOption("option 3");
+	elements["wmpicker"] = new Picker(Vector2D(400, 320), "Window Mode");
+	((Picker*)elements["wmpicker"])->AddOption("Windowed");
+	((Picker*)elements["wmpicker"])->AddOption("Fullscreen");
 
-	elements["pickertest2"] = new Picker(Vector2D(400, 420), "Another setting");
-	((Picker*)elements["pickertest2"])->AddOption("other option 1");
-	((Picker*)elements["pickertest2"])->AddOption("other option 2");
-	((Picker*)elements["pickertest2"])->AddOption("other option 3");
+	elements["fsrespicker"] = new Picker(Vector2D(400, 420), "Fullscreen resolution");
+	((Picker*)elements["fsrespicker"])->AddOption("option 1");
+	((Picker*)elements["fsrespicker"])->AddOption("option 2");
+	((Picker*)elements["fsrespicker"])->AddOption("option 3");
 
 
 
