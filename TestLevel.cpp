@@ -80,21 +80,6 @@ void TestLevel::EarlyUpdate()
         this->TogglePause();
     }
 
-    if (!this->IsPaused())
-    {
-        elements["paused"]->SetVisibility(false);
-        elements["quit"]->SetVisibility(false);
-        elements["endgame"]->SetVisibility(false);
-
-        manager.refresh();
-        manager.EarlyUpdate();
-    }
-    else
-    {
-        elements["paused"]->SetVisibility(true);
-        elements["quit"]->SetVisibility(true);
-        elements["endgame"]->SetVisibility(true);
-    }
 
     
 }
