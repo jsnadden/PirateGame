@@ -21,6 +21,9 @@ private:
 
     bool hasText = false;
 
+    bool hasTextOutline = false;
+    int outlineSize = 0;
+
     SDL_Rect textRect;
 
     std::string text = " ";
@@ -44,7 +47,7 @@ private:
 public:
 
     // Constructor for button with text
-    Button(Vector2D position, std::string text);
+    Button(Vector2D position, std::string text, int outline = 0);
 
     // Constructor for button with image
     Button(Vector2D position, int width, int height, int scale, std::string imgPath, SDL_RendererFlip flip = SDL_FLIP_NONE);

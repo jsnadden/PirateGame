@@ -5,6 +5,7 @@
 #include "States.hpp"
 #include "Collision.hpp"
 #include "ListOfStates.hpp"
+#include "PauseMenu.hpp"
 
 class TestLevel :
     public State
@@ -21,12 +22,8 @@ private:
     Map* map0;
 
     SDL_Color PAUSE_TINT = { 0x00, 0x00, 0x00, 0x80 };
-    SDL_Color BLACK = { 0x00, 0x00, 0x00, 0xff };
-    SDL_Color LIGHT_GREY = { 0xa0, 0xa0, 0xa0, 0xff };
-    SDL_Color WHITE = { 0xff, 0xff, 0xff, 0xff };
-    SDL_Color TRANSPARENT = { 0x00, 0x00, 0x00, 0x00 };
 
-    std::map<std::string, UIElement*> pausemenu;
+    PauseMenu* pauseMenu;
 
 public:
 
@@ -43,7 +40,7 @@ public:
 
     void InitMap();
     void InitPlayer();
-    void InitPauseMenu();
+    void InitGui();
     void HandleCollision();
 
     std::vector<Entity*>* tiles;

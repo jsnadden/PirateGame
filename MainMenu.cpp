@@ -5,11 +5,12 @@ MainMenu::MainMenu()
 {
 	states = States::GetInstance();
 	
-	elements["title"] = new UIText(Vector2D(400, 200), "PIRATE GAME", 36);
+	elements["title"] = new UIText(Vector2D(400, 200), "GAME LOGO HERE", 36);
 
 	elements["start"] = new Button(Vector2D(400, 350), "NEW GAME");
-	elements["settings"] = new Button(Vector2D(400, 400), "SETTINGS");
-	elements["quit"] = new Button(Vector2D(400.0f, 450.0f), "QUIT GAME");
+	elements["load"] = new Button(Vector2D(400, 400), "LOAD GAME");
+	elements["settings"] = new Button(Vector2D(400, 450), "SETTINGS");
+	elements["quit"] = new Button(Vector2D(400.0f, 500.0f), "QUIT GAME");
 
 	Init();
 }

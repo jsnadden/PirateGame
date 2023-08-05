@@ -9,6 +9,7 @@ protected:
 	Assets* assets;
 	Input* input;
 
+	bool active;
 	bool visible;
 
 public:
@@ -18,6 +19,9 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+
+	bool IsActive();
+	void SetActive(bool act);
 
 	bool IsVisible();
 	void SetVisibility(bool vis);

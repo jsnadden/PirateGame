@@ -1,7 +1,7 @@
 #pragma once
 #include "UIElement.hpp"
 
-class TextPanel : public UIElement
+class Panel : public UIElement
 {
 private:
 
@@ -12,8 +12,8 @@ private:
 
 public:
 
-	TextPanel(Vector2D position, std::string imgPath, int s = 1);
-	~TextPanel();
+	Panel(Vector2D position, std::string imgPath, int s = 1);
+	~Panel();
 
 	void Update();
 	void Draw();

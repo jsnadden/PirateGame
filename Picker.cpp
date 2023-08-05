@@ -10,7 +10,7 @@ Picker::Picker(Vector2D position, std::string t, int s)
     Vector2D titleOffset(0, -32 * s);
     Vector2D buttonOffset(220 * s, 0);
 
-    panel = new TextPanel(position, "assets/GUI/12longpanel.png", scale);
+    panel = new Panel(position, "assets/GUI/12longpanel.png", scale);
     rightButton = new Button(position + buttonOffset, 32, 32, scale, "assets/GUI/sidearrowbutton.png");
     leftButton = new Button(position - buttonOffset, 32, 32, scale, "assets/GUI/sidearrowbutton.png", SDL_FLIP_HORIZONTAL);
     title = new UIText(position + titleOffset, t, fontSize * scale, { 0xff, 0xff, 0xff, 0xff });

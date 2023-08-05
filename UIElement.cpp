@@ -6,11 +6,22 @@ UIElement::UIElement()
 	assets = Assets::GetInstance();
 	input = Input::GetInstance();
 
+	active = true;
 	visible = true;
 }
 
 UIElement::~UIElement()
 {
+}
+
+bool UIElement::IsActive()
+{
+	return active;
+}
+
+void UIElement::SetActive(bool act)
+{
+	active = act;
 }
 
 bool UIElement::IsVisible()

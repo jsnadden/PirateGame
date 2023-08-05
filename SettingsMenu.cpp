@@ -12,14 +12,13 @@ SettingsMenu::SettingsMenu()
 	elements["wmpicker"] = new Picker(Vector2D(400, 320), "Window Mode");
 	((Picker*)elements["wmpicker"])->AddOption("Windowed");
 	((Picker*)elements["wmpicker"])->AddOption("Fullscreen");
+	((Picker*)elements["wmpicker"])->SetIndex(graphics->IsFullscreen() ? 1 : 0);
+
 
 	elements["fsrespicker"] = new Picker(Vector2D(400, 420), "Fullscreen resolution");
 	((Picker*)elements["fsrespicker"])->AddOption("option 1");
 	((Picker*)elements["fsrespicker"])->AddOption("option 2");
 	((Picker*)elements["fsrespicker"])->AddOption("option 3");
-
-
-
 
 	Init();
 }

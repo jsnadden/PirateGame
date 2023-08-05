@@ -80,15 +80,30 @@ SDL_Texture* Assets::GetTexture(std::string path)
 	return textures[path];
 }
 
-SDL_Texture* Assets::GetText(std::string text, std::string fontPath, int size, SDL_Color colour)
+SDL_Texture* Assets::GetText(std::string text, std::string fontPath, int size, SDL_Color fillColour)
 {
 	TTF_Font* font = GetFont(fontPath, size);
 
-	std::string key = text + fontPath + std::to_string(size) + (char)colour.r + (char)colour.b + (char)colour.g;
+	std::string key = text + fontPath + std::to_string(size) + (char)fillColour.r + (char)fillColour.b + (char)fillColour.g;
 
 	if (texts[key] == nullptr)
 	{
-		texts[key] = Graphics::GetInstance()->LoadText(font, text, colour);
+		texts[key] = Graphics::GetInstance()->LoadText(text, font, fillColour);
+	}
+
+	return texts[key];
+}
+
+SDL_Texture* Assets::GetOutlinedText(std::string text, std::string fontPath, int size, SDL_Color fillColour, int outlineSize, SDL_Color outlineColour)
+{
+	TTF_Font* font = GetFont(fontPath, size);
+
+	std::string key = text + fontPath + std::to_string(size) + (char)fillColour.r + (char)fillColour.g + (char)fillColour.b
+		+ (char)outlineColour.r + (char)outlineColour.g + (char)outlineColour.b;
+
+	if (texts[key] == nullptr)
+	{
+		texts[key] = Graphics::GetInstance()->LoadOutlinedText(text, font, fillColour, outlineSize, outlineColour);
 	}
 
 	return texts[key];

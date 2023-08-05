@@ -2,7 +2,7 @@
 #include "UIElement.hpp"
 #include "Button.hpp"
 #include "UIText.hpp"
-#include "TextPanel.hpp"
+#include "Panel.hpp"
 
 class Picker :
     public UIElement
@@ -20,7 +20,7 @@ private:
     UIText* title;
     int fontSize = 16;
 
-    TextPanel* panel = nullptr;
+    Panel* panel = nullptr;
 
 public:
 

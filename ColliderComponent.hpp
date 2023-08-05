@@ -56,7 +56,7 @@ public:
 		}
 		transform = &entity->getComponent<TransformComponent>();
 
-		colliderTexture = graphics->LoadTexture("assets/collider.png");
+		colliderTexture = graphics->LoadTexture("assets/tiles/collider.png");
 		srcRect = { 0, 0, 32, 32 };
 	}
 

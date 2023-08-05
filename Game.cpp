@@ -128,6 +128,11 @@ void Game::Run()
             {
                 quit = true;
             }
+            if (event.type == SDL_WINDOWEVENT)
+            {
+                graphics->HandleWindowEvent(event);
+            }
+            
         }
 
         // CRUDE FRAME RATE LIMITER

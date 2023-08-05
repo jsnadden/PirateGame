@@ -1,6 +1,6 @@
 #include "Button.hpp"
 
-Button::Button(Vector2D position, std::string t)
+Button::Button(Vector2D position, std::string t, int outline)
 	: UIElement()
 {
     centre = position; 
@@ -8,6 +8,8 @@ Button::Button(Vector2D position, std::string t)
     down = hover = false;
 
     hasText = true;
+    hasTextOutline = (outline > 0);
+    outlineSize = outline;
     text = t;
 
     InitText();
@@ -155,9 +157,18 @@ void Button::SetButtonColours(SDL_Color defaultColour, SDL_Color hoverColour, SD
 
 void Button::InitText()
 {
-    defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
-    hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
-    downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+    if (hasTextOutline)
+    {
+        defaultTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, defaultTextColour, outlineSize, {0x00, 0x00, 0x00, 0xff});
+        hoverTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, hoverTextColour, outlineSize, { 0x00, 0x00, 0x00, 0xff });
+        downTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, downTextColour, outlineSize, { 0x00, 0x00, 0x00, 0xff });
+    }
+    else
+    {
+        defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
+        hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
+        downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+    }
 
     SDL_QueryTexture(defaultTextTexture, NULL, NULL, &textRect.w, &textRect.h);
     textRect.x = centre.x - (textRect.w / 2);
@@ -194,9 +205,18 @@ void Button::SetTextColours(SDL_Color defaultColour, SDL_Color hoverColour, SDL_
     hoverTextColour = hoverColour;
     downTextColour = downColour;
     
-    defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
-    hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
-    downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+    if (hasTextOutline)
+    {
+        defaultTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, defaultTextColour, outlineSize, { 0x00, 0x00, 0x00, 0xff });
+        hoverTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, hoverTextColour, outlineSize, { 0x00, 0x00, 0x00, 0xff });
+        downTextTexture = assets->GetOutlinedText(text, fontPath, fontSize, downTextColour, outlineSize, { 0x00, 0x00, 0x00, 0xff });
+    }
+    else
+    {
+        defaultTextTexture = assets->GetText(text, fontPath, fontSize, defaultTextColour);
+        hoverTextTexture = assets->GetText(text, fontPath, fontSize, hoverTextColour);
+        downTextTexture = assets->GetText(text, fontPath, fontSize, downTextColour);
+    }
 }
 
 void Button::SetImage(std::string path, int width, int height, SDL_RendererFlip flip)

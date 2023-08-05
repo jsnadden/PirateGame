@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 #include <stdio.h>
 #include <string>
 #include <SDL.h>
@@ -8,32 +9,6 @@
 
 class Graphics
 {
-public:
-
-	// TODO: construct a way to set the window resolution in-game, using an .ini
-	static const int SCREEN_WIDTH = 800;
-	static const int SCREEN_HEIGHT = 640;
-
-	static Graphics* GetInstance();
-	static void Release();
-
-	static bool HasInitialised();
-
-	SDL_Texture* LoadTexture(std::string path);
-	void DrawTexture(SDL_Texture* tex, SDL_Rect* sRect = nullptr, SDL_Rect* dRect = nullptr, float rot = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
-	SDL_Texture* LoadText(TTF_Font* font, std::string text, SDL_Color colour);
-
-	void WindowTitle(const char* newTitle);
-	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-
-	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
-	void FillWindow(SDL_Color colour);
-
-	SDL_Rect* ViewRect();
-
-	void ClearRenderer();
-	void Render();
-
 private:
 
 	SDL_Window* window;
@@ -50,6 +25,48 @@ private:
 	~Graphics();
 
 	bool Init();
+
+	bool fullscreen = false;
+	bool minimised = false;
+	bool mouseFocus = true;
+	bool keyboardFocus = true;
+
+
+public:
+
+	// TODO: should read these in from a config
+	static const int SCREEN_WIDTH = 800;
+	static const int SCREEN_HEIGHT = 640;
+
+	static Graphics* GetInstance();
+	static void Release();
+
+	static bool HasInitialised();
+
+	void ClearRenderer();
+	void Render();
+
+	SDL_Texture* LoadTexture(std::string path);
+	void DrawTexture(SDL_Texture* tex, SDL_Rect* sRect = nullptr, SDL_Rect* dRect = nullptr, float rot = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	SDL_Texture* LoadText(std::string text, TTF_Font* font, SDL_Color fillColour);
+	SDL_Texture* LoadOutlinedText(std::string text, TTF_Font* font, SDL_Color fillColour, int outlineSize, SDL_Color outlineColour = { 0,0,0,0 });
+
+	void WindowTitle(const char* newTitle);
+	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+
+	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
+	void FillWindow(SDL_Color colour);
+
+	SDL_Rect* ViewRect();
+
+	void ToggleFullscreen();
+	void HandleWindowEvent(SDL_Event& e);
+
+	bool IsFullscreen();
+	bool IsMinimised();
+	bool HasMouseFocus();
+	bool HasKeyboardFocus();
+
 
 };
 

@@ -61,7 +61,7 @@ void LogoSplashScreen::LateUpdate()
 	elapsedTime += timer->DeltaTime();
 	alpha = static_cast<Uint8>(255/4 * (elapsedTime - totalTime / 2) * (elapsedTime - totalTime / 2));
 
-	if (input->KeyPressed(SDL_SCANCODE_ESCAPE) || elapsedTime >= totalTime)
+	if (input->KeyPressed(SDL_SCANCODE_ESCAPE) || elapsedTime >= totalTime || input->MouseButtonPressed(Input::left))
 	{
 		states->StartState<MainMenu>();
 		elapsedTime = 0.0f;

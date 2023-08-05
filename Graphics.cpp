@@ -48,9 +48,9 @@ void Graphics::Release()
 bool Graphics::Init()
 {
 	// Start SDL subsystems
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		printf("SDL Video could not initialize! SDL_Error: %s\n", SDL_GetError());
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
 
@@ -63,7 +63,7 @@ bool Graphics::Init()
 	}
 
 	// Create renderer, error check, set background to white
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 	if (renderer == nullptr)
 	{
 		printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -115,22 +115,57 @@ SDL_Texture* Graphics::LoadTexture(std::string path)
 	return tex;
 }
 
-SDL_Texture* Graphics::LoadText(TTF_Font* font, std::string text, SDL_Color colour)
+SDL_Texture* Graphics::LoadText(std::string text, TTF_Font* font, SDL_Color fillColour)
 {
 	SDL_Texture* tex = nullptr;
 
-	SDL_Surface* tempSurface = TTF_RenderText_Solid(font, text.c_str(), colour);
-	if (tempSurface == nullptr) {
+	SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), fillColour);
+	if (textSurface == nullptr) {
 		printf("Text surface creation failed! TTF_Error: %s\n", TTF_GetError());
 		return nullptr;
 	}
 
-	tex = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	tex = SDL_CreateTextureFromSurface(renderer, textSurface);
 	if (tex == nullptr) {
-		printf("Text surface creation failed! SDL_Error: %s\n", SDL_GetError());
+		printf("Text texture creation failed! SDL_Error: %s\n", SDL_GetError());
 	}
 
-	SDL_FreeSurface(tempSurface);
+	SDL_FreeSurface(textSurface);
+
+	return tex;
+}
+
+SDL_Texture* Graphics::LoadOutlinedText(std::string text, TTF_Font* font, SDL_Color fillColour, int outlineSize, SDL_Color outlineColour)
+{
+	SDL_Texture* tex = nullptr;
+
+	SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), fillColour);
+	if (textSurface == nullptr) {
+		printf("Text surface creation failed! TTF_Error: %s\n", TTF_GetError());
+		return nullptr;
+	}
+
+	TTF_SetFontOutline(font, outlineSize);
+
+	SDL_Surface* outlineSurface = TTF_RenderText_Blended(font, text.c_str(), outlineColour);
+	if (outlineSurface == nullptr) {
+		printf("Text outline surface creation failed! TTF_Error: %s\n", TTF_GetError());
+		return nullptr;
+	}
+
+	TTF_SetFontOutline(font, 0);
+
+	SDL_Rect rect = { outlineSize, outlineSize, textSurface->w, textSurface->h };
+	SDL_SetSurfaceBlendMode(textSurface, SDL_BLENDMODE_BLEND);
+	SDL_BlitSurface(textSurface, NULL, outlineSurface, &rect);
+
+	tex = SDL_CreateTextureFromSurface(renderer, outlineSurface);
+	if (tex == nullptr) {
+		printf("Text texture creation failed! SDL_Error: %s\n", SDL_GetError());
+	}
+
+	SDL_FreeSurface(textSurface);
+	SDL_FreeSurface(outlineSurface);
 
 	return tex;
 }
@@ -180,4 +215,70 @@ SDL_Rect* Graphics::ViewRect()
 	windowRect.x = windowRect.y = 0;
 	SDL_GetWindowSize(window, &windowRect.w, &windowRect.h);
 	return &windowRect;
+}
+
+void Graphics::ToggleFullscreen()
+{
+	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+	fullscreen = !(SDL_GetWindowFlags(window) & fullscreenFlag);
+	SDL_SetWindowFullscreen(window, fullscreen ? fullscreenFlag : 0);
+	SDL_ShowCursor(!fullscreen);
+}
+
+void Graphics::HandleWindowEvent(SDL_Event& e)
+{
+	switch (e.window.event)
+	{
+	case SDL_WINDOWEVENT_EXPOSED:
+		SDL_RenderPresent(renderer);
+		break;
+
+	case SDL_WINDOWEVENT_ENTER:
+		mouseFocus = true;
+		break;
+
+	case SDL_WINDOWEVENT_LEAVE:
+		mouseFocus = false;
+		break;
+
+	case SDL_WINDOWEVENT_FOCUS_GAINED:
+		keyboardFocus = true;
+		break;
+
+	case SDL_WINDOWEVENT_FOCUS_LOST:
+		keyboardFocus = false;
+		break;
+
+	case SDL_WINDOWEVENT_MINIMIZED:
+		minimised = true;
+		break;
+
+	case SDL_WINDOWEVENT_MAXIMIZED:
+		minimised = false;
+		break;
+
+	case SDL_WINDOWEVENT_RESTORED:
+		minimised = false;
+		break;
+	}
+}
+
+bool Graphics::IsFullscreen()
+{
+	return fullscreen;
+}
+
+bool Graphics::IsMinimised()
+{
+	return minimised;
+}
+
+bool Graphics::HasMouseFocus()
+{
+	return mouseFocus;
+}
+
+bool Graphics::HasKeyboardFocus()
+{
+	return keyboardFocus;
 }

@@ -11,7 +11,8 @@ public:
 	static void Release();
 
 	SDL_Texture* GetTexture(std::string path);
-	SDL_Texture* GetText(std::string text, std::string fontPath, int size, SDL_Color colour);
+	SDL_Texture* GetText(std::string text, std::string fontPath, int size, SDL_Color fillColour);
+	SDL_Texture* GetOutlinedText(std::string text, std::string fontPath, int size, SDL_Color fillColour, int outlineSize, SDL_Color outlineColour);
 
 	Mix_Music* GetMusic(std::string path);
 	Mix_Chunk* GetSFX(std::string path);

@@ -1,6 +1,6 @@
-#include "TextPanel.hpp"
+#include "Panel.hpp"
 
-TextPanel::TextPanel(Vector2D position, std::string imgPath, int s)
+Panel::Panel(Vector2D position, std::string imgPath, int s)
 {
     panelTexture = assets->GetTexture(imgPath);
 
@@ -15,7 +15,7 @@ TextPanel::TextPanel(Vector2D position, std::string imgPath, int s)
 
 }
 
-TextPanel::~TextPanel()
+Panel::~Panel()
 {
     graphics = nullptr;
     assets = nullptr;
@@ -24,10 +24,10 @@ TextPanel::~TextPanel()
     panelTexture = nullptr;
 }
 
-void TextPanel::Update()
+void Panel::Update()
 {}
 
-void TextPanel::Draw()
+void Panel::Draw()
 {
     graphics->DrawTexture(panelTexture, NULL, &destRect);
 }

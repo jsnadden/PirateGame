@@ -186,7 +186,7 @@
     <ClInclude Include="Picker.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="TextPanel.hpp">
+    <ClInclude Include="Panel.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
     <ClInclude Include="UIElement.hpp">
@@ -196,6 +196,9 @@
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
     <ClInclude Include="UISprite.hpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
   </ItemGroup>
@@ -260,7 +263,7 @@
     <ClCompile Include="Picker.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="TextPanel.cpp">
+    <ClCompile Include="Panel.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
@@ -270,6 +273,9 @@
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
     <ClCompile Include="UISprite.cpp">
+      <Filter>GUI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
   </ItemGroup>

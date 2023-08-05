@@ -51,7 +51,8 @@
     <ClInclude Include="ListOfStates.hpp" />
     <ClInclude Include="LogoSplashScreen.hpp" />
     <ClInclude Include="Managers.hpp" />
-    <ClInclude Include="TextPanel.hpp" />
+    <ClInclude Include="PauseMenu.hpp" />
+    <ClInclude Include="Panel.hpp" />
     <ClInclude Include="Picker.hpp" />
     <ClInclude Include="SettingsMenu.hpp" />
     <ClInclude Include="Singleton.hpp" />
@@ -87,9 +88,10 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="LogoSplashScreen.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Picker.cpp" />
     <ClCompile Include="SettingsMenu.cpp" />
-    <ClCompile Include="TextPanel.cpp" />
+    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
