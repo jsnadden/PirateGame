@@ -3,22 +3,27 @@
 SettingsMenu::SettingsMenu()
 	: State()
 {
-	states = States::GetInstance();
+	SDL_Rect* view = graphics->ViewRect();
+	int centreX = view->w / 2;
+	int centreY = view->h / 2;
 	
-	elements["title"] = new UIText(Vector2D(400, 200), "SETTINGS", 36);
+	elements["title"] = new UIText(Vector2D(centreX, 120), "SETTINGS", 36);
 
-	elements["backbutton"] = new Button(Vector2D(80, 50), "BACK");
+	elements["backbutton"] = new Button(Vector2D(centreX - 200, 600), "BACK");
 
-	elements["wmpicker"] = new Picker(Vector2D(400, 320), "Window Mode");
+	elements["confirmbutton"] = new Button(Vector2D(centreX + 200, 600), "APPLY");
+	elements["confirmbutton"]->SetActive(false);
+
+	elements["wmpicker"] = new Picker(Vector2D(centreX, centreY), "Window Mode");
 	((Picker*)elements["wmpicker"])->AddOption("Windowed");
 	((Picker*)elements["wmpicker"])->AddOption("Fullscreen");
 	((Picker*)elements["wmpicker"])->SetIndex(graphics->IsFullscreen() ? 1 : 0);
+	((Picker*)elements["wmpicker"])->Confirm();
 
-
-	elements["fsrespicker"] = new Picker(Vector2D(400, 420), "Fullscreen resolution");
-	((Picker*)elements["fsrespicker"])->AddOption("option 1");
-	((Picker*)elements["fsrespicker"])->AddOption("option 2");
-	((Picker*)elements["fsrespicker"])->AddOption("option 3");
+	elements["anothersetting"] = new Picker(Vector2D(centreX, centreY + 100), "Another setting");
+	((Picker*)elements["anothersetting"])->AddOption("option 1");
+	((Picker*)elements["anothersetting"])->AddOption("option 2");
+	((Picker*)elements["anothersetting"])->AddOption("option 3");
 
 	Init();
 }
@@ -33,7 +38,6 @@ SettingsMenu::~SettingsMenu()
 {
 	Exit();
 
-	states = nullptr;
 	graphics = nullptr;
 	timer = nullptr;
 	input = nullptr;
@@ -58,9 +62,26 @@ void SettingsMenu::EarlyUpdate()
 
 void SettingsMenu::Update()
 {
+	// once I have other settings to change, this logic will need to be reworked
+	if (((Picker*)elements["wmpicker"])->HasChanged())
+	{
+		elements["confirmbutton"]->SetActive(true);
+
+		if (((Button*)elements["confirmbutton"])->IsActivated())
+		{
+			graphics->SetFullScreen(((Picker*)elements["wmpicker"])->Index());
+			((Picker*)elements["wmpicker"])->Confirm();
+		}
+	}
+	else
+	{
+		elements["confirmbutton"]->SetActive(false);
+	}
+	
+
 	for (auto& e : elements)
 	{
-		e.second->Update();
+		if (e.second->IsActive()) e.second->Update();
 	}
 
 	if (((Button*)elements["backbutton"])->IsActivated())
@@ -81,6 +102,6 @@ void SettingsMenu::Render()
 {
 	for (auto& e : elements)
 	{
-		e.second->Draw();
+		if (e.second->IsVisible()) e.second->Draw();
 	}
 }

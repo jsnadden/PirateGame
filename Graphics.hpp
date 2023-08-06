@@ -35,8 +35,8 @@ private:
 public:
 
 	// TODO: should read these in from a config
-	static const int SCREEN_WIDTH = 800;
-	static const int SCREEN_HEIGHT = 640;
+	static const int DEF_WINDOW_WIDTH = 1280;
+	static const int DEF_WINDOW_HEIGHT = 720;
 
 	static Graphics* GetInstance();
 	static void Release();
@@ -58,8 +58,11 @@ public:
 	void FillWindow(SDL_Color colour);
 
 	SDL_Rect* ViewRect();
+	int CentreX();
+	int CentreY();
 
 	void ToggleFullscreen();
+	void SetFullScreen(bool fs);
 	void HandleWindowEvent(SDL_Event& e);
 
 	bool IsFullscreen();

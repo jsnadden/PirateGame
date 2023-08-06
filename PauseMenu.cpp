@@ -2,21 +2,15 @@
 
 PauseMenu::PauseMenu()
 {
-
-    backPanel = new Panel(Vector2D(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2), "assets/GUI/pausepanel.png", 2);
-    title = new UIText(Vector2D(400.0f, 200.0f), "PAUSED", 36);
-
-    buttons["settings"] = new Button(Vector2D(400.0f, 350.0f), "SETTINGS");
-    //buttons["settings"]->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
-    //buttons["settings"]->SetTextColours(WHITE, LIGHT_GREY, BLACK);
-
-    buttons["quit"] = new Button(Vector2D(400.0f, 400.0f), "QUIT TO MAIN MENU");
-    //buttons["quit"]->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
-    //buttons["quit"]->SetTextColours(WHITE, LIGHT_GREY, BLACK);
-
-    buttons["endgame"] = new Button(Vector2D(400.0f, 450.0f), "QUIT TO DESKTOP");
-    //buttons["endgame"]->SetButtonColours(TRANSPARENT, TRANSPARENT, TRANSPARENT);
-    //buttons["endgame"]->SetTextColours(WHITE, LIGHT_GREY, BLACK);
+    SDL_Rect* view = graphics->ViewRect();
+    int centreX = view->w / 2;
+    int centreY = view->h / 2;
+    backPanel = new Panel(Vector2D(centreX, centreY), "assets/GUI/pausepanel.png", 2);
+    title = new UIText(Vector2D(centreX, centreY - 120), "PAUSED", 36);
+    buttons["save"] = new Button(Vector2D(centreX, centreY -20), "SAVE GAME");
+    buttons["settings"] = new Button(Vector2D(centreX, centreY + 30), "SETTINGS");
+    buttons["quit"] = new Button(Vector2D(centreX, centreY + 80), "QUIT TO MAIN MENU");
+    buttons["endgame"] = new Button(Vector2D(centreX, centreY + 130), "QUIT TO DESKTOP");
 
 }
 

@@ -82,6 +82,16 @@ void Picker::SetIndex(int i)
     index = i;
 }
 
+bool Picker::HasChanged()
+{
+    return index != lastindex;
+}
+
+void Picker::Confirm()
+{
+    lastindex = index;
+}
+
 size_t Picker::OptionCount()
 {
     return options.size();

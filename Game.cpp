@@ -21,7 +21,7 @@ Game::Game()
     states = States::GetInstance();
 
     camera = Camera::GetInstance();
-    camera->SetDims(Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT);
+    camera->SetDims(Graphics::DEF_WINDOW_WIDTH, Graphics::DEF_WINDOW_HEIGHT);
 
     InitialState();
 
@@ -114,13 +114,17 @@ void Game::Run()
     {
         timer->Reset();
 
-        EarlyUpdate();
+        if (!graphics->IsMinimised())
+        {
+            EarlyUpdate();
 
-        Update();
+            Update();
+
+            LateUpdate();
+
+            Render();
+        }
         
-        LateUpdate();
-
-        Render();
 
         while (SDL_PollEvent(&event) != 0)
         {
@@ -137,11 +141,11 @@ void Game::Run()
 
         // CRUDE FRAME RATE LIMITER
         timer->Update();
+        //std::cout << timer->DeltaTime() << std::endl;
         if (timer->DeltaTime() < FRAME_SECS)
         {
             SDL_Delay(1000.f * (FRAME_SECS - timer->DeltaTime()));
         }
-
         timer->Update();
         //std::cout << timer->DeltaTime() << std::endl;
     }

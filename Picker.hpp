@@ -9,12 +9,11 @@ class Picker :
 {
 private:
 
-
-
     Vector2D centre;
     int scale;
 
     int index = 0;
+    int lastindex = 0;
 
     std::vector<UIText*> options;
     UIText* title;
@@ -36,6 +35,9 @@ public:
 
     int Index();
     void SetIndex(int i);
+
+    bool HasChanged();
+    void Confirm();
 
     size_t OptionCount();
     UIText* CurrentOption();

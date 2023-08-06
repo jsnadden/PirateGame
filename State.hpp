@@ -21,7 +21,6 @@ protected:
 
 	std::map<std::string, UIElement*> elements;
 
-
 public:
 
 	State();

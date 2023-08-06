@@ -55,7 +55,7 @@ bool Graphics::Init()
 	}
 
 	// Create window, error check
-	window = SDL_CreateWindow("-", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("-", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DEF_WINDOW_WIDTH, DEF_WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -193,10 +193,7 @@ void Graphics::WindowTitle(const char* newTitle)
 
 void Graphics::SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	backgroundColour.r = r;
-	backgroundColour.g = g;
-	backgroundColour.b = b;
-	backgroundColour.a = a;
+	backgroundColour = { r, g, b, a };
 }
 
 void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
@@ -222,7 +219,13 @@ void Graphics::ToggleFullscreen()
 	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
 	fullscreen = !(SDL_GetWindowFlags(window) & fullscreenFlag);
 	SDL_SetWindowFullscreen(window, fullscreen ? fullscreenFlag : 0);
-	SDL_ShowCursor(!fullscreen);
+}
+
+void Graphics::SetFullScreen(bool fs)
+{
+	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+	fullscreen = fs;
+	SDL_SetWindowFullscreen(window, fullscreen ? fullscreenFlag : 0);
 }
 
 void Graphics::HandleWindowEvent(SDL_Event& e)

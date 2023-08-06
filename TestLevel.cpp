@@ -157,14 +157,14 @@ void TestLevel::Render()
 
 void TestLevel::InitMap()
 {
-    map0 = new Map("assets/tiles/terrain.png", 32, 2, &manager);
+    map0 = new Map("assets/tiles/terrain.png", 32, 3, &manager);
     map0->LoadMap("assets/maps/map0.txt", 16, 16, colliderGroup, mapGroup);
 }
 
 void TestLevel::InitPlayer()
 {
     int playerSize = 32;
-    int playerScale = 2;
+    int playerScale = 3;
     int offset = (playerSize * playerScale) / 2;
     player = &manager.addEntity();
     player->addComponent<TransformComponent>(400 - offset, 320 - offset, playerSize, playerSize, playerScale);

@@ -13,6 +13,8 @@ private:
     TransformComponent* transform;
     SpriteComponent* sprite;
 
+    float scale;
+
 public:
 
     ControlComponent()
@@ -32,6 +34,7 @@ public:
 	void init() override
 	{
 		transform = &entity->getComponent<TransformComponent>();
+        scale = transform->GetScale();
 		sprite = &entity->getComponent<SpriteComponent>();
 	}
 
@@ -72,8 +75,8 @@ public:
 
         vel.Normalise();
 
-        // TODO this speed should be set by other systems!!
-        vel *= 150.f;
+        // TODO should be able to set this speed externally
+        vel *= 75.f * scale;
         transform->SetVelocity(vel);
 	}
 

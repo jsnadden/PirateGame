@@ -116,10 +116,15 @@ void Button::Draw()
         {
             currentText = downTextTexture;
         }
+
         graphics->DrawTexture(currentText, NULL, &textRect);
         currentText = nullptr;
     }
-          
+         
+    if (!active)
+    {
+        graphics->DrawRectangle({ 0, 0, 0, 125 }, &buttonRect);
+    }
 }
 
 bool Button::IsDown()

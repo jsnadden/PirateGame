@@ -10,7 +10,7 @@ class SettingsMenu :
 {
 private:
 
-    States* states;
+
 
 public:
     SettingsMenu();

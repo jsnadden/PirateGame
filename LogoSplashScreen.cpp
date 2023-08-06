@@ -8,9 +8,13 @@ LogoSplashScreen::LogoSplashScreen()
 	elapsedTime = 0.0f;
 	alpha = 0;
 
-	elements["title1"] = new UIText(Vector2D(400, 170), "JumpRope", 36);
-	elements["title2"] = new UIText(Vector2D(400, 470), "Games", 36);
-	elements["skippinggirl"] = new UISprite(Vector2D(400, 320), "assets/sprites/jumprope.png", 5, 32, 32, true, 4, 0.09f);
+	SDL_Rect* view = graphics->ViewRect();
+	int centreX = view->w / 2;
+	int centreY = view->h / 2;
+
+	elements["title1"] = new UIText(Vector2D(centreX, centreY - 150), "JumpRope", 48);
+	elements["title2"] = new UIText(Vector2D(centreX, centreY + 150), "Games", 48);
+	elements["skippinggirl"] = new UISprite(Vector2D(centreX, centreY), "assets/sprites/jumprope.png", 6, 32, 32, true, 4, 0.09f);
 
 	Init();
 }

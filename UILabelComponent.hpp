@@ -48,14 +48,14 @@ public:
 	{
 		int height;
 		SDL_QueryTexture(texture, NULL, NULL, NULL, &height);
-		location.y = (Graphics::SCREEN_HEIGHT - height) / 2;
+		location.y = (Graphics::DEF_WINDOW_HEIGHT - height) / 2;
 	}
 
 	void CentreH()
 	{
 		int width;
 		SDL_QueryTexture(texture, NULL, NULL, &width, NULL);
-		location.x = (Graphics::SCREEN_WIDTH - width) / 2;
+		location.x = (Graphics::DEF_WINDOW_WIDTH - width) / 2;
 	}
 
 	void draw() override

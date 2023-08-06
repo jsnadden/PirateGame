@@ -4,13 +4,16 @@ MainMenu::MainMenu()
 	: State()
 {
 	states = States::GetInstance();
-	
-	elements["title"] = new UIText(Vector2D(400, 200), "GAME LOGO HERE", 36);
 
-	elements["start"] = new Button(Vector2D(400, 350), "NEW GAME");
-	elements["load"] = new Button(Vector2D(400, 400), "LOAD GAME");
-	elements["settings"] = new Button(Vector2D(400, 450), "SETTINGS");
-	elements["quit"] = new Button(Vector2D(400.0f, 500.0f), "QUIT GAME");
+	SDL_Rect* view = graphics->ViewRect();
+	int centreX = view->w / 2;
+	int centreY = view->h / 2;
+	
+	elements["logo_placeholder"] = new UIText(Vector2D(centreX, centreY - 150), "GAME LOGO HERE", 36);
+	elements["start"] = new Button(Vector2D(centreX, centreY + 30), "NEW GAME");
+	elements["load"] = new Button(Vector2D(centreX, centreY + 90), "LOAD GAME");
+	elements["settings"] = new Button(Vector2D(centreX, centreY + 150), "SETTINGS");
+	elements["quit"] = new Button(Vector2D(centreX, centreY + 210), "QUIT GAME");
 
 	Init();
 }
@@ -50,9 +53,14 @@ void MainMenu::EarlyUpdate()
 		endGame = true;
 	}
 
-	if (input->KeyPressed(SDL_SCANCODE_SPACE))
+	if (input->KeyPressed(SDL_SCANCODE_BACKSPACE))
 	{
 		Exit();
+	}
+
+	if (input->KeyPressed(SDL_SCANCODE_SPACE))
+	{
+		std::cout << graphics->ViewRect()->w << " x " << graphics->ViewRect()->h << std::endl;
 	}
 }
 
@@ -66,6 +74,11 @@ void MainMenu::Update()
 	if (((Button*)elements["start"])->IsActivated())
 	{
 		states->StartState<TestLevel>();
+	}
+
+	if (((Button*)elements["load"])->IsActivated())
+	{
+		graphics->ToggleFullscreen();
 	}
 
 	if (((Button*)elements["settings"])->IsActivated())
