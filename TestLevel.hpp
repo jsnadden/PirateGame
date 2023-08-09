@@ -6,6 +6,7 @@
 #include "Collision.hpp"
 #include "ListOfStates.hpp"
 #include "PauseMenu.hpp"
+#include <entt.hpp>
 
 class TestLevel :
     public State

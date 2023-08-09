@@ -81,11 +81,11 @@ void Button::Draw()
     if (hasImage)
     {
         srcRect.y = 0;
-        if (hover)
+        if (active && hover)
         {
             srcRect.y = srcRect.h;
         }
-        if (down)
+        if (active && down)
         {
             srcRect.y = 2 * srcRect.h;
         }
@@ -94,11 +94,11 @@ void Button::Draw()
     else
     {
         currentColour = defaultButtonColour;
-        if (hover)
+        if (active && hover)
         {
             currentColour = hoverButtonColour;
         }
-        if (down)
+        if (active && down)
         {
             currentColour = downButtonColour;
         }
@@ -108,11 +108,11 @@ void Button::Draw()
     if (hasText)
     {
         currentText = defaultTextTexture;
-        if (hover)
+        if (active && hover)
         {
             currentText = hoverTextTexture;
         }
-        if (down)
+        if (active && down)
         {
             currentText = downTextTexture;
         }
