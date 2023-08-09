@@ -12,13 +12,15 @@ Game::Game()
         quit = true;
     }
 
-    graphics->WindowTitle("Untitled Pirate Game");
+    graphics->WindowTitle(" ");
 
     assets = Assets::GetInstance();
     input = Input::GetInstance();
     audio = Audio::GetInstance();
     timer = Timer::GetInstance();
     states = States::GetInstance();
+
+    LoadSettings("config/settings.txt");
 
     camera = Camera::GetInstance();
     camera->SetDims(Graphics::DEF_WINDOW_WIDTH, Graphics::DEF_WINDOW_HEIGHT);
@@ -71,6 +73,24 @@ void Game::InitialState()
 {
     // For testing/debugging purposes, the following lets me start in any state I'd like
     states->StartState<LogoSplashScreen>();
+}
+
+void Game::LoadSettings(std::string iniPath)
+{
+    std::ifstream settings(iniPath.c_str());
+
+    bool fullscreen = false;
+
+    if (settings.is_open())
+    {
+        settings >> fullscreen;
+    }
+    else printf("Config file %s could not be loaded!\n", iniPath.c_str());
+
+    settings.close();
+
+    graphics->SetFullScreen(fullscreen);
+
 }
 
 void Game::EarlyUpdate()

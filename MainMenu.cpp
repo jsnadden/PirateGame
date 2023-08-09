@@ -57,11 +57,6 @@ void MainMenu::EarlyUpdate()
 	{
 		Exit();
 	}
-
-	if (input->KeyPressed(SDL_SCANCODE_SPACE))
-	{
-		std::cout << graphics->ViewRect()->w << " x " << graphics->ViewRect()->h << std::endl;
-	}
 }
 
 void MainMenu::Update()

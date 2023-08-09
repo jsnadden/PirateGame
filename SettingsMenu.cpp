@@ -71,6 +71,7 @@ void SettingsMenu::Update()
 		{
 			graphics->SetFullScreen(((Picker*)elements["wmpicker"])->Index());
 			((Picker*)elements["wmpicker"])->Confirm();
+			SaveSettings();
 		}
 	}
 	else
@@ -104,4 +105,17 @@ void SettingsMenu::Render()
 	{
 		if (e.second->IsVisible()) e.second->Draw();
 	}
+}
+
+void SettingsMenu::SaveSettings()
+{
+	std::ofstream settings("config/settings.txt");
+
+	if (settings.is_open())
+	{
+		settings << graphics->IsFullscreen();
+	}
+	else printf("Config file settings.txt could not be loaded!\n");
+
+	settings.close();
 }

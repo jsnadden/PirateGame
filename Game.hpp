@@ -31,6 +31,8 @@ private:
 	
 	void InitialState();
 
+	void LoadSettings(std::string iniPath);
+
 	void EarlyUpdate();
 	void Update();
 	void LateUpdate();

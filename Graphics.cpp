@@ -8,10 +8,7 @@ Graphics::Graphics()
 	renderer = nullptr;
 	initialised = Init();
 
-	backgroundColour.r = 0;
-	backgroundColour.g = 0;
-	backgroundColour.b = 0;
-	backgroundColour.a = 0;
+	backgroundColour = { 0, 0, 0, 0 };
 }
 
 Graphics::~Graphics()
@@ -224,8 +221,11 @@ void Graphics::ToggleFullscreen()
 void Graphics::SetFullScreen(bool fs)
 {
 	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+
+	if (fullscreen && !fs) SDL_SetWindowFullscreen(window, 0);
+	if (!fullscreen && fs) SDL_SetWindowFullscreen(window, fullscreenFlag);
+
 	fullscreen = fs;
-	SDL_SetWindowFullscreen(window, fullscreen ? fullscreenFlag : 0);
 }
 
 void Graphics::HandleWindowEvent(SDL_Event& e)

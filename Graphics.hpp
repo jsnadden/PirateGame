@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <stdio.h>
 #include <string>
 #include <SDL.h>
@@ -27,6 +28,7 @@ private:
 	bool Init();
 
 	bool fullscreen = false;
+
 	bool minimised = false;
 	bool mouseFocus = true;
 	bool keyboardFocus = true;
@@ -58,8 +60,6 @@ public:
 	void FillWindow(SDL_Color colour);
 
 	SDL_Rect* ViewRect();
-	int CentreX();
-	int CentreY();
 
 	void ToggleFullscreen();
 	void SetFullScreen(bool fs);
