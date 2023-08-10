@@ -119,19 +119,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.ini" />
-    <None Include="libFLAC-8.dll" />
-    <None Include="libmodplug-1.dll" />
-    <None Include="libmpg123-0.dll" />
-    <None Include="libogg-0.dll" />
-    <None Include="libopus-0.dll" />
-    <None Include="libopusfile-0.dll" />
-    <None Include="libvorbis-0.dll" />
-    <None Include="libvorbisfile-3.dll" />
-    <None Include="SDL2.dll" />
-    <None Include="SDL2_image.dll" />
-    <None Include="SDL2_mixer.dll" />
-    <None Include="SDL2_ttf.dll" />
-    <None Include="SDL_mixer.dll" />
+    <None Include="x64\Debug\libFLAC-8.dll" />
+    <None Include="x64\Debug\libmodplug-1.dll" />
+    <None Include="x64\Debug\libmpg123-0.dll" />
+    <None Include="x64\Debug\libogg-0.dll" />
+    <None Include="x64\Debug\libopus-0.dll" />
+    <None Include="x64\Debug\libopusfile-0.dll" />
+    <None Include="x64\Debug\libvorbis-0.dll" />
+    <None Include="x64\Debug\libvorbisfile-3.dll" />
+    <None Include="x64\Debug\SDL2.dll" />
+    <None Include="x64\Debug\SDL2_image.dll" />
+    <None Include="x64\Debug\SDL2_mixer.dll" />
+    <None Include="x64\Debug\SDL2_ttf.dll" />
+    <None Include="x64\Debug\SDL_mixer.dll" />
     <None Include="src\SDL2.dll" />
     <None Include="src\SDL2_ttf.dll" />
   </ItemGroup>
@@ -190,6 +190,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\johns_shbfd3b\Documents\C++\ENTT;C:\Users\johns_shbfd3b\Documents\C++\SDL2_mixer-2.0.0\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\include;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\johns_shbfd3b\Documents\C++\SDL2_mixer-2.0.0\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2_image-2.6.3\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2_ttf-2.20.2\lib\x64;C:\Users\johns_shbfd3b\Documents\C++\SDL2-2.28.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
