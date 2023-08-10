@@ -111,198 +111,198 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Assets.hpp">
+    <ClInclude Include="src\Managers\Assets.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.hpp">
+    <ClInclude Include="src\Managers\Audio.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.hpp">
+    <ClInclude Include="src\Managers\Graphics.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Input.hpp">
+    <ClInclude Include="src\Managers\Input.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.hpp">
+    <ClInclude Include="src\Managers\Timer.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.hpp">
+    <ClInclude Include="src\Core\Game.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.hpp">
+    <ClInclude Include="src\ECS\ECS.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Components.hpp">
+    <ClInclude Include="src\ECS\Components.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.hpp">
+    <ClInclude Include="src\Managers\Camera.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
+    <ClInclude Include="src\States\State.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.hpp">
+    <ClInclude Include="src\States\TestLevel.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="Map.hpp">
+    <ClInclude Include="src\TileMaps\Map.hpp">
       <Filter>TileMaps</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.hpp">
+    <ClInclude Include="src\States\MainMenu.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.hpp">
+    <ClInclude Include="src\Physics\Collision.hpp">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.hpp">
+    <ClInclude Include="src\Structs\Vector2D.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.hpp">
+    <ClInclude Include="src\Structs\Animation.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="States.hpp">
+    <ClInclude Include="src\Managers\States.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Managers.hpp">
+    <ClInclude Include="src\Managers\Managers.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="DynRect.hpp">
+    <ClInclude Include="src\Structs\DynRect.hpp">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsMenu.hpp">
+    <ClInclude Include="src\States\SettingsMenu.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.hpp">
+    <ClInclude Include="src\Managers\GUI.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Uncopyable.hpp">
+    <ClInclude Include="src\Abstraction\Uncopyable.hpp">
       <Filter>Abstract Class Patterns</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderComponent.hpp">
+    <ClInclude Include="src\ECS\ColliderComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ControlComponent.hpp">
+    <ClInclude Include="src\ECS\ControlComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileComponent.hpp">
+    <ClInclude Include="src\ECS\ProjectileComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteComponent.hpp">
+    <ClInclude Include="src\ECS\SpriteComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TileComponent.hpp">
+    <ClInclude Include="src\ECS\TileComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TransformComponent.hpp">
+    <ClInclude Include="src\ECS\TransformComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="UILabelComponent.hpp">
+    <ClInclude Include="src\ECS\UILabelComponent.hpp">
       <Filter>ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.hpp">
+    <ClInclude Include="src\Abstraction\Singleton.hpp">
       <Filter>Abstract Class Patterns</Filter>
     </ClInclude>
-    <ClInclude Include="LogoSplashScreen.hpp">
+    <ClInclude Include="src\States\LogoSplashScreen.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="ListOfStates.hpp">
+    <ClInclude Include="src\States\ListOfStates.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="Button.hpp">
+    <ClInclude Include="src\GUI\Button.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="Picker.hpp">
+    <ClInclude Include="src\GUI\Picker.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="Panel.hpp">
+    <ClInclude Include="src\GUI\Panel.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="UIElement.hpp">
+    <ClInclude Include="src\GUI\UIElement.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="UIText.hpp">
+    <ClInclude Include="src\GUI\UIText.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="UISprite.hpp">
+    <ClInclude Include="src\GUI\UISprite.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.hpp">
+    <ClInclude Include="src\GUI\PauseMenu.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets.cpp">
+    <ClCompile Include="src\Managers\Assets.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
+    <ClCompile Include="src\Managers\Audio.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
+    <ClCompile Include="src\Managers\Graphics.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="src\Managers\Input.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
+    <ClCompile Include="src\Managers\Timer.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="src\Core\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\Core\main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ECS.cpp">
+    <ClCompile Include="src\ECS\ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="src\Managers\Camera.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
+    <ClCompile Include="src\States\State.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
+    <ClCompile Include="src\States\TestLevel.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="src\TileMaps\Map.cpp">
       <Filter>TileMaps</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
+    <ClCompile Include="src\States\MainMenu.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="src\Physics\Collision.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="States.cpp">
+    <ClCompile Include="src\Managers\States.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsMenu.cpp">
+    <ClCompile Include="src\States\SettingsMenu.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
+    <ClCompile Include="src\Managers\GUI.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="LogoSplashScreen.cpp">
+    <ClCompile Include="src\States\LogoSplashScreen.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="src\GUI\Button.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="Picker.cpp">
+    <ClCompile Include="src\GUI\Picker.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="Panel.cpp">
+    <ClCompile Include="src\GUI\Panel.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
+    <ClCompile Include="src\GUI\UIElement.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="UIText.cpp">
+    <ClCompile Include="src\GUI\UIText.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="UISprite.cpp">
+    <ClCompile Include="src\GUI\UISprite.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenu.cpp">
+    <ClCompile Include="src\GUI\PauseMenu.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
   </ItemGroup>

@@ -50,72 +50,72 @@
     <Text Include="assets\maps\map0.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.hpp" />
-    <ClInclude Include="Assets.hpp" />
-    <ClInclude Include="Audio.hpp" />
-    <ClInclude Include="Button.hpp" />
-    <ClInclude Include="DynRect.hpp" />
-    <ClInclude Include="GUI.hpp" />
-    <ClInclude Include="ListOfStates.hpp" />
-    <ClInclude Include="LogoSplashScreen.hpp" />
-    <ClInclude Include="Managers.hpp" />
-    <ClInclude Include="PauseMenu.hpp" />
-    <ClInclude Include="Panel.hpp" />
-    <ClInclude Include="Picker.hpp" />
-    <ClInclude Include="SettingsMenu.hpp" />
-    <ClInclude Include="Singleton.hpp" />
-    <ClInclude Include="UIElement.hpp" />
-    <ClInclude Include="Camera.hpp" />
-    <ClInclude Include="ColliderComponent.hpp" />
-    <ClInclude Include="Collision.hpp" />
-    <ClInclude Include="Components.hpp" />
-    <ClInclude Include="ControlComponent.hpp" />
-    <ClInclude Include="ECS.hpp" />
-    <ClInclude Include="Game.hpp" />
-    <ClInclude Include="MainMenu.hpp" />
-    <ClInclude Include="States.hpp" />
-    <ClInclude Include="TestLevel.hpp" />
-    <ClInclude Include="Graphics.hpp" />
-    <ClInclude Include="Input.hpp" />
-    <ClInclude Include="Map.hpp" />
-    <ClInclude Include="ProjectileComponent.hpp" />
-    <ClInclude Include="SpriteComponent.hpp" />
-    <ClInclude Include="State.hpp" />
-    <ClInclude Include="TileComponent.hpp" />
-    <ClInclude Include="Timer.hpp" />
-    <ClInclude Include="TransformComponent.hpp" />
-    <ClInclude Include="UILabelComponent.hpp" />
-    <ClInclude Include="UISprite.hpp" />
-    <ClInclude Include="UIText.hpp" />
-    <ClInclude Include="Uncopyable.hpp" />
-    <ClInclude Include="Vector2D.hpp" />
+    <ClInclude Include="src\Structs\Animation.hpp" />
+    <ClInclude Include="src\Managers\Assets.hpp" />
+    <ClInclude Include="src\Managers\Audio.hpp" />
+    <ClInclude Include="src\GUI\Button.hpp" />
+    <ClInclude Include="src\Structs\DynRect.hpp" />
+    <ClInclude Include="src\Managers\GUI.hpp" />
+    <ClInclude Include="src\States\ListOfStates.hpp" />
+    <ClInclude Include="src\States\LogoSplashScreen.hpp" />
+    <ClInclude Include="src\Managers\Managers.hpp" />
+    <ClInclude Include="src\GUI\PauseMenu.hpp" />
+    <ClInclude Include="src\GUI\Panel.hpp" />
+    <ClInclude Include="src\GUI\Picker.hpp" />
+    <ClInclude Include="src\States\SettingsMenu.hpp" />
+    <ClInclude Include="src\Abstraction\Singleton.hpp" />
+    <ClInclude Include="src\GUI\UIElement.hpp" />
+    <ClInclude Include="src\Managers\Camera.hpp" />
+    <ClInclude Include="src\ECS\ColliderComponent.hpp" />
+    <ClInclude Include="src\Physics\Collision.hpp" />
+    <ClInclude Include="src\ECS\Components.hpp" />
+    <ClInclude Include="src\ECS\ControlComponent.hpp" />
+    <ClInclude Include="src\ECS\ECS.hpp" />
+    <ClInclude Include="src\Core\Game.hpp" />
+    <ClInclude Include="src\States\MainMenu.hpp" />
+    <ClInclude Include="src\Managers\States.hpp" />
+    <ClInclude Include="src\States\TestLevel.hpp" />
+    <ClInclude Include="src\Managers\Graphics.hpp" />
+    <ClInclude Include="src\Managers\Input.hpp" />
+    <ClInclude Include="src\TileMaps\Map.hpp" />
+    <ClInclude Include="src\ECS\ProjectileComponent.hpp" />
+    <ClInclude Include="src\ECS\SpriteComponent.hpp" />
+    <ClInclude Include="src\States\State.hpp" />
+    <ClInclude Include="src\ECS\TileComponent.hpp" />
+    <ClInclude Include="src\Managers\Timer.hpp" />
+    <ClInclude Include="src\ECS\TransformComponent.hpp" />
+    <ClInclude Include="src\ECS\UILabelComponent.hpp" />
+    <ClInclude Include="src\GUI\UISprite.hpp" />
+    <ClInclude Include="src\GUI\UIText.hpp" />
+    <ClInclude Include="src\Abstraction\Uncopyable.hpp" />
+    <ClInclude Include="src\Structs\Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets.cpp" />
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="LogoSplashScreen.cpp" />
-    <ClCompile Include="PauseMenu.cpp" />
-    <ClCompile Include="Picker.cpp" />
-    <ClCompile Include="SettingsMenu.cpp" />
-    <ClCompile Include="Panel.cpp" />
-    <ClCompile Include="UIElement.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="ECS.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="States.cpp" />
-    <ClCompile Include="TestLevel.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="UISprite.cpp" />
-    <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="src\Managers\Assets.cpp" />
+    <ClCompile Include="src\Managers\Audio.cpp" />
+    <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\Managers\GUI.cpp" />
+    <ClCompile Include="src\States\LogoSplashScreen.cpp" />
+    <ClCompile Include="src\GUI\PauseMenu.cpp" />
+    <ClCompile Include="src\GUI\Picker.cpp" />
+    <ClCompile Include="src\States\SettingsMenu.cpp" />
+    <ClCompile Include="src\GUI\Panel.cpp" />
+    <ClCompile Include="src\GUI\UIElement.cpp" />
+    <ClCompile Include="src\Managers\Camera.cpp" />
+    <ClCompile Include="src\Physics\Collision.cpp" />
+    <ClCompile Include="src\ECS\ECS.cpp" />
+    <ClCompile Include="src\Core\Game.cpp" />
+    <ClCompile Include="src\States\MainMenu.cpp" />
+    <ClCompile Include="src\Managers\States.cpp" />
+    <ClCompile Include="src\States\TestLevel.cpp" />
+    <ClCompile Include="src\Managers\Graphics.cpp" />
+    <ClCompile Include="src\Managers\Input.cpp" />
+    <ClCompile Include="src\Core\main.cpp" />
+    <ClCompile Include="src\TileMaps\Map.cpp" />
+    <ClCompile Include="src\States\State.cpp" />
+    <ClCompile Include="src\Managers\Timer.cpp" />
+    <ClCompile Include="src\GUI\UISprite.cpp" />
+    <ClCompile Include="src\GUI\UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.ini" />
@@ -226,6 +226,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\johns_shbfd3b\Documents\C++\PirateGame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

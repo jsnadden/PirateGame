@@ -1,0 +1,9 @@
+#pragma once
+#include "src/ECS/ECS.hpp"
+#include "src/ECS/TransformComponent.hpp"
+#include "src/ECS/TileComponent.hpp"
+#include "src/ECS/SpriteComponent.hpp"
+#include "src/ECS/ControlComponent.hpp"
+#include "src/ECS/ColliderComponent.hpp"
+#include "src/ECS/UILabelComponent.hpp"
+#include "src/ECS/ProjectileComponent.hpp"
