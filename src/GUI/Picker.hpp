@@ -17,7 +17,7 @@ private:
 
     std::vector<UIText*> options;
     UIText* title;
-    int fontSize = 16;
+    int fontSize = 24;
 
     Panel* panel = nullptr;
 

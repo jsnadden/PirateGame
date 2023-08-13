@@ -27,8 +27,8 @@ private:
     SDL_Rect textRect;
 
     std::string text = " ";
-    std::string fontPath = "assets/fonts/arcade.ttf";
-    int fontSize = 18;
+    std::string fontPath = "assets/fonts/MinimalPixelFontL.ttf";
+    int fontSize = 24;
 
     SDL_Color defaultTextColour{ 0xff, 0xff, 0xff, 0xff };
     SDL_Color hoverTextColour{ 0xff, 0xff, 0xff, 0xff };

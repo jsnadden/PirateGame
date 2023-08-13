@@ -168,7 +168,7 @@ void TestLevel::InitPlayer()
     int offset = (playerSize * playerScale) / 2;
     player = &manager.addEntity();
     player->addComponent<TransformComponent>(400 - offset, 320 - offset, playerSize, playerSize, playerScale);
-    player->addComponent<SpriteComponent>("assets/sprites/ship.png", true, SpriteComponent::loop);
+    player->addComponent<SpriteComponent>("assets/sprites/ship2.png", true, SpriteComponent::loop);
     player->getComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
     player->getComponent<SpriteComponent>().AddAnimation("Sail", 1, 3, 10.0f);
     player->getComponent<SpriteComponent>().Play("Idle");

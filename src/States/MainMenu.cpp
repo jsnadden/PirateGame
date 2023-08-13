@@ -9,7 +9,7 @@ MainMenu::MainMenu()
 	int centreX = view->w / 2;
 	int centreY = view->h / 2;
 	
-	elements["logo_placeholder"] = new UIText(Vector2D(centreX, centreY - 150), "GAME LOGO HERE", 36);
+	elements["logo_placeholder"] = new UIText(Vector2D(centreX, centreY - 150), "GAME LOGO HERE", 48);
 	elements["start"] = new Button(Vector2D(centreX, centreY + 30), "NEW GAME");
 	elements["load"] = new Button(Vector2D(centreX, centreY + 90), "LOAD GAME");
 	elements["settings"] = new Button(Vector2D(centreX, centreY + 150), "SETTINGS");
