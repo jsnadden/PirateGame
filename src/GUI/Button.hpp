@@ -1,6 +1,6 @@
 #pragma once
 #include "src/GUI/UIElement.hpp"
-#include "src/Physics/Collision.hpp"
+#include "src/Geometry/Collision.hpp"
 
 class Button :
     public UIElement
@@ -27,8 +27,8 @@ private:
     SDL_Rect textRect;
 
     std::string text = " ";
-    std::string fontPath = "assets/fonts/MinimalPixelFontL.ttf";
-    int fontSize = 24;
+    std::string fontPath = "assets/fonts/arcade.ttf";
+    int fontSize = 18;
 
     SDL_Color defaultTextColour{ 0xff, 0xff, 0xff, 0xff };
     SDL_Color hoverTextColour{ 0xff, 0xff, 0xff, 0xff };

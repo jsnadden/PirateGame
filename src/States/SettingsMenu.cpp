@@ -7,7 +7,7 @@ SettingsMenu::SettingsMenu()
 	int centreX = view->w / 2;
 	int centreY = view->h / 2;
 	
-	elements["title"] = new UIText(Vector2D(centreX, 180), "SETTINGS", 48);
+	elements["title"] = new UIText(Vector2D(centreX, 180), "SETTINGS", 36);
 
 	elements["backbutton"] = new Button(Vector2D(centreX - 200, 600), "BACK");
 

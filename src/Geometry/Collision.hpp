@@ -1,7 +1,8 @@
 #pragma once
 #include <SDL.h>
 #include <limits>
-#include "src/ECS/Components.hpp"
+#include "src/Structs/DynRect.hpp"
+#include "src/Structs/Vector2D.hpp"
 
 struct Collision
 {
@@ -23,11 +24,5 @@ struct Collision
 	// Check collision for a ray and an axis-aligned rectangle, passback collision data
 	static bool RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection,
 		const DynRect& target, Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime);
-
-	// Check collision for two axis-aligned rectangular ColliderComponents, passback collision data
-	static bool SweptAABB(const DynRect& colliderA, const DynRect& colliderB, float dt,
-		Vector2D& contactPos, Vector2D& contactNormal, float& contactTime);
-
-	static bool ResolveSweptAABB(Entity* colliderA, Entity* colliderB, const float dt);
 
 };

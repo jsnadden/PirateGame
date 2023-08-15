@@ -50,6 +50,19 @@
     <Text Include="assets\maps\map0.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ECS\Components.hpp" />
+    <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\ControlComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\SpriteComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\VelocityComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\TagComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\TileComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\TransformComponent.hpp" />
+    <ClInclude Include="src\ECS\Entity.hpp" />
+    <ClInclude Include="src\ECS\Factory.hpp" />
+    <ClInclude Include="src\ECS\Systems\InputHandling.hpp" />
+    <ClInclude Include="src\ECS\Systems\Rendering.hpp" />
+    <ClInclude Include="src\ECS\Systems\Physics.hpp" />
     <ClInclude Include="src\Structs\Animation.hpp" />
     <ClInclude Include="src\Managers\Assets.hpp" />
     <ClInclude Include="src\Managers\Audio.hpp" />
@@ -66,11 +79,7 @@
     <ClInclude Include="src\Abstraction\Singleton.hpp" />
     <ClInclude Include="src\GUI\UIElement.hpp" />
     <ClInclude Include="src\Managers\Camera.hpp" />
-    <ClInclude Include="src\ECS\ColliderComponent.hpp" />
-    <ClInclude Include="src\Physics\Collision.hpp" />
-    <ClInclude Include="src\ECS\Components.hpp" />
-    <ClInclude Include="src\ECS\ControlComponent.hpp" />
-    <ClInclude Include="src\ECS\ECS.hpp" />
+    <ClInclude Include="src\Geometry\Collision.hpp" />
     <ClInclude Include="src\Core\Game.hpp" />
     <ClInclude Include="src\States\MainMenu.hpp" />
     <ClInclude Include="src\Managers\States.hpp" />
@@ -78,13 +87,8 @@
     <ClInclude Include="src\Managers\Graphics.hpp" />
     <ClInclude Include="src\Managers\Input.hpp" />
     <ClInclude Include="src\TileMaps\Map.hpp" />
-    <ClInclude Include="src\ECS\ProjectileComponent.hpp" />
-    <ClInclude Include="src\ECS\SpriteComponent.hpp" />
     <ClInclude Include="src\States\State.hpp" />
-    <ClInclude Include="src\ECS\TileComponent.hpp" />
     <ClInclude Include="src\Managers\Timer.hpp" />
-    <ClInclude Include="src\ECS\TransformComponent.hpp" />
-    <ClInclude Include="src\ECS\UILabelComponent.hpp" />
     <ClInclude Include="src\GUI\UISprite.hpp" />
     <ClInclude Include="src\GUI\UIText.hpp" />
     <ClInclude Include="src\Abstraction\Uncopyable.hpp" />
@@ -102,8 +106,7 @@
     <ClCompile Include="src\GUI\Panel.cpp" />
     <ClCompile Include="src\GUI\UIElement.cpp" />
     <ClCompile Include="src\Managers\Camera.cpp" />
-    <ClCompile Include="src\Physics\Collision.cpp" />
-    <ClCompile Include="src\ECS\ECS.cpp" />
+    <ClCompile Include="src\Geometry\Collision.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\States\MainMenu.cpp" />
     <ClCompile Include="src\Managers\States.cpp" />

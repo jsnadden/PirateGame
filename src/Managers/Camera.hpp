@@ -14,6 +14,9 @@ public:
 	int Width();
 	int Height();
 
+	void Zoom(float z);
+	float GetZoom();
+		
 	void Follow(Vector2D* pos);
 	void SetMapSize(int w, int h);
 	void SetDims(int w, int h);
@@ -27,9 +30,12 @@ private:
 
 	static Camera* instance;
 
-	//Map* map = nullptr;
 	Vector2D* centre;
+	float zoom = 1.0f;
+
 	SDL_Rect view;
+
+
 	int mapWidth;
 	int mapHeight;
 

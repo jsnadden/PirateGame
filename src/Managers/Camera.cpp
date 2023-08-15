@@ -49,6 +49,16 @@ int Camera::Height()
 	return view.h;
 }
 
+void Camera::Zoom(float z)
+{
+	zoom = z;
+}
+
+float Camera::GetZoom()
+{
+	return zoom;
+}
+
 void Camera::Follow(Vector2D* pos)
 {
 	centre = pos;
@@ -80,9 +90,10 @@ void Camera::Update()
 	view.x = centreX - (view.w / 2);
 	view.y = centreY - (view.h / 2);
 
-	if (view.x < 0) view.x = 0;
+	// This will limit the camera to the given "map dimensions"
+	/*if (view.x < 0) view.x = 0;
 	if (view.y < 0) view.y = 0;
 	if (view.x + view.w > mapWidth) view.x = mapWidth - view.w;
-	if (view.y + view.h > mapHeight) view.y = mapHeight - view.h;
+	if (view.y + view.h > mapHeight) view.y = mapHeight - view.h;*/
 
 }

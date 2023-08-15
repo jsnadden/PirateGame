@@ -1,10 +1,14 @@
 #pragma once
-#include <entt.hpp>
-#include "src/TileMaps/Map.hpp"
+#include "src/ECS/Entity.hpp"
 #include "src/ECS/Components.hpp"
+#include "src/ECS/Factory.hpp"
+#include "src/ECS/Systems/Physics.hpp"
+#include "src/ECS/Systems/Rendering.hpp"
+#include "src/ECS/Systems/InputHandling.hpp"
+#include "src/TileMaps/Map.hpp"
 #include "src/States/State.hpp"
 #include "src/Managers/States.hpp"
-#include "src/Physics/Collision.hpp"
+#include "src/Geometry/Collision.hpp"
 #include "src/States/ListOfStates.hpp"
 #include "src/GUI/PauseMenu.hpp"
 
@@ -16,9 +20,9 @@ private:
     Camera* camera;
     States* states;
 
-    ECSManager manager;
+    entt::registry enttReg;
 
-    Entity* player;
+    Entity player;
 
     Map* map0;
 
@@ -42,22 +46,5 @@ public:
     void InitMap();
     void InitPlayer();
     void InitGui();
-    void HandleCollision();
-
-    std::vector<Entity*>* tiles;
-    std::vector<Entity*>* players;
-    std::vector<Entity*>* enemies;
-    std::vector<Entity*>* colliders;
-    std::vector<Entity*>* projectiles;
-
-    enum groupLabels : std::size_t
-    {
-        mapGroup,
-        playerGroup,
-        enemyGroup,
-        colliderGroup,
-        projectileGroup
-    };
-
 };
 

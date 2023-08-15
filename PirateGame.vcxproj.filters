@@ -129,12 +129,6 @@
     <ClInclude Include="src\Core\Game.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\ECS.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Components.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="src\Managers\Camera.hpp">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -150,7 +144,7 @@
     <ClInclude Include="src\States\MainMenu.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="src\Physics\Collision.hpp">
+    <ClInclude Include="src\Geometry\Collision.hpp">
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Vector2D.hpp">
@@ -176,27 +170,6 @@
     </ClInclude>
     <ClInclude Include="src\Abstraction\Uncopyable.hpp">
       <Filter>Abstract Class Patterns</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\ColliderComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\ControlComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\ProjectileComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\SpriteComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\TileComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\TransformComponent.hpp">
-      <Filter>ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\UILabelComponent.hpp">
-      <Filter>ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Abstraction\Singleton.hpp">
       <Filter>Abstract Class Patterns</Filter>
@@ -228,6 +201,19 @@
     <ClInclude Include="src\GUI\PauseMenu.hpp">
       <Filter>GUI\UIElements</Filter>
     </ClInclude>
+    <ClInclude Include="src\ECS\Entity.hpp" />
+    <ClInclude Include="src\ECS\Components.hpp" />
+    <ClInclude Include="src\ECS\Components\TagComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\TransformComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\TileComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\VelocityComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\SpriteComponent.hpp" />
+    <ClInclude Include="src\ECS\Systems\Physics.hpp" />
+    <ClInclude Include="src\ECS\Factory.hpp" />
+    <ClInclude Include="src\ECS\Systems\Rendering.hpp" />
+    <ClInclude Include="src\ECS\Systems\InputHandling.hpp" />
+    <ClInclude Include="src\ECS\Components\ControlComponent.hpp" />
+    <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">
@@ -251,9 +237,6 @@
     <ClCompile Include="src\Core\main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\ECS.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
     <ClCompile Include="src\Managers\Camera.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -269,7 +252,7 @@
     <ClCompile Include="src\States\MainMenu.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="src\Physics\Collision.cpp">
+    <ClCompile Include="src\Geometry\Collision.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Managers\States.cpp">

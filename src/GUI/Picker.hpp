@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "src/GUI/UIElement.hpp"
 #include "src/GUI/Button.hpp"
 #include "src/GUI/UIText.hpp"
@@ -17,7 +18,7 @@ private:
 
     std::vector<UIText*> options;
     UIText* title;
-    int fontSize = 24;
+    int fontSize = 18;
 
     Panel* panel = nullptr;
 

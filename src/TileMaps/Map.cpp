@@ -1,21 +1,21 @@
 #include "src/TileMaps/Map.hpp"
 
-Map::Map(std::string path, int ts, int ms, ECSManager* man)
+Map::Map(std::string path, int ts, int ms, entt::registry* reg)
 {
-	texturePath = path;
+	tileSheetPath = path;
 	tileSize = ts;
 	mapScale = ms;
 	scaledSize = ts * ms;
 
 	camera = Camera::GetInstance();
 
-	manager = man;
+	enttReg = reg;
 }
 
 Map::~Map()
 {}
 
-void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Group tileGrp)
+void Map::LoadMap(std::string path, int sizeX, int sizeY)
 {
 	mapWidth = scaledSize * sizeX;
 	mapHeight = scaledSize * sizeY;
@@ -35,7 +35,10 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Gro
 			srcY = atoi(&c) * tileSize;
 			mapfile.get(c);
 			srcX = atoi(&c) * tileSize;
-			AddTile(srcX, srcY, x * scaledSize, y * scaledSize, tileGrp);
+
+			tileGrid[std::pair(x, y)] = enttReg->create();
+			AddTile(tileGrid[std::pair(x, y)], srcX, srcY, x * scaledSize, y * scaledSize);
+
 			mapfile.ignore();
 		}
 	}
@@ -50,11 +53,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Gro
 
 			if (c == '1')
 			{
-				auto& tileCollider(manager->addEntity());
-				tileCollider.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
-				//tileCollider.getComponent<ColliderComponent>().SetRelative(0.25f, 0.25f, 0.5f, 0.5f);
-				// TODO make this reference a group specific to the current state stateStack.top()
-				tileCollider.addGroup(colliderGrp);
+				enttReg->emplace<ColliderComponent>(tileGrid[std::pair(x, y)], 0, 0, tileSize, tileSize);
 			}
 
 			mapfile.ignore();
@@ -64,9 +63,9 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY, Group colliderGrp, Gro
 	mapfile.close();
 }
 
-void Map::AddTile(int srcX, int srcY, int xPos, int yPos, Group tileGrp)
+void Map::AddTile(entt::entity ent, int srcX, int srcY, int xPos, int yPos)
 {
-	auto& tile(manager->addEntity());
-	tile.addComponent<TileComponent>(texturePath, srcX, srcY, tileSize, Vector2D(xPos, yPos), mapScale);
-	tile.addGroup(tileGrp);
+	enttReg->emplace<TagComponent>(ent, "map_tile");
+	enttReg->emplace<TransformComponent>(ent, Vector2D(xPos, yPos), Vector2D(mapScale, mapScale));
+	enttReg->emplace<TileComponent>(ent, tileSheetPath, srcX, srcY, tileSize);
 }

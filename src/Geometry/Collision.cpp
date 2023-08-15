@@ -1,4 +1,4 @@
-#include "src/Physics/Collision.hpp"
+#include "src/Geometry/Collision.hpp"
 
 
 bool Collision::PointRect(const int x, const int y, const SDL_Rect rect)
@@ -69,42 +69,3 @@ Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime)
 	return true;
 }
 
-bool Collision::SweptAABB(const DynRect& colliderA, const DynRect& colliderB, float dt,
-	Vector2D& contactPos, Vector2D& contactNormal, float& contactTime)
-{
-	
-	// Check if dynamic rectangle is actually moving - we assume rectangles are NOT in collision to start
-	if (colliderA.vx == 0.0f && colliderA.vy == 0.0f)
-		return false;
-
-	// Expand target rectangle by source dimensions
-	DynRect expandedB = colliderB + colliderA;
-
-	if (RayRect(colliderA.Centre(), colliderA.GetVelocity() * dt, expandedB, contactPos, contactNormal, contactTime))
-		return (contactTime >= 0.0f && contactTime < 1.0f);
-	else
-		return false;
-
-}
-
-bool Collision::ResolveSweptAABB(Entity* colliderA, Entity* colliderB, const float dt)
-{
-	Vector2D contactPoint, contactNormal;
-	float s = 0.0f;
-
-	if (Collision::SweptAABB(colliderA->getComponent<ColliderComponent>().Rectangle(), colliderB->getComponent<ColliderComponent>().Rectangle(), dt,
-		contactPoint, contactNormal, s))
-	{
-		// scale normal component of colliderA's velocity so that it will touch, but not penetrate colliderB
-		float nVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal);
-		float tVel = colliderA->getComponent<ColliderComponent>().Rectangle().GetVelocity().Dot(contactNormal.Orth());
-		Vector2D correctedVelocity = s * nVel * contactNormal + tVel * contactNormal.Orth();
-		colliderA->getComponent<TransformComponent>().SetVelocity(correctedVelocity);
-		colliderA->getComponent<ColliderComponent>().SyncToTransform();
-		colliderB->getComponent<ColliderComponent>().Show();
-
-		return true;
-	}
-
-	return false;
-}
