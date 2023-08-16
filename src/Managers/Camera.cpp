@@ -39,6 +39,16 @@ int Camera::OriginY()
 	return view.y;
 }
 
+int Camera::CentreX()
+{
+	return view.x + view.w / 2;
+}
+
+int Camera::CentreY()
+{
+	return view.y + view.h / 2;
+}
+
 int Camera::Width()
 {
 	return view.w;

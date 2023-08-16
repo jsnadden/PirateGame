@@ -6,8 +6,8 @@ TestLevel::TestLevel()
     camera = Camera::GetInstance();
     states = States::GetInstance();
 
-    InitMap();
     InitPlayer();
+    InitMap();
     InitGui();
     Init();
 
@@ -35,8 +35,8 @@ TestLevel::~TestLevel()
     camera = nullptr;
     states = nullptr;
 
-    delete map0;
-    map0 = nullptr;
+    delete map;
+    map = nullptr;
 
     for (auto& e : elements)
     {
@@ -61,6 +61,7 @@ void TestLevel::EarlyUpdate()
         pauseMenu->SetActive(paused);
         pauseMenu->SetVisibility(paused);
     }
+
 
     
     if (!this->paused)
@@ -123,7 +124,7 @@ void TestLevel::LateUpdate()
 {
     if (!this->IsPaused())
     {
-        // ???
+        ShuffleMaps();
     }
     
 }
@@ -152,8 +153,12 @@ void TestLevel::Render()
 
 void TestLevel::InitMap()
 {
-    map0 = new Map("assets/tiles/terrain.png", 32, 3, &enttReg);
-    map0->LoadMap("assets/maps/map0.txt", 16, 16);
+    int tileSize = 32;
+    int chunkSize = 16;
+    int mapScale = 3;
+    chunkPixelSize = tileSize * chunkSize * mapScale;
+
+    map = new Map(&enttReg, "assets/tiles/terrain.png", 2, 2, chunkSize, tileSize, mapScale, 0, 0);
 }
 
 void TestLevel::InitPlayer()
@@ -186,5 +191,34 @@ Entity TestLevel::CreateEntity(std::string tag)
     ent.AddComponent<TagComponent>(tag);
     ent.AddComponent<TransformComponent>();
     return ent;
+}
+
+void TestLevel::ShuffleMaps()
+{
+    int chunkX = Maths::divide(camera->CentreX(), chunkPixelSize);
+    int chunkY = Maths::divide(camera->CentreY(), chunkPixelSize);
+
+    if (chunkX == lastChunkX - 1) // left
+    {
+        std::cout << "exited to west" << std::endl;
+    }
+
+    if (chunkX == lastChunkX + 1) // right
+    {
+        std::cout << "exited to east" << std::endl;
+    }
+
+    if (chunkY == lastChunkY - 1) // up
+    {
+        std::cout << "exited to north" << std::endl;
+    }
+
+    if (chunkY == lastChunkY + 1) // down
+    {
+        std::cout << "exited to south" << std::endl;
+    }
+
+    lastChunkX = chunkX;
+    lastChunkY = chunkY;
 }
 

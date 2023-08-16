@@ -1,37 +1,30 @@
 #pragma once
-#include <string>
-#include <fstream>
-#include "src/ECS/Entity.hpp"
-#include "src/ECS/Components.hpp"
-#include "src/Structs/Vector2D.hpp"
-#include "src/Managers/Managers.hpp"
+
+#include "src/TileMaps/MapChunk.hpp"
 
 
 class Map
 {
 public:
 
-	Map(std::string path, int ts, int ms, entt::registry* reg);
-	~Map();
-
-	void LoadMap(std::string path, int sizeX, int sizeY);
-	void AddTile(entt::entity ent, int srcX, int srcY, int xPos, int yPos);
-
+	std::string tileSheetPath;
+	entt::registry* enttReg;
 	int mapWidth;
 	int mapHeight;
+	int chunkSize;
 
-	std::map<std::pair<int, int>, entt::entity> tileGrid;
-	
 private:
 
-	Camera* camera;
+	std::map<int, std::map<int, MapChunk*>> loadedChunks;
 
-	entt::registry* enttReg;
+public:
 
-	std::string tileSheetPath;
+	Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, int tSize, int scale, int startX, int startY);
+	~Map();
 
-	int tileSize;
-	int mapScale;
-	int scaledSize;
+	void ShuffleLWest();
+	void ShuffleEast();
+	void ShuffleNorth();
+	void ShuffleSouth();
 };
 

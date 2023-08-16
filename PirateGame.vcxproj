@@ -50,6 +50,7 @@
     <Text Include="assets\maps\map0.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\TileMaps\MapChunk.hpp" />
     <ClInclude Include="src\ECS\Components.hpp" />
     <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
     <ClInclude Include="src\ECS\Components\ControlComponent.hpp" />
@@ -92,8 +93,10 @@
     <ClInclude Include="src\GUI\UIText.hpp" />
     <ClInclude Include="src\Abstraction\Uncopyable.hpp" />
     <ClInclude Include="src\Structs\Vector2D.hpp" />
+    <ClInclude Include="src\Utility\Maths.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\TileMaps\MapChunk.cpp" />
     <ClCompile Include="src\Managers\Assets.cpp" />
     <ClCompile Include="src\Managers\Audio.cpp" />
     <ClCompile Include="src\GUI\Button.cpp" />

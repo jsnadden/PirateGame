@@ -11,6 +11,8 @@ public:
 
 	int OriginX();
 	int OriginY();
+	int CentreX();
+	int CentreY();
 	int Width();
 	int Height();
 

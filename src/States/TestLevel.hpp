@@ -10,6 +10,7 @@
 #include "src/Geometry/Collision.hpp"
 #include "src/States/ListOfStates.hpp"
 #include "src/GUI/PauseMenu.hpp"
+#include "src/Utility/Maths.hpp"
 
 class TestLevel :
     public State
@@ -23,7 +24,11 @@ private:
 
     Entity player;
 
-    Map* map0;
+    int chunkPixelSize;
+    int lastChunkX;
+    int lastChunkY;
+
+    Map* map;
 
     SDL_Color PAUSE_TINT = { 0x00, 0x00, 0x00, 0x80 };
 
@@ -45,6 +50,8 @@ public:
     void InitMap();
     void InitPlayer();
     void InitGui();
+
+    void ShuffleMaps();
 
     Entity CreateEntity(std::string tag);
 };

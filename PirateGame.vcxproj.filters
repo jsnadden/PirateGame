@@ -209,11 +209,12 @@
     <ClInclude Include="src\ECS\Components\VelocityComponent.hpp" />
     <ClInclude Include="src\ECS\Components\SpriteComponent.hpp" />
     <ClInclude Include="src\ECS\Systems\Physics.hpp" />
-    <ClInclude Include="src\ECS\Factory.hpp" />
     <ClInclude Include="src\ECS\Systems\Rendering.hpp" />
     <ClInclude Include="src\ECS\Systems\InputHandling.hpp" />
     <ClInclude Include="src\ECS\Components\ControlComponent.hpp" />
     <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
+    <ClInclude Include="src\Utility\Maths.hpp" />
+    <ClInclude Include="src\TileMaps\MapChunk.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">
@@ -288,6 +289,7 @@
     <ClCompile Include="src\GUI\PauseMenu.cpp">
       <Filter>GUI\UIElements</Filter>
     </ClCompile>
+    <ClCompile Include="src\TileMaps\MapChunk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\SDL2_ttf.dll">
