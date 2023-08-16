@@ -1,7 +1,6 @@
 #pragma once
 #include "src/ECS/Entity.hpp"
 #include "src/ECS/Components.hpp"
-#include "src/ECS/Factory.hpp"
 #include "src/ECS/Systems/Physics.hpp"
 #include "src/ECS/Systems/Rendering.hpp"
 #include "src/ECS/Systems/InputHandling.hpp"
@@ -46,5 +45,7 @@ public:
     void InitMap();
     void InitPlayer();
     void InitGui();
+
+    Entity CreateEntity(std::string tag);
 };
 

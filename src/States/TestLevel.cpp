@@ -134,7 +134,7 @@ void TestLevel::Render()
 
     Rendering::DrawMapTiles(&enttReg);
     Rendering::DrawSprites(&enttReg);
-    Rendering::DrawColliders(&enttReg);
+    //Rendering::DrawColliders(&enttReg);
 
     for (auto& e : elements)
     {
@@ -162,7 +162,7 @@ void TestLevel::InitPlayer()
     int playerScale = 3;
     int offset = (playerSize * playerScale) / 2;
 
-    player = Factory::CreateEntity(&enttReg, "player");
+    player = CreateEntity("player");
     player.GetComponent<TransformComponent>().SetPosition(Vector2D(400 - offset, 320 - offset));
     player.GetComponent<TransformComponent>().SetScale(Vector2D(playerScale, playerScale));
     player.AddComponent<VelocityComponent>(VEC_ZERO);
@@ -178,5 +178,13 @@ void TestLevel::InitPlayer()
 void TestLevel::InitGui()
 {
     pauseMenu = new PauseMenu();
+}
+
+Entity TestLevel::CreateEntity(std::string tag)
+{
+    Entity ent = { &this->enttReg, enttReg.create() };
+    ent.AddComponent<TagComponent>(tag);
+    ent.AddComponent<TransformComponent>();
+    return ent;
 }
 
