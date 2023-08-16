@@ -16,12 +16,16 @@ Map::Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, i
     mapHeight = mapH;
     chunkSize = cSize;
 
+    std::string mapPath;
+
     for (int i = -1; i <=1; i++)
     {
         for (int j = -1; j <= 1; j++)
         {
             loadedChunks[i][j] = new MapChunk("assets/tiles/terrain.png", tSize, scale, enttReg, i, j);
-            loadedChunks[i][j]->LoadChunk("assets/maps/map0.txt", chunkSize, chunkSize);
+
+            mapPath = "assets/maps/ocean_" + std::to_string(startX + i) + "_" + std::to_string(startY + j) + ".txt";
+            loadedChunks[i][j]->LoadChunk(mapPath, chunkSize, chunkSize);
         }
     }
 }
@@ -37,4 +41,20 @@ Map::~Map()
             delete loadedChunks[i][j];
         }
     }
+}
+
+void Map::ShuffleWest()
+{
+}
+
+void Map::ShuffleEast()
+{
+}
+
+void Map::ShuffleNorth()
+{
+}
+
+void Map::ShuffleSouth()
+{
 }

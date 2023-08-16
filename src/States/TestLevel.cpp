@@ -18,7 +18,7 @@ TestLevel::TestLevel()
 void TestLevel::Init()
 {
     //graphics->WindowTitle("Test Level");
-    graphics->SetBackgroundColour(0xf0, 0xf0, 0xff, 0xff);
+    graphics->SetBackgroundColour(0x00, 0x00, 0x00, 0xff);
 
     pauseMenu->SetActive(paused);
     pauseMenu->SetVisibility(paused);
@@ -168,7 +168,7 @@ void TestLevel::InitPlayer()
     int offset = (playerSize * playerScale) / 2;
 
     player = CreateEntity("player");
-    player.GetComponent<TransformComponent>().SetPosition(Vector2D(400 - offset, 320 - offset));
+    player.GetComponent<TransformComponent>().SetPosition(Vector2D(768 - offset, 768 - offset));
     player.GetComponent<TransformComponent>().SetScale(Vector2D(playerScale, playerScale));
     player.AddComponent<VelocityComponent>(VEC_ZERO);
     player.AddComponent<SpriteComponent>("assets/Sprites/ship2.png", playerSize, playerSize, true, SpriteComponent::loop);

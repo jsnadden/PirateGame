@@ -32,44 +32,47 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 	mapfile.open(path);
 	bool success = !mapfile.fail();
 
-	int srcX, srcY;
-
-	for (int y = 0; y < sizeY; y++)
+	if (success)
 	{
-		for (int x = 0; x < sizeX; x++)
+		int srcX, srcY;
+
+		for (int y = 0; y < sizeY; y++)
 		{
-			mapfile.get(c);
-			srcY = atoi(&c) * tileSize;
-			mapfile.get(c);
-			srcX = atoi(&c) * tileSize;
-
-			tileGrid[x][y] = enttReg->create();
-			AddTile(tileGrid[x][y], srcX, srcY, x * scaledSize, y * scaledSize);
-
-			mapfile.ignore();
-		}
-	}
-
-	mapfile.ignore();
-
-	for (int y = 0; y < sizeY; y++)
-	{
-		for (int x = 0; x < sizeX; x++)
-		{
-			mapfile.get(c);
-
-			if (c == '1')
+			for (int x = 0; x < sizeX; x++)
 			{
-				enttReg->emplace<ColliderComponent>(tileGrid[x][y], 0, 0, tileSize, tileSize);
+				mapfile.get(c);
+				srcY = atoi(&c) * tileSize;
+				mapfile.get(c);
+				srcX = atoi(&c) * tileSize;
+
+				tileGrid[x][y] = enttReg->create();
+				AddTile(tileGrid[x][y], srcX, srcY, x * scaledSize, y * scaledSize);
+
+				mapfile.ignore();
 			}
-
-			mapfile.ignore();
 		}
+
+		mapfile.ignore();
+
+		for (int y = 0; y < sizeY; y++)
+		{
+			for (int x = 0; x < sizeX; x++)
+			{
+				mapfile.get(c);
+
+				if (c == '1')
+				{
+					enttReg->emplace<ColliderComponent>(tileGrid[x][y], 0, 0, tileSize, tileSize);
+				}
+
+				mapfile.ignore();
+			}
+		}
+
+		mapfile.close();
+
+		loaded = true;
 	}
-
-	mapfile.close();
-
-	loaded = true;
 
 	return success;
 }

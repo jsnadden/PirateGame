@@ -22,7 +22,7 @@ public:
 	Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, int tSize, int scale, int startX, int startY);
 	~Map();
 
-	void ShuffleLWest();
+	void ShuffleWest();
 	void ShuffleEast();
 	void ShuffleNorth();
 	void ShuffleSouth();
