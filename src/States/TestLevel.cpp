@@ -106,13 +106,7 @@ void TestLevel::Update()
         Physics::HandleMapCollision(&enttReg, timer->DeltaTime());
         Physics::DoMovement(&enttReg, timer->DeltaTime());
 
-        camera->Update();
-
-        // Cull off-screen tiles
-        /*for (auto& t : *tiles)
-        {
-            t->getComponent<TileComponent>().SetVisibility(Collision::AABB(*graphics->ViewRect(), t->getComponent<TileComponent>().Location()));
-        }*/
+        
 
         Rendering::AnimateSprites(&enttReg, timer->DeltaTime());
 
@@ -126,7 +120,14 @@ void TestLevel::LateUpdate()
     {
         ShuffleMaps();
     }
-    
+
+    camera->Update();
+
+    // Cull off-screen tiles
+    /*for (auto& t : *tiles)
+    {
+        t->getComponent<TileComponent>().SetVisibility(Collision::AABB(*graphics->ViewRect(), t->getComponent<TileComponent>().Location()));
+    }*/
 }
 
 void TestLevel::Render()
@@ -198,25 +199,35 @@ void TestLevel::ShuffleMaps()
     int chunkX = Maths::divide(camera->CentreX(), chunkPixelSize);
     int chunkY = Maths::divide(camera->CentreY(), chunkPixelSize);
 
-    if (chunkX == lastChunkX - 1) // left
+    if (chunkX == lastChunkX - 1) // west
     {
-        std::cout << "exited to west" << std::endl;
+        map->ShuffleWest(chunkX, chunkY);
+        //std::cout << "exited to west" << std::endl;
+        //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
-    if (chunkX == lastChunkX + 1) // right
+    if (chunkX == lastChunkX + 1) // east
     {
-        std::cout << "exited to east" << std::endl;
+        map->ShuffleEast(chunkX, chunkY);
+        //std::cout << "exited to east" << std::endl;
+        //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
-    if (chunkY == lastChunkY - 1) // up
+    if (chunkY == lastChunkY - 1) // north
     {
-        std::cout << "exited to north" << std::endl;
+        map->ShuffleNorth(chunkX, chunkY);
+        //std::cout << "exited to north" << std::endl;
+        //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
-    if (chunkY == lastChunkY + 1) // down
+    if (chunkY == lastChunkY + 1) // south
     {
-        std::cout << "exited to south" << std::endl;
+        map->ShuffleSouth(chunkX, chunkY);
+        //std::cout << "exited to south" << std::endl;
+        //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
+
+
 
     lastChunkX = chunkX;
     lastChunkY = chunkY;

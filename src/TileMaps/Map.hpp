@@ -12,6 +12,8 @@ public:
 	int mapWidth;
 	int mapHeight;
 	int chunkSize;
+	int tileSize;
+	int mapScale;
 
 private:
 
@@ -22,9 +24,10 @@ public:
 	Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, int tSize, int scale, int startX, int startY);
 	~Map();
 
-	void ShuffleWest();
-	void ShuffleEast();
-	void ShuffleNorth();
-	void ShuffleSouth();
+	void Teleport(int chunkX, int chunkY);
+	void ShuffleWest(int chunkX, int chunkY);
+	void ShuffleEast(int chunkX, int chunkY);
+	void ShuffleNorth(int chunkX, int chunkY);
+	void ShuffleSouth(int chunkX, int chunkY);
 };
 

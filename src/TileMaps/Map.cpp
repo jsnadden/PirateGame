@@ -15,6 +15,8 @@ Map::Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, i
     mapWidth = mapW;
     mapHeight = mapH;
     chunkSize = cSize;
+    tileSize = tSize;
+    mapScale = scale;
 
     std::string mapPath;
 
@@ -22,7 +24,7 @@ Map::Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, i
     {
         for (int j = -1; j <= 1; j++)
         {
-            loadedChunks[i][j] = new MapChunk("assets/tiles/terrain.png", tSize, scale, enttReg, i, j);
+            loadedChunks[i][j] = new MapChunk("assets/tiles/terrain.png", tSize, scale, enttReg, startX + i, startY + j);
 
             mapPath = "assets/maps/ocean_" + std::to_string(startX + i) + "_" + std::to_string(startY + j) + ".txt";
             loadedChunks[i][j]->LoadChunk(mapPath, chunkSize, chunkSize);
@@ -43,18 +45,84 @@ Map::~Map()
     }
 }
 
-void Map::ShuffleWest()
+void Map::Teleport(int chunkX, int chunkY)
 {
+    std::string mapPath;
+
+    for (int i = -1; i <= 1; i++)
+    {
+        for (int j = -1; j <= 1; j++)
+        {
+            delete loadedChunks[i][j];
+
+            loadedChunks[i][j] = new MapChunk("assets/tiles/terrain.png", tileSize, mapScale, enttReg, chunkX + i, chunkY + j);
+
+            mapPath = "assets/maps/ocean_" + std::to_string(chunkX + i) + "_" + std::to_string(chunkY + j) + ".txt";
+            loadedChunks[i][j]->LoadChunk(mapPath, chunkSize, chunkSize);
+        }
+    }
 }
 
-void Map::ShuffleEast()
+void Map::ShuffleWest(int chunkX, int chunkY)
 {
+    std::string mapPath;
+
+    for (int j = -1; j <= 1; j++)
+    {
+        delete loadedChunks[1][j];
+        loadedChunks[1][j] = loadedChunks[0][j];
+        loadedChunks[0][j] = loadedChunks[-1][j];
+        loadedChunks[-1][j] = new MapChunk("assets/tiles/terrain.png", tileSize, mapScale, enttReg, chunkX - 1, chunkY + j);
+
+        mapPath = "assets/maps/ocean_" + std::to_string(chunkX - 1) + "_" + std::to_string(chunkY + j) + ".txt";
+        loadedChunks[-1][j]->LoadChunk(mapPath, chunkSize, chunkSize);
+    }
 }
 
-void Map::ShuffleNorth()
+void Map::ShuffleEast(int chunkX, int chunkY)
 {
+    std::string mapPath;
+
+    for (int j = -1; j <= 1; j++)
+    {
+        delete loadedChunks[-1][j];
+        loadedChunks[-1][j] = loadedChunks[0][j];
+        loadedChunks[0][j] = loadedChunks[1][j];
+        loadedChunks[1][j] = new MapChunk("assets/tiles/terrain.png", tileSize, mapScale, enttReg, chunkX + 1, chunkY + j);
+
+        mapPath = "assets/maps/ocean_" + std::to_string(chunkX + 1) + "_" + std::to_string(chunkY + j) + ".txt";
+        loadedChunks[1][j]->LoadChunk(mapPath, chunkSize, chunkSize);
+    }
 }
 
-void Map::ShuffleSouth()
+void Map::ShuffleNorth(int chunkX, int chunkY)
 {
+    std::string mapPath;
+
+    for (int i = -1; i <= 1; i++)
+    {
+        delete loadedChunks[i][1];
+        loadedChunks[i][1] = loadedChunks[i][0];
+        loadedChunks[i][0] = loadedChunks[i][-1];
+        loadedChunks[i][-1] = new MapChunk("assets/tiles/terrain.png", tileSize, mapScale, enttReg, chunkX + i, chunkY - 1);
+
+        mapPath = "assets/maps/ocean_" + std::to_string(chunkX + i) + "_" + std::to_string(chunkY -1) + ".txt";
+        loadedChunks[i][-1]->LoadChunk(mapPath, chunkSize, chunkSize);
+    }
+}
+
+void Map::ShuffleSouth(int chunkX, int chunkY)
+{
+    std::string mapPath;
+
+    for (int i = -1; i <= 1; i++)
+    {
+        delete loadedChunks[i][-1];
+        loadedChunks[i][-1] = loadedChunks[i][0];
+        loadedChunks[i][0] = loadedChunks[i][1];
+        loadedChunks[i][1] = new MapChunk("assets/tiles/terrain.png", tileSize, mapScale, enttReg, chunkX + i, chunkY + 1);
+
+        mapPath = "assets/maps/ocean_" + std::to_string(chunkX + i) + "_" + std::to_string(chunkY + 1) + ".txt";
+        loadedChunks[i][1]->LoadChunk(mapPath, chunkSize, chunkSize);
+    }
 }
