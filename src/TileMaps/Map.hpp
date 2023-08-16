@@ -7,13 +7,18 @@ class Map
 {
 public:
 
+	std::string mapName;
 	std::string tileSheetPath;
+
 	entt::registry* enttReg;
+
 	int mapWidth;
 	int mapHeight;
+
 	int chunkSize;
 	int tileSize;
 	int mapScale;
+
 
 private:
 
@@ -21,7 +26,7 @@ private:
 
 public:
 
-	Map(entt::registry* reg, std::string path, int mapW, int mapH, int cSize, int tSize, int scale, int startX, int startY);
+	Map(entt::registry* reg, std::string name, std::string path, int mapW, int mapH, int cSize, int tSize, int scale, int startX, int startY);
 	~Map();
 
 	void Teleport(int chunkX, int chunkY);

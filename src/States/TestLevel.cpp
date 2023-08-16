@@ -159,7 +159,7 @@ void TestLevel::InitMap()
     int mapScale = 3;
     chunkPixelSize = tileSize * chunkSize * mapScale;
 
-    map = new Map(&enttReg, "assets/tiles/terrain.png", 2, 2, chunkSize, tileSize, mapScale, 0, 0);
+    map = new Map(&enttReg, "ocean", "assets/tiles/terrain.png", 2, 2, chunkSize, tileSize, mapScale, 0, 0);
 }
 
 void TestLevel::InitPlayer()
@@ -202,32 +202,35 @@ void TestLevel::ShuffleMaps()
     if (chunkX == lastChunkX - 1) // west
     {
         map->ShuffleWest(chunkX, chunkY);
-        //std::cout << "exited to west" << std::endl;
+        std::cout << "exited to west" << std::endl;
         //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
     if (chunkX == lastChunkX + 1) // east
     {
         map->ShuffleEast(chunkX, chunkY);
-        //std::cout << "exited to east" << std::endl;
+        std::cout << "exited to east" << std::endl;
         //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
     if (chunkY == lastChunkY - 1) // north
     {
         map->ShuffleNorth(chunkX, chunkY);
-        //std::cout << "exited to north" << std::endl;
+        std::cout << "exited to north" << std::endl;
         //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
     if (chunkY == lastChunkY + 1) // south
     {
         map->ShuffleSouth(chunkX, chunkY);
-        //std::cout << "exited to south" << std::endl;
+        std::cout << "exited to south" << std::endl;
         //std::cout << enttReg.alive() << " living entities" << std::endl;
     }
 
-
+    if (std::max(std::abs(lastChunkX - chunkX), std::abs(lastChunkY - chunkY)) > 1)
+    {
+        map->Teleport(chunkX, chunkY);
+    }
 
     lastChunkX = chunkX;
     lastChunkY = chunkY;
