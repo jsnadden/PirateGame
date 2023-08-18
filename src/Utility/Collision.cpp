@@ -1,4 +1,4 @@
-#include "src/Geometry/Collision.hpp"
+#include "src/Utility/Collision.hpp"
 
 
 bool Collision::PointRect(const int x, const int y, const SDL_Rect rect)

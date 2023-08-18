@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Structs\Polygon.hpp" />
+    <ClInclude Include="src\Structs\Transform.hpp" />
     <ClInclude Include="src\TileMaps\MapChunk.hpp" />
     <ClInclude Include="src\ECS\Components.hpp" />
     <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
@@ -80,7 +81,7 @@
     <ClInclude Include="src\Abstraction\Singleton.hpp" />
     <ClInclude Include="src\GUI\UIElement.hpp" />
     <ClInclude Include="src\Managers\Camera.hpp" />
-    <ClInclude Include="src\Geometry\Collision.hpp" />
+    <ClInclude Include="src\Utility\Collision.hpp" />
     <ClInclude Include="src\Core\Game.hpp" />
     <ClInclude Include="src\States\MainMenu.hpp" />
     <ClInclude Include="src\Managers\States.hpp" />
@@ -109,7 +110,7 @@
     <ClCompile Include="src\GUI\Panel.cpp" />
     <ClCompile Include="src\GUI\UIElement.cpp" />
     <ClCompile Include="src\Managers\Camera.cpp" />
-    <ClCompile Include="src\Geometry\Collision.cpp" />
+    <ClCompile Include="src\Utility\Collision.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\States\MainMenu.cpp" />
     <ClCompile Include="src\Managers\States.cpp" />

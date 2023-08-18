@@ -14,10 +14,10 @@ public:
             if (tile.visible)
             {
                 SDL_Rect destRect{
-                    static_cast<int>(trans.Position()->x - Camera::GetInstance()->OriginX()),
-                    static_cast<int>(trans.Position()->y - Camera::GetInstance()->OriginY()),
-                    static_cast<int>(tile.srcRect.w * trans.Scale()->x),
-                    static_cast<int>(tile.srcRect.h * trans.Scale()->y)
+                    static_cast<int>(trans.transform.position.x - Camera::GetInstance()->OriginX()),
+                    static_cast<int>(trans.transform.position.y - Camera::GetInstance()->OriginY()),
+                    static_cast<int>(tile.srcRect.w * trans.transform.scale.x),
+                    static_cast<int>(tile.srcRect.h * trans.transform.scale.y)
                 };
 
                 Graphics::GetInstance()->DrawTexture(tile.texture, &tile.srcRect, &destRect);
@@ -30,10 +30,10 @@ public:
         for (auto [ent, trans, sprite] : reg->view<TransformComponent, SpriteComponent>().each())
         {
             SDL_Rect destRect{
-                    static_cast<int>(trans.Position()->x - Camera::GetInstance()->OriginX()),
-                    static_cast<int>(trans.Position()->y - Camera::GetInstance()->OriginY()),
-                    static_cast<int>(sprite.srcRect.w * trans.Scale()->x),
-                    static_cast<int>(sprite.srcRect.h * trans.Scale()->y)
+                    static_cast<int>(trans.transform.position.x - Camera::GetInstance()->OriginX()),
+                    static_cast<int>(trans.transform.position.y - Camera::GetInstance()->OriginY()),
+                    static_cast<int>(sprite.srcRect.w * trans.transform.scale.x),
+                    static_cast<int>(sprite.srcRect.h * trans.transform.scale.y)
             };
 
             destRect.x -= destRect.w / 2;
@@ -87,10 +87,10 @@ public:
 			{
 				int j = (i + 1) % n;
 				Graphics::GetInstance()->DrawLine(coll.colour,
-					trans.Position()->x + coll.polygon.vertices[i].x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
-					trans.Position()->y + coll.polygon.vertices[i].y * trans.Scale()->y - Camera::GetInstance()->OriginY(),
-					trans.Position()->x + coll.polygon.vertices[j].x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
-					trans.Position()->y + coll.polygon.vertices[j].y * trans.Scale()->y - Camera::GetInstance()->OriginY());
+					trans.transform.position.x + coll.polygon.vertices[i].x * trans.transform.scale.x - Camera::GetInstance()->OriginX(),
+					trans.transform.position.y + coll.polygon.vertices[i].y * trans.transform.scale.y - Camera::GetInstance()->OriginY(),
+					trans.transform.position.x + coll.polygon.vertices[j].x * trans.transform.scale.x - Camera::GetInstance()->OriginX(),
+					trans.transform.position.y + coll.polygon.vertices[j].y * trans.transform.scale.y - Camera::GetInstance()->OriginY());
 			}
 			
 			

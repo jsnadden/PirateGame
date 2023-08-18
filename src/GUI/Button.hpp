@@ -1,6 +1,6 @@
 #pragma once
 #include "src/GUI/UIElement.hpp"
-#include "src/Geometry/Collision.hpp"
+#include "src/Utility/Collision.hpp"
 
 class Button :
     public UIElement

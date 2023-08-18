@@ -7,7 +7,7 @@
 #include "src/TileMaps/Map.hpp"
 #include "src/States/State.hpp"
 #include "src/Managers/States.hpp"
-#include "src/Geometry/Collision.hpp"
+#include "src/Utility/Collision.hpp"
 #include "src/States/ListOfStates.hpp"
 #include "src/GUI/PauseMenu.hpp"
 #include "src/Utility/Maths.hpp"
@@ -21,6 +21,8 @@ private:
     States* states;
 
     entt::registry enttReg;
+
+    const int GLOBAL_SCALE = 2;
 
     Entity player;
 

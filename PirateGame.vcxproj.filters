@@ -144,7 +144,7 @@
     <ClInclude Include="src\States\MainMenu.hpp">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="src\Geometry\Collision.hpp">
+    <ClInclude Include="src\Utility\Collision.hpp">
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\Structs\Vector2D.hpp">
@@ -216,6 +216,7 @@
     <ClInclude Include="src\Utility\Maths.hpp" />
     <ClInclude Include="src\TileMaps\MapChunk.hpp" />
     <ClInclude Include="src\Structs\Polygon.hpp" />
+    <ClInclude Include="src\Structs\Transform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">
@@ -254,7 +255,7 @@
     <ClCompile Include="src\States\MainMenu.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="src\Geometry\Collision.cpp">
+    <ClCompile Include="src\Utility\Collision.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Managers\States.cpp">

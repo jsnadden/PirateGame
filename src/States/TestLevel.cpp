@@ -154,21 +154,20 @@ void TestLevel::InitMap()
 {
     int tileSize = 32;
     int chunkSize = 16;
-    int mapScale = 3;
-    chunkPixelSize = tileSize * chunkSize * mapScale;
+    chunkPixelSize = tileSize * chunkSize * GLOBAL_SCALE;
 
-    map = new Map(&enttReg, "ocean", "assets/tiles/terrain.png", 2, 2, chunkSize, tileSize, mapScale, 0, 0);
+    map = new Map(&enttReg, "ocean", "assets/tiles/terrain.png", 2, 2, chunkSize, tileSize, GLOBAL_SCALE, 0, 0);
 }
 
 void TestLevel::InitPlayer()
 {
     int playerSize = 32;
-    int playerScale = 3;
-    int offset = (playerSize * playerScale) / 2;
+    int offset = (playerSize * GLOBAL_SCALE) / 2;
+    int startingPos = 256 * GLOBAL_SCALE - offset;
 
     player = CreateEntity("player");
-    player.GetComponent<TransformComponent>().SetPosition(Vector2D(768 - offset, 768 - offset));
-    player.GetComponent<TransformComponent>().SetScale(Vector2D(playerScale, playerScale));
+    player.GetComponent<TransformComponent>().transform.position = Vector2D(startingPos, startingPos);
+    player.GetComponent<TransformComponent>().transform.scale = Vector2D(GLOBAL_SCALE, GLOBAL_SCALE);
     player.AddComponent<VelocityComponent>(VEC_ZERO);
     player.AddComponent<SpriteComponent>("assets/Sprites/ship2.png", playerSize, playerSize, true, SpriteComponent::loop);
     player.GetComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
@@ -178,7 +177,7 @@ void TestLevel::InitPlayer()
     player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, -playerSize / 2, playerSize, playerSize));
     player.AddComponent<ControlComponent>();
 
-    camera->Follow(player.GetComponent<TransformComponent>().Position());
+    camera->Follow(&player.GetComponent<TransformComponent>().transform.position);
 }
 
 void TestLevel::InitGui()

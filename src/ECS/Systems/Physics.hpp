@@ -1,7 +1,7 @@
 #pragma once
 #include <entt.hpp>
 #include "src/ECS/Components.hpp"
-#include "src/Geometry/Collision.hpp"
+#include "src/Utility/Collision.hpp"
 
 class Physics
 {
@@ -19,49 +19,66 @@ public:
     {
         for (auto [ent1, trans1, vel1, coll1] : reg->view<TransformComponent, VelocityComponent, ColliderComponent>().each())
         {
+            // set up global collision parameters
             bool collTest = false;
 
             for (auto [ent2, trans2, tile2, coll2] : reg->view<TransformComponent, TileComponent, ColliderComponent>().each())
             {
-                collTest |= ResolveSAT_Static(coll1.polygon, trans1, coll2.polygon, trans2);
+                // crude broadphasing
+                if ((trans1.transform.position - trans2.transform.position).NormSquared() < 10000 * trans1.transform.scale.x * trans1.transform.scale.x)
+                {
+                    coll2.colour = { 0xff, 0xff, 0x00, 0xff };
+
+                    // set up individual collision parameters
+                    float pen;
+                    collTest |= ResolveSAT_Static(coll1.polygon, trans1, coll2.polygon, trans2, pen);
+
+                    // respond to individual collision
+                    // TODO
+
+                }
+                else coll2.colour = { 0xff, 0x00, 0x00, 0xff };
             }
 
+            // respond to global colission
             if (collTest) coll1.colour = { 0x00, 0xff, 0x00, 0xff };
             else coll1.colour = { 0xff, 0x00, 0x00, 0xff };
         }
     }
 
-    static bool ResolveSAT_Static(Polygon& p1, TransformComponent& t1, Polygon& p2, TransformComponent& t2)
+    static bool ResolveSAT_Static(Polygon& p1, TransformComponent& t1, Polygon& p2, TransformComponent& t2, float& penetration)
     {
         Polygon* poly1 = &p1;
-        Vector2D c1 = *t1.Position();
-        Vector2D s1 = *t1.Scale();
+        Transform trans1 = t1.transform;
 
         Polygon* poly2 = &p2;
-        Vector2D c2 = *t2.Position();
-        Vector2D s2 = *t2.Scale();
+        Transform trans2 = t2.transform;
 
         float overlap = INFINITY;
+        penetration = 0;
 
         for (int shape = 0; shape < 2; shape++)
         {
             if (shape == 1)
             {
                 poly1 = &p2;
+                trans1 = t2.transform;
+
                 poly2 = &p1;
+                trans2 = t1.transform;
             }
 
             for (int a = 0; a < poly1->vertices.size(); a++)
             {
                 int b = (a + 1) % poly1->vertices.size();
-                Vector2D axisProj = (s1 * (poly1->vertices[b] - poly1->vertices[a])).Orth();
+                Vector2D axisProj = (trans1 * poly1->vertices[b] - trans1 * poly1->vertices[a]).Orth();
                 axisProj.Normalise();
 
                 // Work out min and max 1D points for p1
                 float min_p1 = INFINITY, max_p1 = -INFINITY;
                 for (int p = 0; p < poly1->vertices.size(); p++)
                 {
-                    float q = (c1 + (s1 * poly1->vertices[p])).Dot(axisProj);
+                    float q = (trans1 * poly1->vertices[p]).Dot(axisProj);
                     min_p1 = std::min(min_p1, q);
                     max_p1 = std::max(max_p1, q);
                 }
@@ -70,7 +87,7 @@ public:
                 float min_p2 = INFINITY, max_p2 = -INFINITY;
                 for (int p = 0; p < poly2->vertices.size(); p++)
                 {
-                    float q = (c2 + (s2 * poly2->vertices[p])).Dot(axisProj);
+                    float q = (trans2 * poly2->vertices[p]).Dot(axisProj);
                     min_p2 = std::min(min_p2, q);
                     max_p2 = std::max(max_p2, q);
                 }
@@ -79,15 +96,16 @@ public:
                 overlap = std::min(std::min(max_p1, max_p2) - std::max(min_p1, min_p2), overlap);
 
                 if (!(max_p2 >= min_p1 && max_p1 >= min_p2))
+                {
+                    penetration = 0;
                     return false;
+                }
+
+                penetration = std::max(penetration, overlap);
             }
         }
 
-        // If we got here, the objects have collided, we will displace r1
-        // by overlap along the vector between the two object centers
-        Vector2D d = c1-c2;
-        float s = d.Norm();
-        //t1.Translate(overlap * d / s);
+        // If we got here, the objects have collided
         return true;
     }
 
