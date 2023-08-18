@@ -50,6 +50,7 @@
     <Text Include="assets\maps\map0.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Structs\Polygon.hpp" />
     <ClInclude Include="src\TileMaps\MapChunk.hpp" />
     <ClInclude Include="src\ECS\Components.hpp" />
     <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />

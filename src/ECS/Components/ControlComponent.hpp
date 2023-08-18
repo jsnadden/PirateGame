@@ -4,11 +4,7 @@ struct ControlComponent
 {
 	bool controlled = false;
 
-	ControlComponent() = default;
-
-	ControlComponent(bool cont)
-		: controlled(cont)
-	{
-
-	}
+	ControlComponent()
+		: controlled(true)
+	{}
 };

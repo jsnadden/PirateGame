@@ -215,6 +215,7 @@
     <ClInclude Include="src\ECS\Components\ColliderComponent.hpp" />
     <ClInclude Include="src\Utility\Maths.hpp" />
     <ClInclude Include="src\TileMaps\MapChunk.hpp" />
+    <ClInclude Include="src\Structs\Polygon.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">

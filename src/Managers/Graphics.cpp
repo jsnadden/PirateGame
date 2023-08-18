@@ -199,6 +199,12 @@ void Graphics::DrawRectangle(SDL_Color colour, SDL_Rect* rect)
 	SDL_RenderFillRect(renderer, rect);
 }
 
+void Graphics::DrawLine(SDL_Color colour, float startx, float starty, float endx, float endy)
+{
+	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
+	SDL_RenderDrawLine(renderer, (int)startx, (int)starty, (int)endx, (int)endy);
+}
+
 void Graphics::FillWindow(SDL_Color colour)
 {
 	DrawRectangle(colour, ViewRect());

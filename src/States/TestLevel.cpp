@@ -61,8 +61,6 @@ void TestLevel::EarlyUpdate()
         pauseMenu->SetActive(paused);
         pauseMenu->SetVisibility(paused);
     }
-
-
     
     if (!this->paused)
     {
@@ -136,7 +134,7 @@ void TestLevel::Render()
 
     Rendering::DrawMapTiles(&enttReg);
     Rendering::DrawSprites(&enttReg);
-    //Rendering::DrawColliders(&enttReg);
+    Rendering::DrawColliders(&enttReg);
 
     for (auto& e : elements)
     {
@@ -174,9 +172,11 @@ void TestLevel::InitPlayer()
     player.AddComponent<VelocityComponent>(VEC_ZERO);
     player.AddComponent<SpriteComponent>("assets/Sprites/ship2.png", playerSize, playerSize, true, SpriteComponent::loop);
     player.GetComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
-    player.GetComponent<SpriteComponent>().AddAnimation("Sail", 1, 3, 10.0f);
+    player.GetComponent<SpriteComponent>().AddAnimation("Move", 1, 3, 10.0f);
     player.GetComponent<SpriteComponent>().Play("Idle");
-    player.AddComponent<ColliderComponent>(-16,0,32,16);
+    //player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, 0, playerSize, playerSize/2));
+    player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, -playerSize / 2, playerSize, playerSize));
+    player.AddComponent<ControlComponent>();
 
     camera->Follow(player.GetComponent<TransformComponent>().Position());
 }

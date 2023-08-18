@@ -75,11 +75,14 @@ public:
 
 	void Play(std::string animName)
 	{
-		srcRect.y = srcRect.h * animations[animName]->row;
-		totalFrames = animations[animName]->nFrames;
+		if (animations.find(animName) != animations.end())
+		{
+			srcRect.y = srcRect.h * animations[animName]->row;
+			totalFrames = animations[animName]->nFrames;
 
-		timePerFrame = 1.0f / animations[animName]->speed;
-		endTime = totalFrames * timePerFrame;
+			timePerFrame = 1.0f / animations[animName]->speed;
+			endTime = totalFrames * timePerFrame;
+		}
 	}
 
 };

@@ -62,7 +62,7 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 
 				if (c == '1')
 				{
-					enttReg->emplace<ColliderComponent>(tileGrid[x][y], 0, 0, tileSize, tileSize);
+					enttReg->emplace<ColliderComponent>(tileGrid[x][y], Polygon(0,0,tileSize, tileSize));
 				}
 
 				mapfile.ignore();

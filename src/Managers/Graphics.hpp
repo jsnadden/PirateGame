@@ -57,6 +57,7 @@ public:
 	void SetBackgroundColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	void DrawRectangle(SDL_Color colour, SDL_Rect* rect);
+	void DrawLine(SDL_Color colour, float startx, float starty, float endx, float endy);
 	void FillWindow(SDL_Color colour);
 
 	SDL_Rect* ViewRect();

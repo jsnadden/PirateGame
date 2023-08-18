@@ -34,9 +34,15 @@ public:
         velocity.Normalise();
         velocity *= 150.f;
 
-        for (auto [ent, vel] : reg->view<VelocityComponent>().each())
+        for (auto [ent, vel, sprite, ctrl] : reg->view<VelocityComponent, SpriteComponent, ControlComponent>().each())
         {
             vel.SetVelocity(velocity);
+
+            if (velocity.x < 0) sprite.Flip(SDL_FLIP_HORIZONTAL);
+            if (velocity.x > 0) sprite.Flip(SDL_FLIP_NONE);
+
+            if (velocity.IsZero()) sprite.Play("Idle");
+            else sprite.Play("Move");
         }
     }
 

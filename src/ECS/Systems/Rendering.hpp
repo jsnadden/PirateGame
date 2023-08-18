@@ -39,7 +39,7 @@ public:
             destRect.x -= destRect.w / 2;
             destRect.y -= destRect.h / 2;
 
-            Graphics::GetInstance()->DrawTexture(sprite.texture, &sprite.srcRect, &destRect);
+            Graphics::GetInstance()->DrawTexture(sprite.texture, &sprite.srcRect, &destRect, 0.0f, sprite.spriteFlip);
         }
     }
 
@@ -81,14 +81,28 @@ public:
 	{
 		for (auto [ent, trans, coll] : reg->view<TransformComponent, ColliderComponent>().each())
 		{
-			SDL_Rect destRect{
+			int n = coll.polygon.vertices.size();
+
+			for (int i = 0; i < n; i++)
+			{
+				int j = (i + 1) % n;
+				Graphics::GetInstance()->DrawLine(coll.colour,
+					trans.Position()->x + coll.polygon.vertices[i].x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
+					trans.Position()->y + coll.polygon.vertices[i].y * trans.Scale()->y - Camera::GetInstance()->OriginY(),
+					trans.Position()->x + coll.polygon.vertices[j].x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
+					trans.Position()->y + coll.polygon.vertices[j].y * trans.Scale()->y - Camera::GetInstance()->OriginY());
+			}
+			
+			
+			
+			/*SDL_Rect destRect{
 				trans.Position()->x + coll.collider.x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
 				trans.Position()->y + coll.collider.y * trans.Scale()->y - Camera::GetInstance()->OriginY(),
 				coll.collider.w * trans.Scale()->x,
 				coll.collider.h * trans.Scale()->y
 			};
 
-			Graphics::GetInstance()->DrawTexture(coll.colliderTexture, NULL, &destRect);
+			Graphics::GetInstance()->DrawTexture(coll.colliderTexture, NULL, &destRect);*/
 		}
 	}
 
