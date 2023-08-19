@@ -7,6 +7,8 @@ struct Polygon
 {
 	std::vector<Vector2D> vertices;
 
+	Polygon() = default;
+
 	Polygon(std::initializer_list<Vector2D> pts)
 	{
 		for (auto p : pts)

@@ -32,7 +32,7 @@ public:
         }
 
         velocity.Normalise();
-        velocity *= 150.f;
+        velocity *= 50.f;
 
         for (auto [ent, vel, sprite, ctrl] : reg->view<VelocityComponent, SpriteComponent, ControlComponent>().each())
         {

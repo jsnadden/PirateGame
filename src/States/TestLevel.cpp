@@ -173,8 +173,7 @@ void TestLevel::InitPlayer()
     player.GetComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
     player.GetComponent<SpriteComponent>().AddAnimation("Move", 1, 3, 10.0f);
     player.GetComponent<SpriteComponent>().Play("Idle");
-    //player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, 0, playerSize, playerSize/2));
-    player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, -playerSize / 2, playerSize, playerSize));
+    player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, 0, playerSize, playerSize/2));
     player.AddComponent<ControlComponent>();
 
     camera->Follow(&player.GetComponent<TransformComponent>().transform.position);

@@ -22,7 +22,7 @@ private:
 
     entt::registry enttReg;
 
-    const int GLOBAL_SCALE = 2;
+    const int GLOBAL_SCALE = 3;
 
     Entity player;
 

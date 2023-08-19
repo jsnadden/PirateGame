@@ -41,18 +41,23 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 			for (int x = 0; x < sizeX; x++)
 			{
 				mapfile.get(c);
-				srcY = atoi(&c) * tileSize;
+				srcY = atoi(&c);
 				mapfile.get(c);
-				srcX = atoi(&c) * tileSize;
+				srcX = atoi(&c);
 
 				tileGrid[x][y] = enttReg->create();
-				AddTile(tileGrid[x][y], srcX, srcY, x * scaledSize, y * scaledSize);
+				AddTile(tileGrid[x][y], srcX * tileSize, srcY * tileSize, x * scaledSize, y * scaledSize);
+
+				int tileType = srcY * 10 + srcX;
+				bool collider = false;
+				Polygon poly = CreateCollider(collider, tileType);
+				if (collider) enttReg->emplace<ColliderComponent>(tileGrid[x][y], poly);
 
 				mapfile.ignore();
 			}
 		}
 
-		mapfile.ignore();
+		/*mapfile.ignore();
 
 		for (int y = 0; y < sizeY; y++)
 		{
@@ -67,7 +72,7 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 
 				mapfile.ignore();
 			}
-		}
+		}*/
 
 		mapfile.close();
 
@@ -96,4 +101,71 @@ void MapChunk::AddTile(entt::entity ent, int srcX, int srcY, int xPos, int yPos)
 	enttReg->emplace<TagComponent>(ent, "map_tile");
 	enttReg->emplace<TransformComponent>(ent, Vector2D(xPos + scaledSize * chunkOffsetX * tilesWide, yPos + scaledSize * chunkOffsetY * tilesHigh), Vector2D(mapScale, mapScale));
 	enttReg->emplace<TileComponent>(ent, tileSheetPath, srcX, srcY, tileSize);
+}
+
+Polygon MapChunk::CreateCollider(bool& coll, int type)
+{
+	Polygon p;
+
+	// these choices are specific to the ordering of the current tilesheet
+	switch (type)
+	{
+	case 1:
+		coll = true;
+		p = Polygon(tileSize / 2, 0, tileSize / 2, tileSize);
+		break;
+	case 2:
+		coll = true;
+		p = Polygon(tileSize / 2, 0, tileSize / 2, tileSize / 2);
+		break;
+	case 3:
+		coll = true;
+		p = Polygon(tileSize / 2, tileSize / 2, tileSize / 2, tileSize / 2);
+		break;
+	case 4:
+		coll = true;
+		p = Polygon(0, tileSize / 2, tileSize, tileSize / 2);
+		break;
+	case 5:
+		coll = true;
+		p = Polygon(0, tileSize / 2, tileSize / 2, tileSize / 2);
+		break;
+	case 6:
+		coll = true;
+		p = Polygon(0, 0, tileSize / 2, tileSize);
+		break;
+	case 7:
+		coll = true;
+		p = Polygon(0, 0, tileSize / 2, tileSize / 2);
+		break;
+	case 8:
+		coll = true;
+		p = Polygon(0, 0, tileSize, tileSize / 2);
+		break;
+	case 9:
+		coll = true;
+		p = Polygon({ Vector2D(0, tileSize), Vector2D(tileSize / 2, tileSize),
+			Vector2D(tileSize, tileSize / 2), Vector2D(tileSize, 0) });
+		break;
+	case 10:
+		coll = true;
+		p = Polygon({ Vector2D(0, 0), Vector2D(0, tileSize / 2),
+			Vector2D(tileSize / 2, tileSize), Vector2D(tileSize, tileSize) });
+		break;
+	case 11:
+		coll = true;
+		p = Polygon({ Vector2D(0, tileSize / 2), Vector2D(0, tileSize),
+			Vector2D(tileSize, 0), Vector2D(tileSize / 2, 0) });
+		break;
+	case 12:
+		coll = true;
+		p = Polygon({ Vector2D(0, 0), Vector2D(tileSize, tileSize),
+			Vector2D(tileSize, tileSize / 2), Vector2D(tileSize / 2, 0) });
+		break;
+	default:
+		coll = false;
+		break;
+	}
+
+	return p;
 }
