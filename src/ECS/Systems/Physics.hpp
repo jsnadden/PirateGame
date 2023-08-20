@@ -19,46 +19,59 @@ public:
     {
         for (auto [ent1, trans1, vel1, coll1] : reg->view<TransformComponent, VelocityComponent, ColliderComponent>().each())
         {
-            // set up global collision parameters
-            bool collTest = false;
             Vector2D vel = vel1.Velocity();
+
+            std::vector<std::pair<entt::entity, float>> potentialCollisions;
 
             for (auto [ent2, trans2, tile2, coll2] : reg->view<TransformComponent, TileComponent, ColliderComponent>().each())
             {
                 // crude broadphasing
                 if ((trans1.transform.position - trans2.transform.position).NormSquared() < 10000 * trans1.transform.scale.x * trans1.transform.scale.x)
                 {
-                    coll2.colour = { 0xff, 0x7f, 0x00, 0xff };
-
-                    // set up individual collision parameters
                     Vector2D n;
                     float s;
                     
-
-                    if (CheckSAT_dynamic(coll1.polygon, trans1, vel, coll2.polygon, trans2, n, s, dt))
+                    if (CheckSAT_swept(coll1.polygon, trans1, vel, coll2.polygon, trans2, n, s, dt))
                     {
-                        collTest |= true;
-
-                    // respond to individual collision
-                        float velN = vel.Dot(n);
-                        Vector2D t = n.Orth();
-                        float velT = vel.Dot(t);
-                        vel1.SetVelocity(velT * t + s * velN * n);
+                        potentialCollisions.push_back({ ent2, s });
                     }
-                    
 
+                    if (CheckSAT_static(coll1.polygon, trans1, coll2.polygon, trans2)) coll2.colour = {0x00, 0xff, 0x00, 0xff};
+                    else coll2.colour = { 0xff, 0x00, 0x00, 0xff };
                 }
-                else coll2.colour = { 0xff, 0x00, 0x00, 0xff };
             }
 
-            // respond to global colission
-            if (collTest) coll1.colour = { 0x00, 0xff, 0x00, 0xff };
-            else coll1.colour = { 0xff, 0x00, 0x00, 0xff };
+            // Sort by ascending collision time
+            std::sort(potentialCollisions.begin(), potentialCollisions.end(),
+                [](const std::pair<entt::entity, float>& a, const std::pair<entt::entity, float>& b)
+                {
+                    return a.second < b.second;
+                }
+            );
+
+            // Handle the collisions in order
+            for (auto c : potentialCollisions)
+            {
+                Polygon poly2 = reg->get<ColliderComponent>(c.first).polygon;
+                TransformComponent trans2 = reg->get<TransformComponent>(c.first);
+                Vector2D normalVec;
+                float s = 0.0f;
+
+                if (CheckSAT_swept(coll1.polygon, trans1, vel, poly2, trans2, normalVec, s, dt))
+                {
+                    Vector2D tangentVec = normalVec.Orth(); 
+                    float velN = vel.Dot(normalVec);
+                    float velT = vel.Dot(tangentVec);
+                    vel1.SetVelocity(velT * tangentVec + s * velN * normalVec);
+                }
+            }
         }
     }
 
-    static bool CheckSAT_dynamic(Polygon& p1, TransformComponent& t1, Vector2D vel1, Polygon& p2, TransformComponent& t2, Vector2D& minNormal, float& s, float dt)
+    static bool CheckSAT_swept(Polygon& p1, TransformComponent& t1, Vector2D vel1, Polygon& p2, TransformComponent& t2, Vector2D& minNormal, float& s, float dt)
     {
+        minNormal = VEC_ZERO;
+
         if (vel1.IsZero()) return false;
 
         Polygon* poly1 = &p1;
@@ -69,8 +82,8 @@ public:
 
         float overlap = INFINITY;
 
-        float maxt0 = -INFINITY;
-        float mint1 = INFINITY;
+        float entryTime = -INFINITY;
+        float exitTime = INFINITY;
 
         for (int a = 0; a < poly2->vertices.size(); a++)
         {
@@ -96,36 +109,36 @@ public:
                 max_p1 = std::max(max_p1, q);
             }
 
-            // Project velocity
-            float u = dt * (trans1.scale * vel1).Dot(faceNormal);
+            // Project velocity, invert
+            float u = 1.0f / (dt * (trans1.scale * vel1).Dot(faceNormal));
 
-            float s0 = (max_p2 - min_p1) / u;
-            float s1 = (min_p2 - max_p1) / u;
+            float s0 = (max_p2 - min_p1) * u;
+            float s1 = (min_p2 - max_p1) * u;
 
             if (std::isnan(s0) || std::isnan(s1)) return CheckSAT_static(p1, t1, p2, t2);
 
             if (s0 > s1) std::swap(s0, s1);
 
-            if (s1 <= 0 || s0 > 1) return false;
+            exitTime = std::min(exitTime, s1);
 
-            mint1 = std::min(mint1, s1);
+            if (exitTime < 0) return false;
 
-            if (s0 > maxt0)
+            if (s0 > entryTime)
             {
-                maxt0 = s0;
+                entryTime = s0;
                 minNormal = faceNormal;
             }
 
         }
 
-        if (mint1 < maxt0) return false;
+        if (exitTime < entryTime) return false;
 
         // If we later implement moving objects with non-AABB colliders, we'll have to do a second pass of the above, with swapped roles
 
         // If we got here, the objects have collided
 
-        s = maxt0;
-        return true;
+        s = entryTime;
+        return entryTime >= 0.0f && entryTime < 1.0f;
     }
 
     static bool CheckSAT_static(Polygon& p1, TransformComponent& t1, Polygon& p2, TransformComponent& t2)
@@ -203,71 +216,8 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-
-    //static void HandleMapCollision(entt::registry* reg, float dt)
-    //{
-    //    for (auto [ent1, trans1, vel1, coll1] : reg->view<TransformComponent, VelocityComponent, ColliderComponent>().each())
-    //    {
-    //        Vector2D cp, cn;
-    //        float s = 0, min_t = INFINITY;
-    //        std::vector<std::pair<entt::entity, float>> nearbyColliders;
-
-    //        DynRect movingRect{
-    //            trans1.Position()->x + coll1.collider.x * trans1.Scale()->x,
-    //            trans1.Position()->y + coll1.collider.y * trans1.Scale()->y,
-    //            coll1.collider.w * trans1.Scale()->x,
-    //            coll1.collider.h * trans1.Scale()->y,
-    //            vel1.Velocity().x,
-    //            vel1.Velocity().y
-    //        };
-
-    //        // Find potential collisions, make a list of pairs of the form (tile collider, time til collision)
-    //        for (auto [ent2, trans2, tile2, coll2] : reg->view<TransformComponent, TileComponent, ColliderComponent>().each())
-    //        {
-    //            DynRect tileRect{
-    //            trans2.Position()->x + coll2.collider.x * trans2.Scale()->x,
-    //            trans2.Position()->y + coll2.collider.y * trans2.Scale()->y,
-    //            coll2.collider.w * trans2.Scale()->x,
-    //            coll2.collider.h * trans2.Scale()->y, 0, 0 };
-
-    //            if (SweptAABB(movingRect, tileRect, dt, cp, cn, s))
-    //            {
-    //                nearbyColliders.push_back({ ent2, s });
-    //            }
-    //        }
-
-    //        // Sort by ascending collision time
-    //        std::sort(nearbyColliders.begin(), nearbyColliders.end(), [](const std::pair<entt::entity, float>& a, const std::pair<entt::entity, float>& b)
-    //        {
-    //            return a.second < b.second;
-    //        });
-
-    //        // Handle collisions
-    //        for (auto& c : nearbyColliders)
-    //        {
-    //            auto trans2 = reg->get<TransformComponent>(c.first);
-    //            auto coll2 = reg->get<ColliderComponent>(c.first);
-
-    //            DynRect tileRect{
-    //            trans2.Position()->x + coll2.collider.x * trans2.Scale()->x,
-    //            trans2.Position()->y + coll2.collider.y * trans2.Scale()->y,
-    //            coll2.collider.w * trans2.Scale()->x,
-    //            coll2.collider.h * trans2.Scale()->y, 0, 0 };
-
-    //            ResolveSweptAABB(movingRect, vel1, tileRect, dt);
-    //        }
-    //    }
-    //}
-
-    // Check collision for two dynamic, axis-aligned rectangles, passback collision data
+    ////////////////////////////////////////////////////////////
+    //     aabb collision tests, no longer in use
     static bool SweptAABB(const DynRect& colliderA, const DynRect& colliderB, float dt,
     	Vector2D& contactPos, Vector2D& contactNormal, float& contactTime)
     {
@@ -305,5 +255,61 @@ public:
     	return false;
     }
 
+    static void HandleAABB(entt::registry* reg, float dt)
+    {
+        //for (auto [ent1, trans1, vel1, coll1] : reg->view<TransformComponent, VelocityComponent, ColliderComponent>().each())
+        //{
+        //    Vector2D cp, cn;
+        //    float s = 0, min_t = INFINITY;
+        //    std::vector<std::pair<entt::entity, float>> nearbyColliders;
+
+        //    DynRect movingRect{
+        //        trans1.Position()->x + coll1.collider.x * trans1.Scale()->x,
+        //        trans1.Position()->y + coll1.collider.y * trans1.Scale()->y,
+        //        coll1.collider.w * trans1.Scale()->x,
+        //        coll1.collider.h * trans1.Scale()->y,
+        //        vel1.Velocity().x,
+        //        vel1.Velocity().y
+        //    };
+
+        //    // Find potential collisions, make a list of pairs of the form (tile collider, time til collision)
+        //    for (auto [ent2, trans2, tile2, coll2] : reg->view<TransformComponent, TileComponent, ColliderComponent>().each())
+        //    {
+        //        DynRect tileRect{
+        //        trans2.Position()->x + coll2.collider.x * trans2.Scale()->x,
+        //        trans2.Position()->y + coll2.collider.y * trans2.Scale()->y,
+        //        coll2.collider.w * trans2.Scale()->x,
+        //        coll2.collider.h * trans2.Scale()->y, 0, 0 };
+
+        //        if (SweptAABB(movingRect, tileRect, dt, cp, cn, s))
+        //        {
+        //            nearbyColliders.push_back({ ent2, s });
+        //        }
+        //    }
+
+        //    // Sort by ascending collision time
+        //    std::sort(nearbyColliders.begin(), nearbyColliders.end(), [](const std::pair<entt::entity, float>& a, const std::pair<entt::entity, float>& b)
+        //        {
+        //            return a.second < b.second;
+        //        });
+
+        //    // Handle collisions
+        //    for (auto& c : nearbyColliders)
+        //    {
+        //        auto trans2 = reg->get<TransformComponent>(c.first);
+        //        auto coll2 = reg->get<ColliderComponent>(c.first);
+
+        //        DynRect tileRect{
+        //        trans2.Position()->x + coll2.collider.x * trans2.Scale()->x,
+        //        trans2.Position()->y + coll2.collider.y * trans2.Scale()->y,
+        //        coll2.collider.w * trans2.Scale()->x,
+        //        coll2.collider.h * trans2.Scale()->y, 0, 0 };
+
+        //        ResolveSweptAABB(movingRect, vel1, tileRect, dt);
+        //    }
+        //}
+    }
+    //
+    ////////////////////////////////////////////////////////////
 
 };
