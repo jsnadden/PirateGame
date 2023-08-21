@@ -1,6 +1,5 @@
 #pragma once
 #include "src/Structs/Transform.hpp"
-#include "src/Structs/DynRect.hpp"
 
 struct TransformComponent
 {

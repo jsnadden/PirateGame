@@ -217,6 +217,7 @@
     <ClInclude Include="src\TileMaps\MapChunk.hpp" />
     <ClInclude Include="src\Structs\Polygon.hpp" />
     <ClInclude Include="src\Structs\Transform.hpp" />
+    <ClInclude Include="src\Structs\AABB.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">

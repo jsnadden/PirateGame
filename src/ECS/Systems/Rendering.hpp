@@ -79,7 +79,7 @@ public:
 
 	static void DrawColliders(entt::registry* reg)
 	{
-		for (auto [ent, trans, coll] : reg->view<TransformComponent, ColliderComponent>().each())
+		for (auto [ent, trans, coll] : reg->view<TransformComponent, PolyCollider>().each())
 		{
 			int n = coll.polygon.vertices.size();
 
@@ -92,17 +92,19 @@ public:
 					trans.transform.position.x + coll.polygon.vertices[j].x * trans.transform.scale.x - Camera::GetInstance()->OriginX(),
 					trans.transform.position.y + coll.polygon.vertices[j].y * trans.transform.scale.y - Camera::GetInstance()->OriginY());
 			}
-			
-			
-			
-			/*SDL_Rect destRect{
-				trans.Position()->x + coll.collider.x * trans.Scale()->x - Camera::GetInstance()->OriginX(),
-				trans.Position()->y + coll.collider.y * trans.Scale()->y - Camera::GetInstance()->OriginY(),
-				coll.collider.w * trans.Scale()->x,
-				coll.collider.h * trans.Scale()->y
-			};
+		}
 
-			Graphics::GetInstance()->DrawTexture(coll.colliderTexture, NULL, &destRect);*/
+		for (auto [ent, trans, coll] : reg->view<TransformComponent, AABBCollider>().each())
+		{
+			for (auto b : coll.boundingBoxes)
+			{
+				SDL_Rect bCast = {
+					trans.transform.position.x + trans.transform.scale.x * b.x - Camera::GetInstance()->OriginX(),
+					trans.transform.position.y + trans.transform.scale.y * b.y - Camera::GetInstance()->OriginY(),
+					trans.transform.scale.x * b.w,
+					trans.transform.scale.y * b.h };
+				Graphics::GetInstance()->DrawRectangle(coll.colour, &bCast);
+			}
 		}
 	}
 

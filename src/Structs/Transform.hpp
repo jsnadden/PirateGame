@@ -1,5 +1,6 @@
 #pragma once
 #include "src/Structs/Vector2D.hpp"
+#include "src/Structs/AABB.hpp"
 
 struct Transform
 {
@@ -19,5 +20,11 @@ struct Transform
 	{
 		Vector2D scaled = scale * v;
 		return position + Vector2D::RotateVector(scaled, rotation);
+	}
+
+	AABB operator*(const AABB& box) const
+	{
+		AABB transformedBox{ position.x + scale.x * box.x, position.y + scale.y * box.y, scale.x * box.w, scale.y * box.h };
+		return transformedBox;
 	}
 };

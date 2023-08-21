@@ -6,28 +6,18 @@ bool Collision::PointRect(const int x, const int y, const SDL_Rect rect)
 	return (x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h);
 }
 
-bool Collision::AABB(const SDL_Rect rectA, const SDL_Rect rectB)
-{
-	return (rectA.x + rectA.w >= rectB.x)
-		&& (rectB.x + rectB.w >= rectA.x)
-		&& (rectA.y + rectA.h >= rectB.y)
-		&& (rectB.y + rectB.h >= rectA.y);
-		
-}
-
-bool Collision::RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection, const DynRect& target,
-Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime)
+bool Collision::RayRect(const Vector2D& rayOrigin, const Vector2D& rayDirection, AABB& target, Vector2D& contactNormal, float& contactTime)
 {
 	
 	contactNormal = { 0, 0 };
-	contactPoint = { 0, 0 };
+	//contactPoint = { 0, 0 };
 
 	// Cache division
 	Vector2D invdir = {1.0f / rayDirection.x, 1.0f / rayDirection.y };
 
 	// Calculate intersections with rectangle bounding axes
-	Vector2D t_near = (target.GetPosition() - rayOrigin) * invdir;
-	Vector2D t_far = (target.GetPosition() + target.GetSize() - rayOrigin) * invdir;
+	Vector2D t_near = (target.Position() - rayOrigin) * invdir;
+	Vector2D t_far = (target.Position() + target.Size() - rayOrigin) * invdir;
 
 	if (std::isnan(t_far.y) || std::isnan(t_far.x)) return false;
 	if (std::isnan(t_near.y) || std::isnan(t_near.x)) return false;
@@ -50,7 +40,7 @@ Vector2D& contactPoint, Vector2D& contactNormal, float& contactTime)
 		return false;
 
 	// Contact point of collision from parametric line equation
-	contactPoint = rayOrigin + contactTime * rayDirection;
+	//contactPoint = rayOrigin + contactTime * rayDirection;
 
 	if (t_near.x > t_near.y)
 		if (invdir.x < 0)

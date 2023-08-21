@@ -101,7 +101,7 @@ void TestLevel::Update()
         }
 
         
-        Physics::HandleMapCollision(&enttReg, timer->DeltaTime());
+        Physics::HandleAABBCollision(&enttReg, timer->DeltaTime());
         Physics::DoMovement(&enttReg, timer->DeltaTime());
 
         
@@ -173,7 +173,7 @@ void TestLevel::InitPlayer()
     player.GetComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
     player.GetComponent<SpriteComponent>().AddAnimation("Move", 1, 3, 10.0f);
     player.GetComponent<SpriteComponent>().Play("Idle");
-    player.AddComponent<ColliderComponent>(Polygon(-playerSize / 2, 0, playerSize, playerSize/2));
+    player.AddComponent<AABBCollider>(AABB(-playerSize / 2, 0, playerSize, playerSize/2));
     player.AddComponent<ControlComponent>();
 
     camera->Follow(&player.GetComponent<TransformComponent>().transform.position);

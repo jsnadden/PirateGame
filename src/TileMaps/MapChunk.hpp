@@ -17,7 +17,8 @@ public:
 	void UnloadChunk();
 
 	void AddTile(entt::entity ent, int srcX, int srcY, int xPos, int yPos);
-	Polygon CreateCollider(bool& coll, int type);
+	Polygon CreatePolyCollider(bool& coll, int type);
+	AABB CreateAABBCollider(bool& coll, int type);
 
 	int tilesWide;
 	int tilesHigh;

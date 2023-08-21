@@ -49,9 +49,21 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 				AddTile(tileGrid[x][y], srcX * tileSize, srcY * tileSize, x * scaledSize, y * scaledSize);
 
 				int tileType = srcY * 10 + srcX;
+				
+				if (tileType > 8) tileType *= 10;
+
 				bool collider = false;
-				Polygon poly = CreateCollider(collider, tileType);
-				if (collider) enttReg->emplace<ColliderComponent>(tileGrid[x][y], poly);
+				AABB box = CreateAABBCollider(collider, tileType);
+				if (collider)
+				{
+					enttReg->emplace<AABBCollider>(tileGrid[x][y], box);
+
+					if (tileType > 8)
+					{
+						box = CreateAABBCollider(collider, tileType + 1);
+						if (collider) enttReg->get<AABBCollider>(tileGrid[x][y]).boundingBoxes.emplace_back(box);
+					}
+				}
 
 				mapfile.ignore();
 			}
@@ -103,7 +115,7 @@ void MapChunk::AddTile(entt::entity ent, int srcX, int srcY, int xPos, int yPos)
 	enttReg->emplace<TileComponent>(ent, tileSheetPath, srcX, srcY, tileSize);
 }
 
-Polygon MapChunk::CreateCollider(bool& coll, int type)
+Polygon MapChunk::CreatePolyCollider(bool& coll, int type)
 {
 	Polygon p;
 
@@ -168,4 +180,85 @@ Polygon MapChunk::CreateCollider(bool& coll, int type)
 	}
 
 	return p;
+}
+
+AABB MapChunk::CreateAABBCollider(bool& coll, int type)
+{
+	AABB b;
+
+	// these choices are specific to the ordering of the current tilesheet
+	switch (type)
+	{
+	case 1:
+		coll = true;
+		b = AABB(tileSize / 2, 0, tileSize / 2, tileSize);
+		break;
+	case 2:
+		coll = true;
+		b = AABB(tileSize / 2, 0, tileSize / 2, tileSize / 2);
+		break;
+	case 3:
+		coll = true;
+		b = AABB(tileSize / 2, tileSize / 2, tileSize / 2, tileSize / 2);
+		break;
+	case 4:
+		coll = true;
+		b = AABB(0, tileSize / 2, tileSize, tileSize / 2);
+		break;
+	case 5:
+		coll = true;
+		b = AABB(0, tileSize / 2, tileSize / 2, tileSize / 2);
+		break;
+	case 6:
+		coll = true;
+		b = AABB(0, 0, tileSize / 2, tileSize);
+		break;
+	case 7:
+		coll = true;
+		b = AABB(0, 0, tileSize / 2, tileSize / 2);
+		break;
+	case 8:
+		coll = true;
+		b = AABB(0, 0, tileSize, tileSize / 2);
+		break;
+	
+	case 90:
+		coll = true;
+		b = AABB(0, 0, tileSize, tileSize / 2);
+		break;
+	case 100:
+		coll = true;
+		b = AABB(0, 0, tileSize, tileSize / 2);
+		break;
+	case 110:
+		coll = true;
+		b = AABB(0, tileSize / 2, tileSize, tileSize / 2);
+		break;
+	case 120:
+		coll = true;
+		b = AABB(0, tileSize / 2, tileSize, tileSize / 2);
+		break;
+	case 91:
+		coll = true;
+		b = AABB(0, 0, tileSize / 2, tileSize);
+		break;
+	case 101:
+		coll = true;
+		b = AABB(tileSize / 2, 0, tileSize / 2, tileSize);
+		break;
+	case 111:
+		coll = true;
+		b = AABB(tileSize / 2, 0, tileSize / 2, tileSize);
+		break;
+	case 121:
+		coll = true;
+		b = AABB(0, 0, tileSize / 2, tileSize);
+		break;
+
+	default:
+		coll = false;
+		break;
+	}
+
+	return b;
 }
