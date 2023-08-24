@@ -53,6 +53,7 @@ bool MapChunk::LoadChunk(std::string path, int sizeX, int sizeY)
 				if (tileType > 8) tileType *= 10;
 
 				bool collider = false;
+				
 				AABB box = CreateAABBCollider(collider, tileType);
 				if (collider)
 				{

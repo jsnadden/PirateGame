@@ -1,6 +1,7 @@
 #pragma once
 #include "src/Structs/Vector2D.hpp"
 #include "src/Structs/AABB.hpp"
+#include "src/Structs/Polygon.hpp"
 
 struct Transform
 {
@@ -26,5 +27,15 @@ struct Transform
 	{
 		AABB transformedBox{ position.x + scale.x * box.x, position.y + scale.y * box.y, scale.x * box.w, scale.y * box.h };
 		return transformedBox;
+	}
+
+	Polygon operator*(const Polygon& poly) const
+	{
+		Polygon transformedPoly;
+		for (auto v : poly.vertices)
+		{
+			transformedPoly.vertices.emplace_back(*(this) * v);
+		}
+		return transformedPoly;
 	}
 };

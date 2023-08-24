@@ -218,6 +218,8 @@
     <ClInclude Include="src\Structs\Polygon.hpp" />
     <ClInclude Include="src\Structs\Transform.hpp" />
     <ClInclude Include="src\Structs\AABB.hpp" />
+    <ClInclude Include="src\ECS\Components\AIComponent.hpp" />
+    <ClInclude Include="src\AI\DecisionTree.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">

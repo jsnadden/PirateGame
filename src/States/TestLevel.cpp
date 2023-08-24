@@ -102,6 +102,7 @@ void TestLevel::Update()
 
         
         Physics::HandleAABBCollision(&enttReg, timer->DeltaTime());
+        Physics::HandlePolyCollision(&enttReg, timer->DeltaTime());
         Physics::DoMovement(&enttReg, timer->DeltaTime());
 
         
@@ -134,7 +135,7 @@ void TestLevel::Render()
 
     Rendering::DrawMapTiles(&enttReg);
     Rendering::DrawSprites(&enttReg);
-    Rendering::DrawColliders(&enttReg);
+    //Rendering::DrawColliders(&enttReg);
 
     for (auto& e : elements)
     {
@@ -162,8 +163,8 @@ void TestLevel::InitMap()
 void TestLevel::InitPlayer()
 {
     int playerSize = 32;
-    int offset = (playerSize * GLOBAL_SCALE) / 2;
-    int startingPos = 256 * GLOBAL_SCALE - offset;
+    int startingPos = (256 - playerSize / 2) * GLOBAL_SCALE;
+    int personalSpace = playerSize + 8;
 
     player = CreateEntity("player");
     player.GetComponent<TransformComponent>().transform.position = Vector2D(startingPos, startingPos);
@@ -173,7 +174,7 @@ void TestLevel::InitPlayer()
     player.GetComponent<SpriteComponent>().AddAnimation("Idle", 0, 3, 10.0f);
     player.GetComponent<SpriteComponent>().AddAnimation("Move", 1, 3, 10.0f);
     player.GetComponent<SpriteComponent>().Play("Idle");
-    player.AddComponent<AABBCollider>(AABB(-playerSize / 2, 0, playerSize, playerSize/2));
+    player.AddComponent<AABBCollider>(AABB(-personalSpace / 2, 0, personalSpace, personalSpace /2));
     player.AddComponent<ControlComponent>();
 
     camera->Follow(&player.GetComponent<TransformComponent>().transform.position);

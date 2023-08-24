@@ -81,16 +81,18 @@ public:
 	{
 		for (auto [ent, trans, coll] : reg->view<TransformComponent, PolyCollider>().each())
 		{
-			int n = coll.polygon.vertices.size();
+			Polygon drawn = trans.transform * coll.polygon;
+
+			int n = drawn.vertices.size();
 
 			for (int i = 0; i < n; i++)
 			{
 				int j = (i + 1) % n;
 				Graphics::GetInstance()->DrawLine(coll.colour,
-					trans.transform.position.x + coll.polygon.vertices[i].x * trans.transform.scale.x - Camera::GetInstance()->OriginX(),
-					trans.transform.position.y + coll.polygon.vertices[i].y * trans.transform.scale.y - Camera::GetInstance()->OriginY(),
-					trans.transform.position.x + coll.polygon.vertices[j].x * trans.transform.scale.x - Camera::GetInstance()->OriginX(),
-					trans.transform.position.y + coll.polygon.vertices[j].y * trans.transform.scale.y - Camera::GetInstance()->OriginY());
+					drawn.vertices[i].x - Camera::GetInstance()->OriginX(),
+					drawn.vertices[i].y - Camera::GetInstance()->OriginY(),
+					drawn.vertices[j].x - Camera::GetInstance()->OriginX(),
+					drawn.vertices[j].y - Camera::GetInstance()->OriginY());
 			}
 		}
 
