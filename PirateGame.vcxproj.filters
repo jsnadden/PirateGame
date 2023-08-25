@@ -219,7 +219,16 @@
     <ClInclude Include="src\Structs\Transform.hpp" />
     <ClInclude Include="src\Structs\AABB.hpp" />
     <ClInclude Include="src\ECS\Components\AIComponent.hpp" />
-    <ClInclude Include="src\AI\DecisionTree.hpp" />
+    <ClInclude Include="src\BehaviourTrees\Node.hpp" />
+    <ClInclude Include="src\BehaviourTrees\BehaviourTree.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Sequencer.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Condition.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Fallback.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Action.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Inverter.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Wait.hpp" />
+    <ClInclude Include="src\ECS\Systems\AI.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">
@@ -353,6 +362,7 @@
     <Text Include="assets\maps\map0.txt">
       <Filter>Assets\Maps</Filter>
     </Text>
+    <Text Include="ACKNOWLEDGEMENTS" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\arcade.ttf">

@@ -6,3 +6,4 @@
 #include "src/ECS/Components/SpriteComponent.hpp"
 #include "src/ECS/Components/ControlComponent.hpp"
 #include "src/ECS/Components/ColliderComponent.hpp"
+#include "src/ECS/Components/AIComponent.hpp"

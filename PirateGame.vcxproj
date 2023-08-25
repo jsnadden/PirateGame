@@ -48,10 +48,20 @@
   <ItemGroup>
     <Text Include="assets\map0.txt" />
     <Text Include="assets\maps\map0.txt" />
+    <Text Include="ACKNOWLEDGEMENTS" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AI\DecisionTree.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Inverter.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Wait.hpp" />
+    <ClInclude Include="src\BehaviourTrees\Node.hpp" />
+    <ClInclude Include="src\BehaviourTrees\BehaviourTree.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Action.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Condition.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Fallback.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Sequencer.hpp" />
     <ClInclude Include="src\ECS\Components\AIComponent.hpp" />
+    <ClInclude Include="src\ECS\Systems\AI.hpp" />
     <ClInclude Include="src\Structs\AABB.hpp" />
     <ClInclude Include="src\Structs\Polygon.hpp" />
     <ClInclude Include="src\Structs\Transform.hpp" />

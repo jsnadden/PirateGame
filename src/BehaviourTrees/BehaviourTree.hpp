@@ -6,11 +6,10 @@
 namespace BT
 {
 
-	template <typename Time, typename Event, typename ... Args>
+	template <typename Time, typename ... Args>
 	struct BehaviourTree
 	{
 		using time_type = Time;
-		using event_type = Event;
 		using args_type = std::tuple<Args...>;
 	};
 

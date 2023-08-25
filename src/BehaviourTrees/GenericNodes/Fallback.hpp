@@ -5,14 +5,14 @@
 namespace BT
 {
 
-	template <typename BehaviourTree>
+	template <typename Tree>
 	struct FallbackNode;
 
-	template <typename Time, typename Event, typename ... Args>
-	struct FallbackNode<BehaviourTree<Time, Event, Args...>>
-		: Node<BehaviourTree<Time, Event, Args...>>
+	template <typename Time, typename ... Args>
+	struct FallbackNode<BehaviourTree<Time, Args...>>
+		: Node<BehaviourTree<Time, Args...>>
 	{
-		using tree_type = BehaviourTree<Time, Event, Args...>;
+		using tree_type = BehaviourTree<Time, Args...>;
 		using node_type = Node<tree_type>;
 		using typename node_type::running;
 		using typename node_type::finished;
@@ -22,7 +22,7 @@ namespace BT
 			: children(std::move(ch))
 		{}
 
-		void Start(Args ...) override
+		void Start(Args ... args) override
 		{
 			index = 0;
 			started = false;
@@ -56,27 +56,27 @@ namespace BT
 			return finished{ false };
 		}
 
-		bool Interrupt(Event const& event, Args ... args) override
+		bool Interrupt(Args ... args) override
 		{
 			if (index < children.size())
-				return children[index]->Interrupt(event, args...);
+				return children[index]->Interrupt(args...);
 
 			return false;
 		}
 
 	private:
-		std::vector<node_ptr<BehaviourTree<Time, Event, Args...>>> children;
+		std::vector<node_ptr<BehaviourTree<Time, Args...>>> children;
 		std::size_t index = 0;
 		bool started = false;
 	};
 
-	template <typename BehaviourTree, typename ... Children>
-	node_ptr<BehaviourTree> Fallback(node_ptr<BehaviourTree> child, Children ... siblings)
+	template <typename Tree, typename ... Children>
+	node_ptr<Tree> Fallback(node_ptr<Tree> child, Children ... siblings)
 	{
-		std::vector<node_ptr<BehaviourTree>> children;
+		std::vector<node_ptr<Tree>> children;
 		children.push_back(std::move(child));
 		(children.push_back(std::move(siblings)), ...);
-		return std::make_unique<FallbackNode<BehaviourTree>>(std::move(children));
+		return std::make_unique<FallbackNode<Tree>>(std::move(children));
 	}
 
 

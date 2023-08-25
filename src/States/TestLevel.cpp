@@ -66,7 +66,7 @@ void TestLevel::EarlyUpdate()
     {
         InputHandling::ControlMovement(&enttReg);
 
-        // RUN AI
+        AI::RunAI(&enttReg, timer->DeltaTime());
     }
 
     
@@ -175,7 +175,8 @@ void TestLevel::InitPlayer()
     player.GetComponent<SpriteComponent>().AddAnimation("Move", 1, 3, 10.0f);
     player.GetComponent<SpriteComponent>().Play("Idle");
     player.AddComponent<AABBCollider>(AABB(-personalSpace / 2, 0, personalSpace, personalSpace /2));
-    player.AddComponent<ControlComponent>();
+    //player.AddComponent<ControlComponent>();
+    player.AddComponent<AIComponent>(5);
 
     camera->Follow(&player.GetComponent<TransformComponent>().transform.position);
 }

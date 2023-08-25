@@ -9,10 +9,10 @@ namespace BT
 	template <typename BehaviourTree>
 	struct Node;
 
-	template <typename Time, typename Event, typename ... Args>
-	struct Node<BehaviourTree<Time, Event, Args...>>
+	template <typename Time, typename ... Args>
+	struct Node<BehaviourTree<Time, Args...>>
 	{
-		using tree_type = BehaviourTree<Time, Event, Args...>;
+		using tree_type = BehaviourTree<Time, Args...>;
 
 		struct running
 		{};
@@ -31,12 +31,12 @@ namespace BT
 
 		virtual void Start(Args ...) {}
 		virtual status Tick(Time dt, Args ... args) = 0;
-		virtual bool Interrupt(Event const&, Args ...) { return false; }
+		virtual bool Interrupt(Args ... args) { return false; }
 
-		virtual ~node() {}
+		virtual ~Node() {}
 	};
 
-	template <typename BehaviourTree>
-	using node_ptr = std::unique_ptr<Node<BehaviourTree>>;
+	template <typename Tree>
+	using node_ptr = std::unique_ptr<Node<Tree>>;
 
 }

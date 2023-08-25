@@ -19,6 +19,8 @@ public:
     {
         for (auto [ent1, trans1, vel1, coll1] : reg->view<TransformComponent, VelocityComponent, AABBCollider>().each())
         {
+            coll1.hit = false;
+
             for (auto b1 : coll1.boundingBoxes)
             {
                 Vector2D cp, cn;
@@ -73,6 +75,7 @@ public:
                             Vector2D correctedVelocity = s * nVel * contactNormal + tVel * contactNormal.Orth();
                             vel1.SetVelocity(correctedVelocity);
                             vel = trans1.transform.scale * vel1.Velocity();
+                            coll1.hit = true;
                         }
                     }
                     
