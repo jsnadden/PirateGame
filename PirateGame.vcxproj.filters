@@ -229,6 +229,9 @@
     <ClInclude Include="src\BehaviourTrees\GenericNodes\Inverter.hpp" />
     <ClInclude Include="src\BehaviourTrees\GenericNodes\Wait.hpp" />
     <ClInclude Include="src\ECS\Systems\AI.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Repeat.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Success.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Failure.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\Assets.cpp">

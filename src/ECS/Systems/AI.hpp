@@ -10,7 +10,7 @@ public:
 	{
 		for (auto [entity, ai, vel] : reg->view<AIComponent, VelocityComponent>().each())
 		{
-			ai.Tick(dt, reg, entity);
+			ai.root->Tick(dt, reg, entity);
 		}
 	}
 };

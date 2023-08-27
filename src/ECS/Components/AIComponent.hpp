@@ -26,7 +26,7 @@ struct Behaviours
             });
     }
 
-    static Node ChooseRandomVelocity(Vector2D* vel)
+    static Node ChooseRandomNearbyLocation(Vector2D* vel)
     {
         return BT::Action<Tree>([=](float dt, entt::registry* reg, entt::entity ent)
             {
@@ -40,12 +40,30 @@ struct Behaviours
             });
     }
 
-    static Node SetVel(Vector2D* vel)
+    static Node GoTowards(Vector2D* vel)
     {
         return BT::Action<Tree>([=](float dt, entt::registry* reg, entt::entity ent)
             {
                 reg->get<VelocityComponent>(ent).SetVelocity(*vel);
             });
+    }
+
+    static Node Stop(Vector2D* vel)
+    {
+        return BT::Action<Tree>([=](float dt, entt::registry* reg, entt::entity ent)
+            {
+                reg->get<VelocityComponent>(ent).SetVelocity(VEC_ZERO);
+            });
+    }
+
+    static Node Wander(Vector2D* vel, float idleTime)
+    {
+        return BT::RepeatForever(BT::Sequencer(
+            Behaviours::ChooseRandomNearbyLocation(vel),
+            Behaviours::GoTowards(vel),
+            Behaviours::WaitFor(idleTime),
+            Behaviours::Stop(vel),
+            Behaviours::WaitFor(idleTime)));
     }
 };
 
@@ -56,13 +74,7 @@ struct AIComponent
 
     AIComponent(float idleTime)
     {
-        root = BT::Sequencer(Behaviours::ChooseRandomVelocity(&vel), Behaviours::WaitFor(idleTime), Behaviours::SetVel(&vel));
-    }
-
-    void Tick(float dt, entt::registry* reg, entt::entity ent)
-    {
-        root->Tick(dt, reg, ent);
-        std::cout << vel << std::endl;
+        root = Behaviours::Wander(&vel, idleTime);
     }
 };
 

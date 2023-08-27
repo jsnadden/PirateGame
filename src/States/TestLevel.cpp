@@ -176,7 +176,7 @@ void TestLevel::InitPlayer()
     player.GetComponent<SpriteComponent>().Play("Idle");
     player.AddComponent<AABBCollider>(AABB(-personalSpace / 2, 0, personalSpace, personalSpace /2));
     //player.AddComponent<ControlComponent>();
-    player.AddComponent<AIComponent>(5);
+    player.AddComponent<AIComponent>(1);
 
     camera->Follow(&player.GetComponent<TransformComponent>().transform.position);
 }

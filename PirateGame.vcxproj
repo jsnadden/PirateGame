@@ -52,7 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BehaviourTrees\GenericNodes.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Failure.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Repeat.hpp" />
     <ClInclude Include="src\BehaviourTrees\GenericNodes\Inverter.hpp" />
+    <ClInclude Include="src\BehaviourTrees\GenericNodes\Success.hpp" />
     <ClInclude Include="src\BehaviourTrees\GenericNodes\Wait.hpp" />
     <ClInclude Include="src\BehaviourTrees\Node.hpp" />
     <ClInclude Include="src\BehaviourTrees\BehaviourTree.hpp" />
